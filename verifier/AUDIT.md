@@ -41,6 +41,7 @@ paper rather than rebuilt here.
 | Seven-window block inequality | `ZetaSeven.WindowEnergy` | Compiled Lean proof conditional only on the displayed `SevenPointClaim` |
 | Principal-block spectral pinching | `ZetaSeven.Pinching` | Compiled Lean proof for arbitrary finite sigma-type partitions |
 | Concrete ordered simple-zero Gram coordinates | `ZetaSeven.OrderedSimpleZeros` | Compiled Lean proof of increasing-ordinate enumeration, positive normalized gaps, exact Gram reindexing, and defect invariance |
+| Concrete consecutive 267-point Gram blocks | `ZetaSeven.ConcreteBlocks` | Compiled Lean construction, PSD and gap-telescoping proofs, and local theorem at the explicit Gram-to-kernel comparison interface |
 | Shifted 267-block arithmetic | `ZetaSeven.ShiftedPartitions` | Compiled Lean proof at the residue-fiber interface; retained-sublist partition and remainder wiring remain open |
 | 267-point block defect | `ZetaSeven.BlockEnergyDefect` | Compiled Lean proof conditional on `SevenPointClaim` and an explicit finite Gram-to-kernel error bound |
 | Final constant | Exact rational reduction, Arb evaluation, and `ZetaSeven.Assembly` | Compiled Lean arithmetic proof; independent review pending |

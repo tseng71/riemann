@@ -31,6 +31,8 @@ axiom output in `ZetaSeven/Audit.lean` and run the source scan described in
   `Pinching.lean`;
 - the concrete simple-zero ordinate ordering, normalized positive gaps, Gram
   reindexing, and defect invariance in `OrderedSimpleZeros.lean`;
+- the concrete consecutive principal blocks, gap telescoping, and specialized
+  comparison interface in `ConcreteBlocks.lean`;
 - the residue-fiber and 266-fold gap counts in `ShiftedPartitions.lean`;
 - the conditional finite Gram-to-kernel bridge in
   `BlockEnergyDefect.lean`;

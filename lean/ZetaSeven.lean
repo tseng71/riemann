@@ -11,3 +11,4 @@ import ZetaSeven.Pinching
 import ZetaSeven.OrderedSimpleZeros
 import ZetaSeven.ShiftedPartitions
 import ZetaSeven.BlockEnergyDefect
+import ZetaSeven.ConcreteBlocks

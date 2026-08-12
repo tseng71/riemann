@@ -40,3 +40,10 @@ import ZetaSeven
 #print axioms ZetaSeven.ShiftedPartitions.sum_full_267_block_spans_le
 #print axioms ZetaSeven.ShiftedPartitions.aggregate_267_shifted_blocks
 #print axioms ZetaSeven.BlockEnergyDefect.defect_lower_of_kernel_energy_approx
+#print axioms ZetaSeven.ConcreteBlocks.blockIndex_injective
+#print axioms ZetaSeven.ConcreteBlocks.consecutivePrincipalBlock_posSemidef
+#print axioms ZetaSeven.ConcreteBlocks.orderedBlockGram_posSemidef
+#print axioms ZetaSeven.ConcreteBlocks.orderedBlockGap_nonneg
+#print axioms ZetaSeven.ConcreteBlocks.sum_orderedBlockGap_eq_sub
+#print axioms ZetaSeven.ConcreteBlocks.sum_orderedBlockGap_eq_span
+#print axioms ZetaSeven.ConcreteBlocks.orderedBlock_defect_lower_of_kernel_energy_approx

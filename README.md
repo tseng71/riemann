@@ -31,7 +31,10 @@ and an abstract defect-preserving Theorem D source inequality have been
 proved in Lean without `sorry`, `admit`, or new axioms. The actual simple-zero
 subtype is now enumerated by increasing ordinate as `Fin (s₁(T))`; its
 normalized adjacent gaps are proved positive, and reindexing its concrete
-Gram matrix is proved to preserve the full spectral defect. The remaining
+Gram matrix is proved to preserve the full spectral defect. Every full
+consecutive 267-point principal block and its 266 actual normalized gaps are
+now concrete Lean objects; positivity, telescoping spans, PSD, and the
+conditional local defect bridge are compiled. The remaining
 proof boundary is explicit and material: the seven-point interval certificate
 must be replayed by a small verified checker; the retained central sublist
 must be wired into concrete 267 residue partitions and endpoint remainders;
@@ -58,7 +61,8 @@ the exact boundary and proof-closure order.
 3. Check the stability-enhanced rank–trace argument and block-defect bridge.
 4. Check the compiled consecutive-window, principal-block pinching, and
    concrete increasing-ordinate Gram reindexing and abstract 267-offset
-   aggregation modules, then audit the still-open retained-sublist
+   aggregation modules, plus the concrete full-block specialization in
+   `ConcreteBlocks.lean`; then audit the still-open retained-sublist global
    partition/remainder wiring.
 5. Verify the hypotheses and concrete specialization of the new
    defect-preserving Theorem D interface, especially endpoint deletion and

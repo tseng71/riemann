@@ -15,8 +15,9 @@ bridge, exact consecutive-window combinatorics, arbitrary principal-block
 spectral pinching, abstract 267-offset aggregation, the conditional
 267-point block bridge, concrete increasing-ordinate coordinates and
 defect-preserving reindexing for the actual simple-zero Gram matrix, the
-finite tail seam, an abstract defect-preserving Theorem D source inequality,
-epsilon removal, and exact rational assembly. See
+concrete consecutive 267-point principal blocks with telescoping normalized
+gaps, the finite tail seam, an abstract defect-preserving Theorem D source
+inequality, epsilon removal, and exact rational assembly. See
 [`../docs/FORMALIZATION_STATUS.md`](../docs/FORMALIZATION_STATUS.md) for the
 declaration-level ledger.
 

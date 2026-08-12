@@ -50,6 +50,10 @@ overlays these files before rebuilding against exactly the audited base.
 | `ZetaSeven.OrderedSimpleZeros.normalizedSimpleOrdinateAt_strictMono` | Transfers strict ordering to the paper's normalized coordinate `L(γ-T)/(2π)`. |
 | `ZetaSeven.OrderedSimpleZeros.simpleGap_pos` | Proves every adjacent normalized gap in the concrete ordered simple-zero list is positive. |
 | `ZetaSeven.OrderedSimpleZeros.orderedSimpleGram_spectralDefect` | Reindexes the actual simple-zero Gram matrix on the increasing `Fin (s₁(T))` index and proves exact preservation of its spectral defect. |
+| `ZetaSeven.ConcreteBlocks.orderedBlockGram_posSemidef` | Constructs every full consecutive 267-point principal block of the actual ordered simple-zero Gram matrix and proves it PSD. |
+| `ZetaSeven.ConcreteBlocks.orderedBlockGap_nonneg` | Defines the 266 actual normalized adjacent gaps of each concrete block (zero-extended outside the used range) and proves nonnegativity. |
+| `ZetaSeven.ConcreteBlocks.sum_orderedBlockGap_eq_sub` | Proves that every consecutive sum of these concrete gaps telescopes to the corresponding normalized zero separation. |
+| `ZetaSeven.ConcreteBlocks.orderedBlock_defect_lower_of_kernel_energy_approx` | Specializes the local seven-point defect bridge to the actual ordered Gram block, leaving only the displayed finite Gram-to-kernel comparison error. |
 | `ZetaSeven.ShiftedPartitions.sum_full_267_block_spans_le` | Proves that the `S-266` consecutive 267-point blocks charge every adjacent gap at most 266 times. |
 | `ZetaSeven.ShiftedPartitions.aggregate_267_shifted_blocks` | Proves the exact finite 267-offset aggregation from residue-fiber pinching hypotheses, including all endpoint and block-error sums. |
 | `ZetaSeven.BlockEnergyDefect.defect_lower_of_kernel_energy_approx` | Joins the seven-point block energy to the PSD spectral defect, leaving only an explicit nonnegative finite Gram-to-kernel comparison error. |
@@ -103,7 +107,7 @@ lake build ZetaSeven
 lake env lean ZetaSeven/Audit.lean
 ```
 
-The full `lake build ZetaSeven` target in this workspace completed 8,851 jobs
+The full `lake build ZetaSeven` target in this workspace completed 8,852 jobs
 for the pinned dependency closure plus the `ZetaSeven` extension.  The audit reports
 only the standard foundational axioms already present in the upstream
 development:

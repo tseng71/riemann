@@ -57,7 +57,9 @@ $o(N)$, as well as the finite consecutive-window count, arbitrary
 principal-block spectral pinching, abstract 267-offset aggregation, and a
 conditional 267-point block bridge.  It also enumerates the actual simple
 critical-line Gram columns by increasing ordinate and proves that this
-reindexing preserves the full spectral defect.  It does not yet replay the
+reindexing preserves the full spectral defect.  Each full consecutive
+267-point principal block and its normalized adjacent gaps are now concrete
+Lean objects, with positivity and telescoping spans checked.  It does not yet replay the
 Arb certificate or close the retained-central-sublist partition, endpoint,
 Gram-to-kernel, and top-level specialization interfaces.
 The analytic trace and tail estimates are imported from Claude's
@@ -86,7 +88,8 @@ counts.  A Lean companion formalizes the new matrix and exact-arithmetic
 layers, the finite window/pinching/267-offset core, and an abstract
 defect-preserving Theorem~D source inequality.  It also formalizes the
 increasing-ordinate reindexing of the concrete simple-zero Gram matrix and
-its exact defect invariance.  It leaves the local certificate replay,
+its exact defect invariance, and specializes the local block bridge to every
+concrete consecutive 267-point principal block.  It leaves the local certificate replay,
 retained central-sublist partition and endpoint wiring,
 uniform Gram-to-kernel error, and top-level specialization as explicit open
 obligations.  Subject to those stated
@@ -95,8 +98,6 @@ verification obligations, the candidate bound is
  \liminf_{T\to\infty}\frac{\Nsimple(T,2T)}{N(T,2T)}
  \ge 0.6730254768378743181159739993\ldots .
 \]
-The paper isolates every imported input, gives the exact block arithmetic,
-and records the verifier's trust base and remaining review obligations.
 \end{abstract}
 
 \section{Scope and statement of the result}

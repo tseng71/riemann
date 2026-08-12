@@ -35,8 +35,11 @@ Status: the consecutive-window theorem, arbitrary principal-block spectral
 pinching, abstract 267 residue-fiber aggregation, exact 266-fold gap charge,
 the conditional 267-point block-defect bridge, and the concrete
 increasing-ordinate reindexing of the actual simple-zero Gram matrix are
-compiled.  Selecting the retained central sublist and wiring its 267 residue
-partitions and endpoint remainders remains open.
+compiled.  Every full consecutive 267-point block has also been concretely
+constructed with its actual normalized gaps, PSD proof, telescoping span, and
+specialized local bridge.  Selecting the retained central sublist and wiring
+all blocks into its 267 residue partitions and endpoint remainders remains
+open.
 
 ## M4 — analytic Theorem D integration
 
