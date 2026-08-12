@@ -28,10 +28,13 @@ precision settings. The finite-dimensional matrix layer, exact consecutive
 window count, arbitrary principal-block spectral pinching, abstract
 267-offset aggregation, conditional 267-point block bridge, exact assembly,
 and an abstract defect-preserving Theorem D source inequality have been
-proved in Lean without `sorry`, `admit`, or new axioms. The remaining proof
-boundary is explicit and material: the seven-point interval certificate must
-be replayed by a small verified checker; the ordered central-zero Gram matrix
-must be wired into the concrete residue partitions and endpoint remainders;
+proved in Lean without `sorry`, `admit`, or new axioms. The actual simple-zero
+subtype is now enumerated by increasing ordinate as `Fin (s₁(T))`; its
+normalized adjacent gaps are proved positive, and reindexing its concrete
+Gram matrix is proved to preserve the full spectral defect. The remaining
+proof boundary is explicit and material: the seven-point interval certificate
+must be replayed by a small verified checker; the retained central sublist
+must be wired into concrete 267 residue partitions and endpoint remainders;
 and endpoint deletion plus the uniform finite Gram-to-kernel error must be
 proved before the top-level specialization closes.
 
@@ -54,8 +57,9 @@ the exact boundary and proof-closure order.
    containment.
 3. Check the stability-enhanced rank–trace argument and block-defect bridge.
 4. Check the compiled consecutive-window, principal-block pinching, and
-   abstract 267-offset aggregation modules, then audit the still-open
-   concrete central-zero partition/remainder wiring.
+   concrete increasing-ordinate Gram reindexing and abstract 267-offset
+   aggregation modules, then audit the still-open retained-sublist
+   partition/remainder wiring.
 5. Verify the hypotheses and concrete specialization of the new
    defect-preserving Theorem D interface, especially endpoint deletion and
    the uniform Gram-to-kernel replacement used by the local-to-global bridge.

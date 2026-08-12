@@ -22,7 +22,7 @@ Linux 6.18.35 x86_64
 | Canonical nodes / unresolved | 822,433 / 0 |
 | Cross-precision nodes / unresolved | 822,433 / 0 |
 | Splits / pruned / maximum depth | 410,999 / 411,434 / 39 |
-| Lean `lake build ZetaSeven` | 8,850 jobs completed after adding the finite window, pinching, shifted-partition, and block-bridge modules |
+| Lean `lake build ZetaSeven` | 8,851 jobs completed after adding the finite window, pinching, shifted-partition, block-bridge, and concrete ordered-simple-zero modules |
 | Lean source placeholder scan | clean |
 | Lean axiom audit | `propext`, `Classical.choice`, `Quot.sound` only |
 

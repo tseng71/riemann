@@ -30,6 +30,13 @@ import ZetaSeven
 #print axioms ZetaSeven.WindowEnergy.block_energy_of_sevenPointClaim
 #print axioms ZetaSeven.Pinching.sum_psi_re_diag_unitary_le_spectralDefect
 #print axioms ZetaSeven.Pinching.sum_spectralDefect_principalBlock_le
+#print axioms ZetaSeven.Pinching.spectralDefect_reindex
+#print axioms ZetaSeven.OrderedSimpleZeros.simpleOrdinateAt_strictMono
+#print axioms ZetaSeven.OrderedSimpleZeros.normalizedSimpleOrdinateAt_strictMono
+#print axioms ZetaSeven.OrderedSimpleZeros.simpleGap_pos
+#print axioms ZetaSeven.OrderedSimpleZeros.orderedSimpleGram_eq_mul
+#print axioms ZetaSeven.OrderedSimpleZeros.orderedSimpleGram_posSemidef
+#print axioms ZetaSeven.OrderedSimpleZeros.orderedSimpleGram_spectralDefect
 #print axioms ZetaSeven.ShiftedPartitions.sum_full_267_block_spans_le
 #print axioms ZetaSeven.ShiftedPartitions.aggregate_267_shifted_blocks
 #print axioms ZetaSeven.BlockEnergyDefect.defect_lower_of_kernel_energy_approx

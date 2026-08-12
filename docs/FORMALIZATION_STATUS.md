@@ -45,6 +45,11 @@ overlays these files before rebuilding against exactly the audited base.
 | `ZetaSeven.WindowEnergy.block_energy_of_sevenPointClaim` | Proves the exact finite consecutive-window inequality: `n` seven-point windows charge every short pair at most twice and every gap at most `1/500`, conditional only on `SevenPointClaim`. |
 | `ZetaSeven.Pinching.sum_psi_re_diag_unitary_le_spectralDefect` | Proves the Schur--Horn inequality for the chosen `Psi` penalty in an arbitrary unitary basis. |
 | `ZetaSeven.Pinching.sum_spectralDefect_principalBlock_le` | Constructs the block-diagonal unitary from all principal-block eigenbases and proves that the sum of all principal-block defects is at most the full defect for an arbitrary finite sigma-type partition. |
+| `ZetaSeven.Pinching.spectralDefect_reindex` | Proves that simultaneous row/column reindexing by any finite equivalence preserves the complete spectral defect. |
+| `ZetaSeven.OrderedSimpleZeros.simpleOrdinateAt_strictMono` | Enumerates the actual concrete simple critical-line zero subtype by `Fin (s₁(T))` and proves that the physical ordinates are strictly increasing. |
+| `ZetaSeven.OrderedSimpleZeros.normalizedSimpleOrdinateAt_strictMono` | Transfers strict ordering to the paper's normalized coordinate `L(γ-T)/(2π)`. |
+| `ZetaSeven.OrderedSimpleZeros.simpleGap_pos` | Proves every adjacent normalized gap in the concrete ordered simple-zero list is positive. |
+| `ZetaSeven.OrderedSimpleZeros.orderedSimpleGram_spectralDefect` | Reindexes the actual simple-zero Gram matrix on the increasing `Fin (s₁(T))` index and proves exact preservation of its spectral defect. |
 | `ZetaSeven.ShiftedPartitions.sum_full_267_block_spans_le` | Proves that the `S-266` consecutive 267-point blocks charge every adjacent gap at most 266 times. |
 | `ZetaSeven.ShiftedPartitions.aggregate_267_shifted_blocks` | Proves the exact finite 267-offset aggregation from residue-fiber pinching hypotheses, including all endpoint and block-error sums. |
 | `ZetaSeven.BlockEnergyDefect.defect_lower_of_kernel_energy_approx` | Joins the seven-point block energy to the PSD spectral defect, leaving only an explicit nonnegative finite Gram-to-kernel comparison error. |
@@ -74,10 +79,10 @@ The remaining end-to-end work is:
 3. Replay the 822,433-node subdivision forest with a small verified checker.
    The preferred route is chunked kernel reduction; if `native_decide` is used
    instead, its larger trust base must be disclosed explicitly.
-4. Connect the now-compiled finite window, principal-block pinching, and
-   267-offset aggregation theorems to the ordered central simple-zero index:
-   construct the concrete residue partitions and endpoint remainders, prove
-   central endpoint deletion, and prove the uniform finite Gram-to-kernel
+4. Starting from the now-compiled increasing-ordinate coordinates for the
+   actual simple-zero Gram matrix, construct the retained central sublist,
+   concrete residue partitions, and endpoint remainders; prove central
+   endpoint deletion and the uniform finite Gram-to-kernel
    comparison required by
    `BlockEnergyDefect.defect_lower_of_kernel_energy_approx`.  The finite
    zero-side split, tail seam, abstract Theorem-D source inequality, and
@@ -98,7 +103,7 @@ lake build ZetaSeven
 lake env lean ZetaSeven/Audit.lean
 ```
 
-The full `lake build ZetaSeven` target in this workspace completed 8,850 jobs
+The full `lake build ZetaSeven` target in this workspace completed 8,851 jobs
 for the pinned dependency closure plus the `ZetaSeven` extension.  The audit reports
 only the standard foundational axioms already present in the upstream
 development:

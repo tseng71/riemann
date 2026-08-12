@@ -30,8 +30,9 @@ connection to the central simple-zero Gram matrix.
 1. Rational enclosures for `sqrt 2`, `pi`, `sin`, `cos`, and normalized sinc.
 2. Proof-carrying bounds for all kernel and second-derivative cells.
 3. Kernel replay of the 822,433-node subdivision forest.
-4. Concrete reindexing of the ordered central simple-zero Gram matrix into
-   the compiled 267 residue partitions, with all endpoint remainders.
+4. Selection of the retained central sublist from the compiled concrete
+   increasing-ordinate Gram coordinates, followed by wiring into the 267
+   residue partitions with all endpoint remainders.
 5. Central endpoint deletion and uniform finite Gram-to-kernel error
    accounting.
 6. Concrete specialization of the abstract defect-preserving Theorem-D

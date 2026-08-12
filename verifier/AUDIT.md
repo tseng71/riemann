@@ -40,7 +40,8 @@ paper rather than rebuilt here.
 | Local seven-point inequality | Arb interval search, exact expected report, hard terminal-cell failure | Reproduced at 128/256 and 160/320 bits |
 | Seven-window block inequality | `ZetaSeven.WindowEnergy` | Compiled Lean proof conditional only on the displayed `SevenPointClaim` |
 | Principal-block spectral pinching | `ZetaSeven.Pinching` | Compiled Lean proof for arbitrary finite sigma-type partitions |
-| Shifted 267-block arithmetic | `ZetaSeven.ShiftedPartitions` | Compiled Lean proof at the residue-fiber interface; concrete central-zero reindexing remains open |
+| Concrete ordered simple-zero Gram coordinates | `ZetaSeven.OrderedSimpleZeros` | Compiled Lean proof of increasing-ordinate enumeration, positive normalized gaps, exact Gram reindexing, and defect invariance |
+| Shifted 267-block arithmetic | `ZetaSeven.ShiftedPartitions` | Compiled Lean proof at the residue-fiber interface; retained-sublist partition and remainder wiring remain open |
 | 267-point block defect | `ZetaSeven.BlockEnergyDefect` | Compiled Lean proof conditional on `SevenPointClaim` and an explicit finite Gram-to-kernel error bound |
 | Final constant | Exact rational reduction, Arb evaluation, and `ZetaSeven.Assembly` | Compiled Lean arithmetic proof; independent review pending |
 | Underlying analytic trace/tail estimates | Claude, Theorem D and cited propositions | Imported; not independently rebuilt here |
@@ -178,8 +179,9 @@ The exact final expression is
    before journal submission.
 5. The Arb subdivision forest must be replayed by a small independent or Lean
    checker before the local inequality can be called formally verified.
-6. The concrete central-zero reindexing into the compiled 267 residue
-   partitions, endpoint truncation, central-window replacement, and uniform
-   Gram-to-kernel limit remain to be closed in Lean.  The finite window,
-   spectral pinching, abstract shifted arithmetic, and source-side defect
-   retention are already compiled.
+6. Selecting the retained central sublist from the compiled increasing-
+   ordinate Gram coordinates, wiring its 267 residue partitions and endpoint
+   remainders, central-window replacement, and the uniform Gram-to-kernel
+   limit remain to be closed in Lean.  The concrete full-list ordering and
+   defect-preserving reindexing, finite window, spectral pinching, abstract
+   shifted arithmetic, and source-side defect retention are already compiled.

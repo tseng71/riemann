@@ -15,9 +15,10 @@ Date: 2026-08-12
 | Epsilon-form asymptotic rearrangement | **Lean proved** | `ZetaSeven.AsymptoticAssembly`; takes explicit source/local `o(N)` errors and derives the exact candidate coefficient. |
 | Consecutive seven-point window multiplicities | **Lean proved** | `ZetaSeven.WindowEnergy`; exact finite pair and gap charges, conditional only on the displayed `SevenPointClaim`. |
 | Principal-block spectral pinching | **Lean proved** | `ZetaSeven.Pinching`; constructs and verifies the block-diagonal unitary and proves the arbitrary finite-partition defect inequality. |
-| 267-offset finite aggregation | **Lean proved at the abstract fiber interface** | `ZetaSeven.ShiftedPartitions`; proves exact residue-fiber counting and the 266-fold gap charge. Concrete reindexing of the ordered central-zero Gram matrix remains open. |
+| Concrete increasing-ordinate simple-zero Gram coordinates | **Lean proved** | `ZetaSeven.OrderedSimpleZeros`; enumerates the actual `S₁` subtype by `Fin (s₁(T))`, proves positive normalized consecutive gaps, reindexes the concrete Gram matrix, and preserves its spectral defect exactly. |
+| 267-offset finite aggregation | **Lean proved at the abstract fiber interface** | `ZetaSeven.ShiftedPartitions`; proves exact residue-fiber counting and the 266-fold gap charge. Concrete residue partitions, retained central sublists, and endpoint remainder wiring remain open. |
 | 267-point block defect from the local claim | **Lean proved conditional on explicit inputs** | `ZetaSeven.BlockEnergyDefect`; assumes `SevenPointClaim` and a displayed finite Gram-to-kernel comparison error. |
-| Candidate `67.3025476837...%` bound | **Open end-to-end** | Requires proof-carrying interval replay, concrete central-zero partition/remainder and endpoint integration, uniform Gram-to-kernel error control, and top-level specialization of the defect-preserving interface. |
+| Candidate `67.3025476837...%` bound | **Open end-to-end** | Requires proof-carrying interval replay, retained-central-sublist partition/remainder and endpoint integration, uniform Gram-to-kernel error control, and top-level specialization of the defect-preserving interface. |
 
 ## Release gate
 

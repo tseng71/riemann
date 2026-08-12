@@ -29,6 +29,8 @@ axiom output in `ZetaSeven/Audit.lean` and run the source scan described in
 - the consecutive-window charge count in `WindowEnergy.lean`;
 - the constructed block-eigenbasis and principal-block inequality in
   `Pinching.lean`;
+- the concrete simple-zero ordinate ordering, normalized positive gaps, Gram
+  reindexing, and defect invariance in `OrderedSimpleZeros.lean`;
 - the residue-fiber and 266-fold gap counts in `ShiftedPartitions.lean`;
 - the conditional finite Gram-to-kernel bridge in
   `BlockEnergyDefect.lean`;
@@ -45,9 +47,10 @@ Theorem D proof. `ThmDDefect.lean` now retains the simple-zero Gram defect
 through an abstract package of the upstream trace and tail estimates and
 proves that the remaining source error is `o(N)`. The decisive open task is
 the concrete local-to-global lower bound for that defect: certificate replay,
-reindexing the ordered central-zero Gram matrix into the already formalized
-principal-block/residue-fiber interfaces, endpoint remainders and deletion,
-uniform overlap replacement, and a concrete top-level specialization. Until
+selecting the retained central sublist from the now-formalized ordered Gram
+coordinates, wiring it into the principal-block/residue-fiber interfaces,
+endpoint remainders and deletion, uniform overlap replacement, and a concrete
+top-level specialization. Until
 this path is formalized or independently checked, the candidate proportion
 is not an established theorem.
 

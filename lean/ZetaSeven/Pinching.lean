@@ -78,6 +78,37 @@ theorem sum_psi_re_diag_unitary_le_spectralDefect
   rw [heig] at hschur
   linarith
 
+/-! ## Reindexing invariance -/
+
+/-- Reindexing a PSD matrix along an equivalence preserves positivity. -/
+theorem posSemidefReindex
+    {κ : Type*} [Fintype κ] [DecidableEq κ]
+    {M : Matrix ι ι 𝕜} (hM : M.PosSemidef) (e : ι ≃ κ) :
+    (Matrix.reindex e e M).PosSemidef := by
+  rw [Matrix.reindex_apply]
+  exact hM.submatrix e.symm
+
+/-- Spectral defect is invariant under a simultaneous row/column
+reindexing.  The proof compares the canonical sorted eigenvalue lists, so it
+also covers equivalences between index types that are not definitionally the
+same cardinal. -/
+theorem spectralDefect_reindex
+    {κ : Type*} [Fintype κ] [DecidableEq κ]
+    {M : Matrix ι ι 𝕜} (hM : M.PosSemidef) (e : ι ≃ κ) :
+    spectralDefect (posSemidefReindex hM e) = spectralDefect hM := by
+  have hchar : (Matrix.reindex e e M).charpoly = M.charpoly :=
+    Matrix.charpoly_reindex e M
+  have hlist :
+      List.ofFn (posSemidefReindex hM e).1.eigenvalues₀ =
+        List.ofFn hM.1.eigenvalues₀ := by
+    rw [← (posSemidefReindex hM e).1.sort_roots_charpoly_eq_eigenvalues₀,
+      ← hM.1.sort_roots_charpoly_eq_eigenvalues₀, hchar]
+  unfold spectralDefect
+  rw [RHLinalg.sum_eigenvalues_reindex _ psi,
+    RHLinalg.sum_eigenvalues_reindex _ psi]
+  have hsum := congrArg (fun xs : List ℝ => (xs.map psi).sum) hlist
+  simpa only [List.map_ofFn, List.sum_ofFn, Function.comp_apply] using hsum
+
 /-! ## Principal-block pinching -/
 
 section Blocks

@@ -13,8 +13,10 @@ The compiled declarations cover the finite-dimensional rank--trace surplus,
 the simple-zero Gram/remainder split, the off-diagonal spectral-energy
 bridge, exact consecutive-window combinatorics, arbitrary principal-block
 spectral pinching, abstract 267-offset aggregation, the conditional
-267-point block bridge, the finite tail seam, an abstract defect-preserving
-Theorem D source inequality, epsilon removal, and exact rational assembly. See
+267-point block bridge, concrete increasing-ordinate coordinates and
+defect-preserving reindexing for the actual simple-zero Gram matrix, the
+finite tail seam, an abstract defect-preserving Theorem D source inequality,
+epsilon removal, and exact rational assembly. See
 [`../docs/FORMALIZATION_STATUS.md`](../docs/FORMALIZATION_STATUS.md) for the
 declaration-level ledger.
 
@@ -22,9 +24,9 @@ declaration-level ledger.
 
 `SevenPointClaim` is intentionally a definition of a proposition, not a
 theorem. The Arb interval forest is not replayed in Lean.  The compiled
-window/pinching/267-offset theorems have not yet been connected to the
-ordered central-zero index, concrete endpoint remainders, endpoint deletion,
-and a uniform Gram-to-kernel error in a top-level theorem. Therefore this
+increasing-ordinate index has not yet been restricted to the retained central
+sublist or connected to concrete 267 partitions, endpoint remainders,
+endpoint deletion, and a uniform Gram-to-kernel error in a top-level theorem. Therefore this
 package does not prove the candidate proportion and does not prove the
 Riemann hypothesis.
 

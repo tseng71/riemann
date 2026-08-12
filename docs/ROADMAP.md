@@ -33,8 +33,9 @@ Status: Arb evidence complete; Lean/independent replay open.
 
 Status: the consecutive-window theorem, arbitrary principal-block spectral
 pinching, abstract 267 residue-fiber aggregation, exact 266-fold gap charge,
-and the conditional 267-point block-defect bridge are compiled.  Concrete
-reindexing of the ordered central-zero Gram matrix into the 267 residue
+the conditional 267-point block-defect bridge, and the concrete
+increasing-ordinate reindexing of the actual simple-zero Gram matrix are
+compiled.  Selecting the retained central sublist and wiring its 267 residue
 partitions and endpoint remainders remains open.
 
 ## M4 — analytic Theorem D integration

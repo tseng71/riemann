@@ -8,5 +8,6 @@ import ZetaSeven.ThmDDefect
 import ZetaSeven.SevenPointSpec
 import ZetaSeven.WindowEnergy
 import ZetaSeven.Pinching
+import ZetaSeven.OrderedSimpleZeros
 import ZetaSeven.ShiftedPartitions
 import ZetaSeven.BlockEnergyDefect
