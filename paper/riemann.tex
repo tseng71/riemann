@@ -53,8 +53,11 @@ precision settings.  A pinned Lean~4 companion checks the new
 finite-dimensional stability, spectral-energy, and exact assembly lemmas
 without \texttt{sorry}.  It also checks an abstract defect-preserving
 Theorem~D source inequality, with the remaining source error proved to be
-$o(N)$.  It does not yet replay the Arb certificate or close the
-local-to-global seven-point bridge and its concrete top-level specialization.
+$o(N)$, as well as the finite consecutive-window count, arbitrary
+principal-block spectral pinching, abstract 267-offset aggregation, and a
+conditional 267-point block bridge.  It does not yet replay the Arb
+certificate or close the concrete central-zero partition, endpoint,
+Gram-to-kernel, and top-level specialization interfaces.
 The analytic trace and tail estimates are imported from Claude's
 Theorem~D~\cite{Claude26}.  No part of the proposed improvement has yet
 received independent expert review.}}
@@ -78,9 +81,11 @@ Montgomery--Taylor overlap kernel.  An exhaustive interval verifier uses Arb
 enclosures, certified convex tangent bounds, and two rational
 strong-convexity basins; a higher-precision replay has identical logical
 counts.  A Lean companion formalizes the new matrix and exact-arithmetic
-layers and an abstract defect-preserving Theorem~D source inequality.  It
-leaves the local certificate replay, the local-to-global defect comparison,
-and concrete top-level specialization as explicit open obligations.  Subject to those stated
+layers, the finite window/pinching/267-offset core, and an abstract
+defect-preserving Theorem~D source inequality.  It leaves the local
+certificate replay, concrete ordered-zero partition and endpoint wiring,
+uniform Gram-to-kernel error, and top-level specialization as explicit open
+obligations.  Subject to those stated
 verification obligations, the candidate bound is
 \[
  \liminf_{T\to\infty}\frac{\Nsimple(T,2T)}{N(T,2T)}
@@ -106,9 +111,10 @@ Claude~\cite{Claude26}.  That theorem is accompanied by a Lean~4 artifact for
 its stated results~\cite{ClaudeLean26}.  We use its analytic framework as a
 cited input.  The accompanying \texttt{ZetaSeven} package is a pinned
 extension of that Lean development: it verifies the new finite-dimensional
-lemmas, the defect-preserving abstract Theorem~D source inequality, and exact
-assembly, but does not yet prove the local seven-point claim or the
-strengthened end-to-end top-level statement.
+lemmas, the finite window/pinching/267-offset core, the defect-preserving
+abstract Theorem~D source inequality, and exact assembly, but does not yet
+prove the local seven-point claim or the strengthened end-to-end top-level
+statement.
 
 The exact local constant certified in this work is
 \begin{equation}\label{eq:Cstar}
@@ -677,7 +683,9 @@ lake env lean ZetaSeven/Audit.lean
 \end{verbatim}
 The proved declarations cover the rank--trace surplus, the simple-zero Gram
 split and its inertia bound, the finite tail seam, the bridge from
-off-diagonal Gram energy to spectral defect, the abstract
+off-diagonal Gram energy to spectral defect, the exact consecutive-window
+count, arbitrary principal-block spectral pinching, abstract 267-offset
+aggregation, the conditional 267-point block bridge, the abstract
 defect-preserving Theorem~D source inequality (including an explicit
 $o(N)$ error package), and the exact rational and epsilon-form assembly.
 The proposition \texttt{SevenPointClaim} is intentionally defined but not

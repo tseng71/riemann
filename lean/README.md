@@ -11,19 +11,22 @@ builds the extension against mathlib commit
 
 The compiled declarations cover the finite-dimensional rank--trace surplus,
 the simple-zero Gram/remainder split, the off-diagonal spectral-energy
-bridge, the finite tail seam, an abstract defect-preserving Theorem D source
-inequality, epsilon removal, and exact rational assembly. See
+bridge, exact consecutive-window combinatorics, arbitrary principal-block
+spectral pinching, abstract 267-offset aggregation, the conditional
+267-point block bridge, the finite tail seam, an abstract defect-preserving
+Theorem D source inequality, epsilon removal, and exact rational assembly. See
 [`../docs/FORMALIZATION_STATUS.md`](../docs/FORMALIZATION_STATUS.md) for the
 declaration-level ledger.
 
 ## What is not proved
 
 `SevenPointClaim` is intentionally a definition of a proposition, not a
-theorem. The Arb interval forest is not replayed in Lean, and the consecutive
-windows, 267 shifted partitions, pinching, endpoint deletion, and uniform
-Gram-to-kernel replacement are not yet connected in a concrete top-level
-theorem. Therefore this package does not prove the candidate proportion and
-does not prove the Riemann hypothesis.
+theorem. The Arb interval forest is not replayed in Lean.  The compiled
+window/pinching/267-offset theorems have not yet been connected to the
+ordered central-zero index, concrete endpoint remainders, endpoint deletion,
+and a uniform Gram-to-kernel error in a top-level theorem. Therefore this
+package does not prove the candidate proportion and does not prove the
+Riemann hypothesis.
 
 ## Rebuild
 

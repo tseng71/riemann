@@ -10,9 +10,11 @@ The finite claim
 \]
 
 has been verified by exhaustive interval computation at two precision
-settings.  Hand checks found no error in the stability inequality, kernel
-normalization, seven-point combinatorics, shifted pinching, or exact final
-arithmetic.  The corresponding global proportion is
+settings.  Lean checks now cover the stability inequality, seven-window
+combinatorics, arbitrary principal-block pinching, abstract 267-offset
+counting, and exact final arithmetic; hand checks found no error in the
+remaining kernel normalization and analytic wiring.  The corresponding
+global proportion is
 
 \[
 0.6730254768378743181159739993\ldots .
@@ -36,8 +38,10 @@ paper rather than rebuilt here.
 | Epsilon-removal and rational final assembly | `ZetaSeven.AsymptoticAssembly`, `ZetaSeven.Assembly` | Compiled Lean proof; independent review pending |
 | Montgomery--Taylor overlap kernel | Derivation from the full-grid identity; normalization tests | Hand checked; depends on cited tail estimates |
 | Local seven-point inequality | Arb interval search, exact expected report, hard terminal-cell failure | Reproduced at 128/256 and 160/320 bits |
-| Seven-window block inequality | Exact multiplicity count of gaps and pairs | Hand checked |
-| Shifted block pinching | Convex spectral pinching plus exact gap-charge count | Hand checked |
+| Seven-window block inequality | `ZetaSeven.WindowEnergy` | Compiled Lean proof conditional only on the displayed `SevenPointClaim` |
+| Principal-block spectral pinching | `ZetaSeven.Pinching` | Compiled Lean proof for arbitrary finite sigma-type partitions |
+| Shifted 267-block arithmetic | `ZetaSeven.ShiftedPartitions` | Compiled Lean proof at the residue-fiber interface; concrete central-zero reindexing remains open |
+| 267-point block defect | `ZetaSeven.BlockEnergyDefect` | Compiled Lean proof conditional on `SevenPointClaim` and an explicit finite Gram-to-kernel error bound |
 | Final constant | Exact rational reduction, Arb evaluation, and `ZetaSeven.Assembly` | Compiled Lean arithmetic proof; independent review pending |
 | Underlying analytic trace/tail estimates | Claude, Theorem D and cited propositions | Imported; not independently rebuilt here |
 
@@ -174,6 +178,8 @@ The exact final expression is
    before journal submission.
 5. The Arb subdivision forest must be replayed by a small independent or Lean
    checker before the local inequality can be called formally verified.
-6. The endpoint truncation, central-window replacement, 267 shifted
-   partitions, pinching, and uniform Gram-to-kernel limit remain to be closed
-   in Lean.  The abstract source-side defect retention is already compiled.
+6. The concrete central-zero reindexing into the compiled 267 residue
+   partitions, endpoint truncation, central-window replacement, and uniform
+   Gram-to-kernel limit remain to be closed in Lean.  The finite window,
+   spectral pinching, abstract shifted arithmetic, and source-side defect
+   retention are already compiled.

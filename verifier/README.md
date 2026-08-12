@@ -23,11 +23,12 @@ paper, the inequality gives the candidate bound
 > **Status.** This is an AI-assisted, unreviewed research artifact.  It does
 > not prove the Riemann hypothesis.  The finite interval certificate has been
 > run successfully at two Arb precision settings.  A pinned Lean companion
-> proves the new finite-dimensional stability, spectral-energy, and exact
-> assembly lemmas and an abstract defect-preserving Theorem D source
-> inequality without `sorry`.  It does not yet replay the Arb certificate or
-> prove the concrete local-to-global seven-point specialization (including
-> central-window replacement, shifted partitions, endpoint deletion, and
+> proves the new finite-dimensional stability, spectral-energy,
+> consecutive-window, principal-block pinching, abstract 267-offset, exact
+> assembly, and defect-preserving Theorem D source lemmas without `sorry`.
+> It does not yet replay the Arb certificate or prove the concrete
+> local-to-global seven-point specialization (including central-window
+> replacement, concrete partition/remainder wiring, endpoint deletion, and
 > uniform error control).  No part of the proposed improvement has yet
 > received independent expert review.
 

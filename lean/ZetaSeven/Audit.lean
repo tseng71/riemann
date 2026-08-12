@@ -27,3 +27,9 @@ import ZetaSeven
 #print axioms ZetaSeven.AsymptoticAssembly.assemble_Cstar_eps
 #print axioms ZetaSeven.ThmDDefect.simple_lower_c_defect
 #print axioms ZetaSeven.ThmDDefect.thmD_simple_defect_abstract
+#print axioms ZetaSeven.WindowEnergy.block_energy_of_sevenPointClaim
+#print axioms ZetaSeven.Pinching.sum_psi_re_diag_unitary_le_spectralDefect
+#print axioms ZetaSeven.Pinching.sum_spectralDefect_principalBlock_le
+#print axioms ZetaSeven.ShiftedPartitions.sum_full_267_block_spans_le
+#print axioms ZetaSeven.ShiftedPartitions.aggregate_267_shifted_blocks
+#print axioms ZetaSeven.BlockEnergyDefect.defect_lower_of_kernel_energy_approx

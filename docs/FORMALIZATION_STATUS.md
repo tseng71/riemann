@@ -42,6 +42,12 @@ overlays these files before rebuilding against exactly the audited base.
 | `ZetaSeven.AsymptoticAssembly.assemble_Cstar_eps` | Specializes that asymptotic assembly to the exact rational constant `Cstar`. |
 | `ZetaSeven.ThmDDefect.simple_lower_c_defect` | Substitutes the Theorem-D trace and Frobenius estimates while retaining an arbitrary favorable defect term. |
 | `ZetaSeven.ThmDDefect.thmD_simple_defect_abstract` | Carries the concrete simple-zero Gram spectral defect through the pinned Theorem-D trace/tail hypotheses and packages every remaining source-side error as `o(N)`. |
+| `ZetaSeven.WindowEnergy.block_energy_of_sevenPointClaim` | Proves the exact finite consecutive-window inequality: `n` seven-point windows charge every short pair at most twice and every gap at most `1/500`, conditional only on `SevenPointClaim`. |
+| `ZetaSeven.Pinching.sum_psi_re_diag_unitary_le_spectralDefect` | Proves the Schur--Horn inequality for the chosen `Psi` penalty in an arbitrary unitary basis. |
+| `ZetaSeven.Pinching.sum_spectralDefect_principalBlock_le` | Constructs the block-diagonal unitary from all principal-block eigenbases and proves that the sum of all principal-block defects is at most the full defect for an arbitrary finite sigma-type partition. |
+| `ZetaSeven.ShiftedPartitions.sum_full_267_block_spans_le` | Proves that the `S-266` consecutive 267-point blocks charge every adjacent gap at most 266 times. |
+| `ZetaSeven.ShiftedPartitions.aggregate_267_shifted_blocks` | Proves the exact finite 267-offset aggregation from residue-fiber pinching hypotheses, including all endpoint and block-error sums. |
+| `ZetaSeven.BlockEnergyDefect.defect_lower_of_kernel_energy_approx` | Joins the seven-point block energy to the PSD spectral defect, leaving only an explicit nonnegative finite Gram-to-kernel comparison error. |
 
 All declarations above compile without `sorry`, `admit`, or a new `axiom`.
 
@@ -68,13 +74,15 @@ The remaining end-to-end work is:
 3. Replay the 822,433-node subdivision forest with a small verified checker.
    The preferred route is chunked kernel reduction; if `native_decide` is used
    instead, its larger trust base must be disclosed explicitly.
-4. Formalize the consecutive-window sum, pinching, 267 shifted partitions,
-   central endpoint deletion, and the uniform Gram-to-kernel replacement that
-   turn the local certificate into a lower bound for `simpleDefectD`.  The
-   finite zero-side split, tail seam, defect-preserving abstract Theorem-D
-   source inequality, and epsilon-form algebra are now checked.  A concrete
-   top-level specialization still has to connect these pieces to the local
-   certificate and discharge the remaining parameter/interface hypotheses.
+4. Connect the now-compiled finite window, principal-block pinching, and
+   267-offset aggregation theorems to the ordered central simple-zero index:
+   construct the concrete residue partitions and endpoint remainders, prove
+   central endpoint deletion, and prove the uniform finite Gram-to-kernel
+   comparison required by
+   `BlockEnergyDefect.defect_lower_of_kernel_energy_approx`.  The finite
+   zero-side split, tail seam, abstract Theorem-D source inequality, and
+   epsilon-form algebra are already checked.  A concrete top-level
+   specialization must still discharge these analytic interfaces.
 
 Only after items 1--4 close should the numerical proportion be advertised as
 an end-to-end Lean theorem.
@@ -90,7 +98,7 @@ lake build ZetaSeven
 lake env lean ZetaSeven/Audit.lean
 ```
 
-The full `lake build ZetaSeven` target in this workspace completed 8,846 jobs
+The full `lake build ZetaSeven` target in this workspace completed 8,850 jobs
 for the pinned dependency closure plus the `ZetaSeven` extension.  The audit reports
 only the standard foundational axioms already present in the upstream
 development:

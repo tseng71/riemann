@@ -18,18 +18,21 @@ Pinned versions:
 - mathlib: `51e6992efd06126df61a496bebf8f49482a4e129`.
 
 The completed declarations audited so far depend only on Lean's standard
-`propext`, `Classical.choice`, and `Quot.sound`. They include an abstract
-defect-preserving Theorem-D source inequality and the epsilon-form algebra,
-but not a proof of the seven-point global inequality or its local-to-global
-connection to the concrete defect.
+`propext`, `Classical.choice`, and `Quot.sound`. They include the finite
+consecutive-window count, arbitrary principal-block spectral pinching,
+abstract 267-offset aggregation, a conditional 267-point block bridge, an
+abstract defect-preserving Theorem-D source inequality, and the epsilon-form
+algebra. They do not prove `SevenPointClaim` or its concrete analytic
+connection to the central simple-zero Gram matrix.
 
 ## Open proof obligations
 
 1. Rational enclosures for `sqrt 2`, `pi`, `sin`, `cos`, and normalized sinc.
 2. Proof-carrying bounds for all kernel and second-derivative cells.
 3. Kernel replay of the 822,433-node subdivision forest.
-4. Consecutive-window and 267-shift combinatorics.
-5. Spectral pinching, central endpoint deletion, and uniform overlap-error
+4. Concrete reindexing of the ordered central simple-zero Gram matrix into
+   the compiled 267 residue partitions, with all endpoint remainders.
+5. Central endpoint deletion and uniform finite Gram-to-kernel error
    accounting.
 6. Concrete specialization of the abstract defect-preserving Theorem-D
    interface after the local-to-global defect bound is available.

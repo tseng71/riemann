@@ -178,10 +178,13 @@ tail seam, the scalar and matrix spectral-energy bridges (including the exact
 `2 * sum_{i<j}` off-diagonal form), epsilon-removal and rational assembly, and
 an abstract defect-preserving Theorem D source inequality under the pinned
 trace/tail hypotheses, with no `sorry`, `admit`, or new axiom.  It deliberately
-leaves `SevenPointClaim` as a proposition rather than a theorem.  It also does
-not yet prove the concrete local-to-global specialization: central-window
-replacement, 267 shifted partitions, pinching, endpoint deletion, and the
-uniform Gram-to-kernel error passage remain open.
+leaves `SevenPointClaim` as a proposition rather than a theorem.  It now also
+proves the finite consecutive-window count, arbitrary principal-block
+pinching, abstract 267 residue-fiber aggregation, and conditional 267-point
+block bridge. It does not yet prove the concrete local-to-global
+specialization: central-window replacement, concrete partition/remainder
+wiring, endpoint deletion, and the uniform Gram-to-kernel error passage
+remain open.
 
 Thus the current evidence has two complementary but non-identical parts:
 Arb certifies (3.1) externally, while Lean certifies the surrounding algebra.

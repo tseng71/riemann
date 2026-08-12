@@ -31,8 +31,11 @@ Status: Arb evidence complete; Lean/independent replay open.
 - prove spectral pinching for the chosen convex defect;
 - formalize all 267 shifted partitions, gap multiplicities, and remainders.
 
-Status: exact scalar assembly complete; combinatorial/spectral integration
-open.
+Status: the consecutive-window theorem, arbitrary principal-block spectral
+pinching, abstract 267 residue-fiber aggregation, exact 266-fold gap charge,
+and the conditional 267-point block-defect bridge are compiled.  Concrete
+reindexing of the ordered central-zero Gram matrix into the 267 residue
+partitions and endpoint remainders remains open.
 
 ## M4 — analytic Theorem D integration
 
@@ -44,9 +47,10 @@ open.
 
 Status: concrete finite zero-side entry point and tail seam implemented in
 Lean. The abstract defect-preserving Theorem-D source inequality and its
-`o(N)` error package are also implemented. Central-window replacement,
-local-to-global defect comparison, and concrete top-level specialization
-remain open.
+`o(N)` error package are also implemented. The finite local-to-global
+combinatorial and spectral core is now available; central-window replacement,
+uniform Gram-to-kernel error control, concrete partition/remainder wiring,
+and the top-level specialization remain open.
 
 ## M5 — release and review
 

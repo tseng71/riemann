@@ -26,6 +26,12 @@ axiom output in `ZetaSeven/Audit.lean` and run the source scan described in
 - the retained spectral surplus in `Stability.lean`;
 - the simple-zero/remainder inertia split in `SimpleBlock.lean`;
 - the off-diagonal-energy bridge in `BlockDefect.lean`;
+- the consecutive-window charge count in `WindowEnergy.lean`;
+- the constructed block-eigenbasis and principal-block inequality in
+  `Pinching.lean`;
+- the residue-fiber and 266-fold gap counts in `ShiftedPartitions.lean`;
+- the conditional finite Gram-to-kernel bridge in
+  `BlockEnergyDefect.lean`;
 - the defect-preserving source package in `ThmDDefect.lean`;
 - the epsilon-form endgame in `AsymptoticAssembly.lean`;
 - the exact rational rearrangement in `Assembly.lean`.
@@ -38,11 +44,12 @@ Compare the manuscript's interface line by line with the pinned upstream
 Theorem D proof. `ThmDDefect.lean` now retains the simple-zero Gram defect
 through an abstract package of the upstream trace and tail estimates and
 proves that the remaining source error is `o(N)`. The decisive open task is
-the local-to-global lower bound for that defect: certificate replay,
-endpoint deletion, uniform overlap replacement, pinching, 267 shifted
-partitions, and a concrete top-level specialization. Until this path is
-formalized or independently checked, the candidate proportion is not an
-established theorem.
+the concrete local-to-global lower bound for that defect: certificate replay,
+reindexing the ordered central-zero Gram matrix into the already formalized
+principal-block/residue-fiber interfaces, endpoint remainders and deletion,
+uniform overlap replacement, and a concrete top-level specialization. Until
+this path is formalized or independently checked, the candidate proportion
+is not an established theorem.
 
 ## 4. Claim language
 

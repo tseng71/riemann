@@ -6,3 +6,7 @@ import ZetaSeven.Assembly
 import ZetaSeven.AsymptoticAssembly
 import ZetaSeven.ThmDDefect
 import ZetaSeven.SevenPointSpec
+import ZetaSeven.WindowEnergy
+import ZetaSeven.Pinching
+import ZetaSeven.ShiftedPartitions
+import ZetaSeven.BlockEnergyDefect
