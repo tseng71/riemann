@@ -1,5 +1,7 @@
 # Seven-point stability refinement for zeta simple zeros
 
+[中文说明](README.zh-CN.md)
+
 This public repository is the review and reproducibility workspace for an
 AI-assisted attempt to strengthen the known lower bound for the proportion of
 simple zeros of the Riemann zeta function on the critical line.
@@ -22,12 +24,13 @@ C_* = \frac{38262312113}{10^{13}} = 0.0038262312113.
 \]
 
 The external Arb verifier has completed with no unresolved cells at two
-precision settings. Several finite-dimensional matrix and assembly lemmas
-have been proved in Lean without `sorry`, `admit`, or new axioms. The remaining
-proof boundary is explicit and material: the seven-point interval certificate
-must be replayed by a small verified checker, and the retained spectral defect
-must be carried through the full analytic Theorem D chain, including window
-sums, pinching, endpoints, and all asymptotic errors.
+precision settings. The finite-dimensional matrix layer, exact assembly, and
+an abstract defect-preserving Theorem D source inequality have been proved in
+Lean without `sorry`, `admit`, or new axioms. The remaining proof boundary is
+explicit and material: the seven-point interval certificate must be replayed
+by a small verified checker, and its local bound must be connected to the
+simple-zero Gram defect through consecutive windows, pinching, shifted
+partitions, endpoint deletion, and uniform kernel replacement.
 
 ## Publication policy
 
@@ -38,7 +41,8 @@ sums, pinching, endpoints, and all asymptotic errors.
 - A public draft PR contains the current paper, verifier, certificates, Lean
   extension, reproducibility instructions, provenance, and trust-base notes.
 
-See `CLAIMS.md` and `docs/FORMALIZATION_STATUS.md` for the exact boundary.
+See `CLAIMS.md`, `docs/FORMALIZATION_STATUS.md`, and `docs/ROADMAP.md` for
+the exact boundary and proof-closure order.
 
 ## Review focus
 
@@ -48,8 +52,9 @@ See `CLAIMS.md` and `docs/FORMALIZATION_STATUS.md` for the exact boundary.
 3. Check the stability-enhanced rank–trace argument and block-defect bridge.
 4. Check consecutive seven-window multiplicities and the 267 shifted
    partitions.
-5. Verify that the spectral defect survives every analytic approximation and
-   endpoint deletion in the imported Theorem D framework.
+5. Verify the hypotheses and concrete specialization of the new
+   defect-preserving Theorem D interface, especially endpoint deletion and
+   the uniform Gram-to-kernel replacement used by the local-to-global bridge.
 
 ## Attribution
 

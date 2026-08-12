@@ -14,8 +14,9 @@ this file is to make the exact verification boundary reviewable.
 - Lean: `leanprover/lean4:v4.33.0-rc2`
 - mathlib: `51e6992efd06126df61a496bebf8f49482a4e129`
 
-The new library root is `ZetaSeven`.  The upstream `Zeta23` source is retained
-so the extension can be rebuilt against exactly the audited base.
+The new library root is `ZetaSeven`.  This repository stores only that
+extension; the CI workflow fetches the pinned upstream `Zeta23` source and
+overlays these files before rebuilding against exactly the audited base.
 
 ## Closed, compiled theorems
 
@@ -27,11 +28,20 @@ so the extension can be rebuilt against exactly the audited base.
 | `ZetaSeven.Stability.sum_sq_sub_one_eigenvalues_eq_frob_sub_card` | Converts squared spectral deviation into Frobenius excess for a PSD matrix of normalized trace. |
 | `ZetaSeven.Stability.min_one_frob_sub_card_le_spectralDefect` | Matrix form of the local energy bridge. |
 | `ZetaSeven.Stability.gram_defect_rank_trace` | Proves the strengthened Gram-matrix inequality `||P+Q||_F^2 >= 4 tr(P+Q)-3r-4b+D(M)`. |
+| `ZetaSeven.BlockDefect.min_one_two_mul_upperOffDiagEnergy_le_spectralDefect` | Proves the manuscript's exact `min(1, 2 sum_{i<j} ||M_ij||^2) <= D(M)` inequality, without a unit-diagonal assumption. |
+| `Zeta23.ZeroSide.ZeroBlockData.posIndex_simpleQ_le` | Splits off exactly the simple on-line Gram block and proves that the remainder has positive index at most `s₂+p`. |
+| `Zeta23.ZeroSide.ZeroBlockData.finite_simple_zero_counting` | Retains the simple-zero Gram defect in the exact finite zero-side count. |
+| `ZetaSeven.SimpleBlock.hatAz_simple_defect` | Instantiates the finite defect inequality against the concrete zeta-zero `ZeroConfig/Params` data. |
+| `ZetaSeven.SeamDefect.seamA_simple_defect` | Carries the defect through the finite tail perturbation and the passage from `I'` to `(T,2T]`. |
 | `ZetaSeven.Assembly.finite_zero_counting` | Checks the finite zero-count bookkeeping after the strengthened matrix inequality. |
 | `ZetaSeven.Assembly.Cstar_*` | Checks `C_*`, the `261/262` threshold, both exact block values, and denominator positivity by rational normalization. |
 | `ZetaSeven.Assembly.assemble_stability` | Checks the global linear rearrangement, with both error terms explicit. |
 | `ZetaSeven.Assembly.assemble_stability_div` | Checks the positive-denominator quotient form. |
 | `ZetaSeven.Assembly.sigma_exact_form` | Checks the exact linear-fractional expression with denominator `2660013536538507`. |
+| `ZetaSeven.AsymptoticAssembly.assemble_stability_eps` | Converts the defect-preserving source and local inequalities, with two explicit `o(N)` errors, into the epsilon-form proportion statement. |
+| `ZetaSeven.AsymptoticAssembly.assemble_Cstar_eps` | Specializes that asymptotic assembly to the exact rational constant `Cstar`. |
+| `ZetaSeven.ThmDDefect.simple_lower_c_defect` | Substitutes the Theorem-D trace and Frobenius estimates while retaining an arbitrary favorable defect term. |
+| `ZetaSeven.ThmDDefect.thmD_simple_defect_abstract` | Carries the concrete simple-zero Gram spectral defect through the pinned Theorem-D trace/tail hypotheses and packages every remaining source-side error as `o(N)`. |
 
 All declarations above compile without `sorry`, `admit`, or a new `axiom`.
 
@@ -59,22 +69,29 @@ The remaining end-to-end work is:
    The preferred route is chunked kernel reduction; if `native_decide` is used
    instead, its larger trust base must be disclosed explicitly.
 4. Formalize the consecutive-window sum, pinching, 267 shifted partitions,
-   endpoint errors, and the modified Theorem D endgame that retains the defect
-   rather than discarding it.
+   central endpoint deletion, and the uniform Gram-to-kernel replacement that
+   turn the local certificate into a lower bound for `simpleDefectD`.  The
+   finite zero-side split, tail seam, defect-preserving abstract Theorem-D
+   source inequality, and epsilon-form algebra are now checked.  A concrete
+   top-level specialization still has to connect these pieces to the local
+   certificate and discharge the remaining parameter/interface hypotheses.
 
 Only after items 1--4 close should the numerical proportion be advertised as
 an end-to-end Lean theorem.
 
 ## Reproduction
 
-From this directory:
+After overlaying `lean/ZetaSeven`, `lean/ZetaSeven.lean`, and the pinned Lake
+files on the upstream commit (the exact procedure is in
+`.github/workflows/lean.yml`):
 
 ```bash
 lake build ZetaSeven
 lake env lean ZetaSeven/Audit.lean
 ```
 
-The completed build in this workspace comprised 2,830 jobs.  The audit reports
+The full `lake build ZetaSeven` target in this workspace completed 8,846 jobs
+for the pinned dependency closure plus the `ZetaSeven` extension.  The audit reports
 only the standard foundational axioms already present in the upstream
 development:
 

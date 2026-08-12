@@ -18,8 +18,10 @@ Pinned versions:
 - mathlib: `51e6992efd06126df61a496bebf8f49482a4e129`.
 
 The completed declarations audited so far depend only on Lean's standard
-`propext`, `Classical.choice`, and `Quot.sound`. This does not yet include a
-proof of the seven-point global inequality or the full analytic assembly.
+`propext`, `Classical.choice`, and `Quot.sound`. They include an abstract
+defect-preserving Theorem-D source inequality and the epsilon-form algebra,
+but not a proof of the seven-point global inequality or its local-to-global
+connection to the concrete defect.
 
 ## Open proof obligations
 
@@ -27,9 +29,10 @@ proof of the seven-point global inequality or the full analytic assembly.
 2. Proof-carrying bounds for all kernel and second-derivative cells.
 3. Kernel replay of the 822,433-node subdivision forest.
 4. Consecutive-window and 267-shift combinatorics.
-5. Spectral pinching for the defect and endpoint-error accounting.
-6. Integration into the exact Theorem D proof path without discarding the
-   spectral surplus.
+5. Spectral pinching, central endpoint deletion, and uniform overlap-error
+   accounting.
+6. Concrete specialization of the abstract defect-preserving Theorem-D
+   interface after the local-to-global defect bound is available.
 
 Until these obligations close, the candidate global proportion is a research
 claim under active verification, not an established theorem.

@@ -1,0 +1,804 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,mathtools,amsthm}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+\usepackage{url}
+
+\allowdisplaybreaks[2]
+\emergencystretch=2em
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Span}{span}
+\newcommand{\Frob}{\mathrm F}
+\newcommand{\R}{\mathbb R}
+\newcommand{\cD}{\mathcal D}
+\newcommand{\cF}{\mathcal F}
+\newcommand{\MT}{\mathrm{MT}}
+\newcommand{\Nsimple}{N_0^s}
+
+\hypersetup{
+  pdftitle={A Computer-Assisted Seven-Point Candidate Refinement for Simple Zeros of the Riemann Zeta Function},
+  pdfauthor={Anonymous submission; AI-assisted research draft}
+}
+
+\title{A Computer-Assisted Seven-Point Candidate Refinement\\
+for Simple Zeros of the Riemann Zeta Function}
+\author{Anonymous submission\\\small AI-assisted research draft}
+\date{Peer-review draft, August 12, 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{center}
+\fcolorbox{black}{gray!8}{\parbox{0.91\linewidth}{
+\textbf{Release status.} This manuscript is an unreviewed,
+computer-assisted candidate refinement.  It does not prove the Riemann
+hypothesis.  The finite seven-point inequality has been verified at two Arb
+precision settings.  A pinned Lean~4 companion checks the new
+finite-dimensional stability, spectral-energy, and exact assembly lemmas
+without \texttt{sorry}.  It also checks an abstract defect-preserving
+Theorem~D source inequality, with the remaining source error proved to be
+$o(N)$.  It does not yet replay the Arb certificate or close the
+local-to-global seven-point bridge and its concrete top-level specialization.
+The analytic trace and tail estimates are imported from Claude's
+Theorem~D~\cite{Claude26}.  No part of the proposed improvement has yet
+received independent expert review.}}
+\end{center}
+
+\begin{abstract}
+Let $N(T,2T)$ count the nontrivial zeros of the Riemann zeta function with
+ordinates in $(T,2T]$, with multiplicity, and let $\Nsimple(T,2T)$ count the
+simple zeros on the critical line in the same interval.  We retain a convex
+spectral defect in the rank--trace argument underlying Claude's 2026
+Montgomery--Taylor bound and connect that defect to short-range correlations
+of consecutive critical-line zeros.  The only new computer-assisted input is
+the global inequality
+\[
+ \cF_6(g_1,\ldots,g_6)
+ \ge C_*:=\frac{38262312113}{10^{13}}
+ \qquad(g_1,\ldots,g_6\ge0),
+\]
+for an explicit seven-point functional built from the normalized
+Montgomery--Taylor overlap kernel.  An exhaustive interval verifier uses Arb
+enclosures, certified convex tangent bounds, and two rational
+strong-convexity basins; a higher-precision replay has identical logical
+counts.  A Lean companion formalizes the new matrix and exact-arithmetic
+layers and an abstract defect-preserving Theorem~D source inequality.  It
+leaves the local certificate replay, the local-to-global defect comparison,
+and concrete top-level specialization as explicit open obligations.  Subject to those stated
+verification obligations, the candidate bound is
+\[
+ \liminf_{T\to\infty}\frac{\Nsimple(T,2T)}{N(T,2T)}
+ \ge 0.6730254768378743181159739993\ldots .
+\]
+The paper isolates every imported input, gives the exact block arithmetic,
+and records the verifier's trust base and remaining review obligations.
+\end{abstract}
+
+\section{Scope and statement of the result}
+
+Write
+\[
+ N:=N(T,2T),\qquad S:=\Nsimple(T,2T),
+\]
+and let
+\begin{equation}\label{eq:HMT}
+ H_{\MT}:=\frac32-\frac1{\sqrt2}\cot\frac1{\sqrt2}
+ =0.6725007036794116457343797908\ldots .
+\end{equation}
+The quantity $H_{\MT}$ is the optimized constant in Theorem~D of
+Claude~\cite{Claude26}.  That theorem is accompanied by a Lean~4 artifact for
+its stated results~\cite{ClaudeLean26}.  We use its analytic framework as a
+cited input.  The accompanying \texttt{ZetaSeven} package is a pinned
+extension of that Lean development: it verifies the new finite-dimensional
+lemmas, the defect-preserving abstract Theorem~D source inequality, and exact
+assembly, but does not yet prove the local seven-point claim or the
+strengthened end-to-end top-level statement.
+
+The exact local constant certified in this work is
+\begin{equation}\label{eq:Cstar}
+ C_*:=\frac{38262312113}{10000000000000}
+ =0.0038262312113.
+\end{equation}
+
+\begin{proposition}[Relative candidate deduction]\label{thm:main}
+Assume the analytic trace, endpoint-tail, inertia, and uniform overlap
+conclusions used in the proof of Theorem~D of~\cite{Claude26}.  Then
+\begin{align}
+ \liminf_{T\to\infty}\frac{\Nsimple(T,2T)}{N(T,2T)}
+ &\ge \frac{267H_{\MT}-266/500}{267-261C_*}\label{eq:main-formula}\\
+ &=\frac{2670000000000000H_{\MT}-5320000000000}
+ {2660013536538507}\notag\\
+ &=0.67302547683787431811597399932145\ldots .\notag
+\end{align}
+Equivalently, the lower proportion is
+$67.3025476837874318115\ldots\%$.
+\end{proposition}
+
+The adjective ``relative'' is a disclosure about verification scope, not an
+additional number-theoretic hypothesis such as RH.  If the cited analytic
+inputs are accepted, the deduction below is unconditional.  This manuscript
+itself, however, is not yet a peer-reviewed validation of those inputs or of
+their interface with the new defect term.
+
+The proof has three new layers.  Section~\ref{sec:stability} preserves a
+nonnegative spectral defect in the matrix inequality.  Sections
+\ref{sec:kernel}--\ref{sec:certificate} lower-bound that defect using the
+Montgomery--Taylor kernel and a rigorous seven-point computation.  Sections
+\ref{sec:block}--\ref{sec:pinching} convert the local inequality to the exact
+constant in Proposition~\ref{thm:main}.
+
+\section{The imported analytic interface}\label{sec:interface}
+
+We state precisely the portion of~\cite{Claude26} used by the refinement.
+Put
+\[
+ \ell:=\log\frac{T}{2\pi},\qquad L:=\ell,\qquad
+ I:=(T,2T],\qquad I':=(T-T^{1/2},2T+T^{1/2}].
+\]
+For the optimized test family of~\cite[Section~7.1]{Claude26}, let
+$\widehat A$ be the normalized finite compression of Weil's Hermitian form.
+Partition the zeros in $I'$ into simple critical-line zeros $\mathcal S_1$,
+distinct multiple critical-line zeros $\mathcal S_2$, and unordered off-line
+pairs $\mathcal P$.  Write
+\[
+ s_1:=\#\mathcal S_1,\qquad s_2:=\#\mathcal S_2,
+ \qquad p:=\#\mathcal P.
+\]
+Counting multiplicity gives
+\begin{equation}\label{eq:Nlower}
+ N(I')\ge s_1+2s_2+2p.
+\end{equation}
+
+For $\rho\in\mathcal S_1$, let $v_\rho$ be the normalized Gabor atom of
+\cite[Sections~2 and~4]{Claude26}, and let $V$ have these atoms as columns.
+Then
+\[
+ P_1=VV^*,\qquad M=V^*V,
+\]
+the column norms are at most one, and for $Q':=\widehat A-P_1$ the inertia
+decomposition gives
+\begin{equation}\label{eq:positive-index}
+ n_+(Q')\le s_2+p.
+\end{equation}
+The trace and tail analysis in~\cite[Sections~4--7]{Claude26} yields the
+baseline constant~\eqref{eq:HMT}.  In the form needed below, once the matrix
+inequality of Section~\ref{sec:stability} is applied, the same estimates give
+\begin{equation}\label{eq:analytic-interface}
+ S\ge H_{\MT}N+\cD(M^\circ)-o(N),
+\end{equation}
+where $M^\circ$ is the Gram matrix of the retained central simple zeros and
+$\cD$ is defined in~\eqref{eq:Psi} below.  We derive the added term
+$\cD(M^\circ)$ in Corollary~\ref{cor:global-defect}; all analytic error
+estimates used to pass to~\eqref{eq:analytic-interface} remain those of the
+cited paper.
+
+The second imported interface is the full-grid identity of
+\cite[Lemma~2.2]{Claude26} and its endpoint truncation.  It gives the uniform
+kernel limit stated in Lemma~\ref{lem:kernel-limit}.  The normalization and
+closed form of that kernel are rederived in Section~\ref{sec:kernel}, since
+they are also the input to the interval verifier.
+
+\section{A stability refinement of the rank--trace inequality}
+\label{sec:stability}
+
+Define the convex, nonnegative function
+\begin{equation}\label{eq:Psi}
+ \Psi(t):=
+ \begin{cases}
+  (t-1)^2,&0\le t\le2,\\
+  2t-3,&t\ge2,
+ \end{cases}
+ \qquad
+ \cD(M):=\tr\Psi(M)
+\end{equation}
+for positive semidefinite $M$.
+
+\begin{lemma}[Stability-enhanced rank--trace inequality]
+\label{lem:stable-rank-trace}
+Let $V$ be a $d\times r$ matrix whose columns have norm at most one.  Put
+$P=VV^*\succeq0$ and $M=V^*V$, and let $Q$ be Hermitian with
+$n_+(Q)\le b$.  Then
+\begin{equation}\label{eq:stable-rank-trace}
+ \|P+Q\|_{\Frob}^2
+ \ge4\tr(P+Q)-3r-4b+\cD(M).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Write $Q=Q_+-Q_-$ with $Q_\pm\succeq0$, $Q_+Q_-=0$, and
+$\rank Q_+\le b$.  Since $P,Q_+\succeq0$,
+\[
+ \|P+Q\|_{\Frob}^2
+ \ge\|P-Q_-\|_{\Frob}^2+\|Q_+\|_{\Frob}^2.
+\]
+For every $q\ge0$, $q^2\ge4q-4$, hence
+\begin{equation}\label{eq:qplus}
+ \|Q_+\|_{\Frob}^2\ge4\tr Q_+-4b.
+\end{equation}
+
+Let $p_1\ge\cdots\ge p_r\ge0$ be the eigenvalues of $M$, padding the
+nonzero spectrum of $P$ by zeros, and let $n_1\ge n_2\ge\cdots\ge0$ be the
+eigenvalues of $Q_-$.  Von Neumann's trace inequality gives
+$\tr(PQ_-)\le\sum_{i\le r}p_in_i$.  Therefore
+\[
+ \|P-Q_-\|_{\Frob}^2+4\tr Q_-
+ \ge\sum_{i\le r}\bigl((p_i-n_i)^2+4n_i\bigr).
+\]
+For $p\ge0$,
+\begin{equation}\label{eq:scalar-min}
+ \min_{n\ge0}\bigl((p-n)^2+4n\bigr)
+ =\begin{cases}p^2,&0\le p\le2,\\4p-4,&p\ge2,
+ \end{cases}
+ =2p-1+\Psi(p).
+\end{equation}
+It follows that
+\begin{equation}\label{eq:qminus}
+ \|P-Q_-\|_{\Frob}^2
+ \ge2\tr P-r+\cD(M)-4\tr Q_-.
+\end{equation}
+Adding~\eqref{eq:qplus} and~\eqref{eq:qminus} gives
+\[
+ \|P+Q\|_{\Frob}^2
+ \ge4\tr(P+Q)-2\tr P-r-4b+\cD(M).
+\]
+Finally $\tr P$ is the sum of the squared column norms of $V$, so
+$\tr P\le r$.
+\end{proof}
+
+\begin{corollary}[Global defect inequality]\label{cor:global-defect}
+With the notation of Section~\ref{sec:interface},
+\begin{equation}\label{eq:s1-finite}
+ s_1\ge4\tr\widehat A-\|\widehat A\|_{\Frob}^2
+ -2N(I')+\cD(M).
+\end{equation}
+After the endpoint truncation and analytic estimates of~\cite{Claude26},
+\begin{equation}\label{eq:global-defect}
+ S\ge H_{\MT}N+\cD(M^\circ)-o(N).
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+Apply Lemma~\ref{lem:stable-rank-trace} to
+$P_1+Q'=\widehat A$.  Equations~\eqref{eq:Nlower} and
+\eqref{eq:positive-index} imply
+\begin{align*}
+ \|\widehat A\|_{\Frob}^2
+ &\ge4\tr\widehat A-3s_1-4s_2-4p+\cD(M)\\
+ &\ge4\tr\widehat A-s_1-2N(I')+\cD(M),
+\end{align*}
+which is~\eqref{eq:s1-finite}.
+
+Now use the same comparison of $\widehat A$ with the prime-side matrix,
+the same Frobenius and trace asymptotics, and the same tail estimates as in
+the proof of Theorem~D of~\cite{Claude26}.  Pinching $M$ into the retained
+central block and its complement gives
+$\cD(M)\ge\cD(M^\circ)$: pinching is an average of unitary conjugations,
+$X\mapsto\tr\Psi(X)$ is convex and unitarily invariant, and $\Psi\ge0$.
+The remaining main term is $H_{\MT}N$, yielding~\eqref{eq:global-defect}.
+\end{proof}
+
+\section{The Montgomery--Taylor overlap kernel}\label{sec:kernel}
+
+Let $h:=2\pi/L$ and normalize ordinates by
+\[
+ x_\rho:=\frac{\gamma_\rho-T}{h}
+ =\frac{L(\gamma_\rho-T)}{2\pi}.
+\]
+
+\begin{lemma}[Uniform local overlap]\label{lem:kernel-limit}
+Fix $R_0>0$.  After deleting simple zeros in normalized endpoint strips of
+width $L^2$, the number deleted is $o(N)$, and uniformly for retained simple
+zeros with $|x_\rho-x_{\rho'}|\le R_0$,
+\begin{equation}\label{eq:kernel-limit}
+ \langle v_\rho,v_{\rho'}\rangle
+ =k(x_\rho-x_{\rho'})+o(1),
+\end{equation}
+where
+\begin{align}
+ k(x)&:=\frac{K(x)}{K(0)},\label{eq:k-def}\\
+ K(x)&:=\int_{-1/2}^{1/2}
+ \cos(\sqrt2t)\cos(2\pi xt)\,dt\notag\\
+ &=\frac{\sin(\pi x-1/\sqrt2)}{2\pi x-\sqrt2}
+ +\frac{\sin(\pi x+1/\sqrt2)}{2\pi x+\sqrt2},\label{eq:K-closed}\\
+ K(0)&=\sqrt2\sin(1/\sqrt2).\notag
+\end{align}
+The apparent singularities in~\eqref{eq:K-closed} are removable.
+\end{lemma}
+
+\begin{proof}
+The full-grid Gabor identity in~\cite[Lemma~2.2]{Claude26} expresses the
+normalized inner product through the Fourier transform of the squared
+window.  For the optimized window, substitution $u=Lt$ gives
+\[
+ \frac{\displaystyle\int_{-1/2}^{1/2}
+ \phi(Lt)^2e^{-2\pi ixt}\,dt}
+ {\displaystyle\int_{-1/2}^{1/2}\phi(Lt)^2\,dt}
+ \longrightarrow\frac{K(x)}{K(0)}.
+\]
+Indeed, the fixed-width endpoint ramp has rescaled length $O(L^{-1})$, while
+$\phi(Lt)^2$ tends in $L^1$ to
+$\cos(\sqrt2t)\mathbf1_{[-1/2,1/2]}(t)$.  The convergence is uniform for
+$x$ in compact sets.  The endpoint-tail estimate used in
+\cite[Section~5.3]{Claude26} is uniform for bounded separations.  A normalized
+strip of width $L^2$ has physical width $O(L)$ and contains $O(L^2)=o(N)$
+zeros by the standard local zero count.  This proves~\eqref{eq:kernel-limit}.
+The elementary integral gives~\eqref{eq:K-closed} and its value at zero.
+\end{proof}
+
+Set
+\begin{equation}\label{eq:w-def}
+ w(x):=k(x)^2.
+\end{equation}
+The verifier uses the equivalent entire expression
+\begin{equation}\label{eq:sinc}
+ K(x)=\frac12\left(
+ \operatorname{sinc}(\pi x-1/\sqrt2)
+ +\operatorname{sinc}(\pi x+1/\sqrt2)\right),
+\end{equation}
+where $\operatorname{sinc}(z)=\sin z/z$ with its continuous value at zero.
+
+\section{The certified seven-point inequality}\label{sec:certificate}
+
+For six nonnegative consecutive gaps define
+\begin{equation}\label{eq:F6}
+ \cF_6(g_1,\ldots,g_6)
+ :=\frac1{3000}\sum_{i=1}^6g_i
+ +\sum_{r=1}^6\frac2{7-r}
+ \sum_{i=1}^{7-r}w(g_i+\cdots+g_{i+r-1}).
+\end{equation}
+The second term contains all 21 pair separations among seven ordered points.
+
+\begin{proposition}[Certified local inequality]\label{prop:F6}
+For all $g_1,\ldots,g_6\ge0$,
+\begin{equation}\label{eq:F6-bound}
+ \cF_6(g_1,\ldots,g_6)\ge C_*
+ =\frac{38262312113}{10^{13}}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}[Computer-assisted verification]
+The accompanying verifier uses \texttt{python-flint==0.8.0} and Arb interval
+arithmetic~\cite{Johansson17}.  Its grid mesh is $1/4000$.  On every closed
+cell it evaluates~\eqref{eq:sinc}, forms a rigorous lower bound for $w$, and
+widens conversion to IEEE-754 binary64 downward.  A separate interval table
+lower-bounds $w''$.  All later range queries use minima of those cell bounds.
+
+The exact pressure cutoff is
+\[
+ q=\left\lceil C_*\cdot4000\cdot3000\right\rceil=45915.
+\]
+Thus $\sum_i g_i/3000$ proves the target whenever the sum of lower cell
+indices is at least $q$.  Before forming six-dimensional boxes, the verifier
+also uses the one-variable contribution
+\[
+ U(g):=\frac g{3000}+\frac13w(g).
+\]
+The surviving cells form the three exact components
+\[
+ [3807,4780],\qquad[7218,9373],\qquad[10560,44945].
+\]
+Pressure filtering leaves 435 initial products of components.
+
+For each box, every consecutive partial sum in~\eqref{eq:F6} receives a
+range-minimum lower bound.  If this direct interval bound is insufficient,
+the code lower-bounds the Hessian throughout the box using the $w''$ table.
+A binary64 LDL factorization is only a cheap filter; positive definiteness is
+rechecked with Arb.  On a certified convex box, evaluation at its rational
+midpoint gives the rigorous tangent bound
+\[
+ \cF_6(x)\ge\cF_6(c)
+ -\sum_{i=1}^6|\partial_i\cF_6(c)|r_i.
+\]
+
+Two neighborhoods of the numerical minimizers require a sharper local
+argument.  The first has exact rational center represented by
+\begin{equation}\label{eq:basin-center}
+ \begin{aligned}
+ c=(&1.04608035577,\,1.98913202062,\,1.98641493611,\\
+    &1.04160329372,\,1.97702352234,\,1.04500209462).
+ \end{aligned}
+\end{equation}
+and the second has reversed coordinates.  Each coordinate radius is exactly
+$1/64$.  Interval lower bounds for $w''$, followed by an Arb LDL check, prove
+throughout both basins that
+\begin{equation}\label{eq:strong-convexity}
+ \nabla^2\cF_6\succeq\frac3{16}I.
+\end{equation}
+At 256-bit basin precision, strong convexity gives
+\begin{align}
+ \inf_{\text{basin}}\cF_6
+ &\ge \cF_6(c)-\frac{\|\nabla\cF_6(c)\|^2}{2(3/16)}\notag\\
+ &\ge0.00382623121130447424827371713006270699383823035,
+ \label{eq:basin-lower}
+\end{align}
+and the same lower endpoint for the reversed basin.  This clears the exact
+target by more than $4.47\times10^{-15}$.  A search box is basin-pruned only
+when all of its closed grid cells lie inside a certified basin.
+
+All other boxes are bisected along a widest coordinate.  Reaching an
+unresolved terminal cell raises an exception.  The canonical run has the
+following deterministic counts.
+\begin{center}
+\begin{tabular}{lr}
+\toprule
+Field & Canonical value\\
+\midrule
+Initial boxes & 435\\
+Visited nodes & 822,433\\
+Pruned leaves & 411,434\\
+Splits & 410,999\\
+Maximum depth & 39\\
+Interval prunes & 285,258\\
+Pressure prunes & 2,872\\
+Tangent prunes & 122,329\\
+Strong-convexity prunes & 975\\
+Unresolved terminal cells & 0\\
+\bottomrule
+\end{tabular}
+\end{center}
+The code checks both binary-forest identities
+\[
+ 822433=411434+410999,
+ \qquad411434=410999+435.
+\]
+The canonical kernel-table SHA-256 is
+\begin{sloppypar}
+\small\ttfamily
+5a1f95f754a83ba05f37692d4bda69bf3fa5d3752af902826bfc4cffd31428b9,
+\end{sloppypar}
+and the second-derivative-table SHA-256 is
+\begin{sloppypar}
+\small\ttfamily
+318ee79f619cc75c6f7a30424a181764865910693f33a3d95469ebcae0ce42ba.
+\end{sloppypar}
+
+A full rerun with table precision increased from 128 to 160 bits and basin
+precision from 256 to 320 bits produces the same initial boxes, node counts,
+pruning counts, and depth.  Its independently regenerated second-derivative
+table has SHA-256
+\begin{sloppypar}
+\small\ttfamily
+fd634c87441380105aad52f069f735108d0dabcd7d5d0a993b6abc52ee12b055.
+\end{sloppypar}
+This is a cross-precision stress test, not an independent implementation: it
+uses the same source and Arb/FLINT library.  The exact expected reports are
+included in the artifact and are compared field by field on every release
+run.  These facts complete the finite verification of
+Proposition~\ref{prop:F6}.
+\end{proof}
+
+\begin{remark}
+The center~\eqref{eq:basin-center} was located by ordinary floating-point
+optimization, but the optimizer output is not trusted.  Only the displayed
+terminating decimals, interpreted as exact rationals, and the interval proof
+of~\eqref{eq:strong-convexity}--\eqref{eq:basin-lower} enter the certificate.
+\end{remark}
+
+\section{From seven-point windows to block defect}\label{sec:block}
+
+Let $y_1<\cdots<y_m$ and set
+\begin{equation}\label{eq:Em}
+ E_m:=2\sum_{1\le i<j\le m}w(y_j-y_i).
+\end{equation}
+
+\begin{lemma}[Block energy]\label{lem:block-energy}
+For every $m\ge7$,
+\begin{equation}\label{eq:block-energy}
+ E_m+\frac1{500}(y_m-y_1)\ge C_*(m-6).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Write $g_i=y_{i+1}-y_i$ and sum~\eqref{eq:F6-bound} over the $m-6$
+consecutive seven-point windows.  A pair spanning $r\le6$ gaps occurs in at
+most $7-r$ windows and has coefficient $2/(7-r)$ in each, so its total
+coefficient is at most $2$.  Pairs spanning more than six gaps do not appear
+and contribute nonnegatively to $E_m$.  Each single gap occurs in at most six
+windows, so its total linear coefficient is at most $6/3000=1/500$.
+\end{proof}
+
+\begin{lemma}[Block defect]\label{lem:block-defect}
+If $G\succeq0$ is Hermitian, then
+\begin{equation}\label{eq:block-defect}
+ \tr\Psi(G)\ge
+ \min\left\{1,2\sum_{i<j}|G_{ij}|^2\right\}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+If every eigenvalue of $G$ is at most $2$, then
+$\Psi(G)=(G-I)^2$ and
+\[
+ \tr\Psi(G)=\tr(G-I)^2
+ \ge2\sum_{i<j}|G_{ij}|^2.
+\]
+If some eigenvalue $\lambda>2$, then $\Psi(\lambda)=2\lambda-3>1$, while
+all other contributions are nonnegative.
+\end{proof}
+
+Choose
+\begin{equation}\label{eq:m-A0}
+ m:=267,
+ \qquad A_0:=C_*(m-6)=0.9986463461493<1.
+\end{equation}
+For comparison,
+\begin{equation}\label{eq:next-m}
+ C_*(268-6)=1.0024725773606>1.
+\end{equation}
+Thus $m=267$ is the last block size before the unit cap in
+Lemma~\ref{lem:block-defect} activates; direct substitution also shows that
+it maximizes the resulting bound among integer block sizes $m\ge7$.
+
+Let $B$ be a block of 267 consecutive retained central simple zeros, and let
+$G_B$ be its Gram matrix.  If $\Span(B)/500\ge A_0$, the next inequality is
+immediate.  Otherwise $\Span(B)<500$, so Lemma~\ref{lem:kernel-limit} applies
+uniformly to every pair in the fixed-size block and
+\[
+ 2\sum_{i<j}|(G_B)_{ij}|^2=E_m+o(1).
+\]
+Lemmas~\ref{lem:block-energy} and~\ref{lem:block-defect} give, uniformly in
+$B$,
+\begin{equation}\label{eq:267-block}
+ \cD(G_B)+\frac1{500}\Span(B)\ge A_0-o(1).
+\end{equation}
+
+\section{Shifted block pinching and final arithmetic}\label{sec:pinching}
+
+Let
+\[
+ x_1<\cdots<x_{S^\circ}
+\]
+be the normalized ordinates of the retained central simple zeros.  Endpoint
+deletion gives
+\begin{equation}\label{eq:S-central}
+ S^\circ=S-o(N).
+\end{equation}
+For each of the $m=267$ offsets, partition the ordered points into full
+consecutive blocks of size $m$, leaving only bounded endpoint remainders.
+Pinching $M^\circ$ to the principal blocks and the remainder gives
+\begin{equation}\label{eq:block-pinching}
+ \cD(M^\circ)\ge\sum_B\cD(G_B).
+\end{equation}
+
+For each offset, sum~\eqref{eq:267-block} over its full blocks and use
+\eqref{eq:block-pinching}; then average over all $m$ offsets.  The average
+number of full blocks is $S^\circ/m+O(1)$.  Each adjacent gap belongs to a
+block span for at most $m-1$ offsets.  Moreover
+\begin{equation}\label{eq:total-span}
+ x_{S^\circ}-x_1
+ \le\frac{LT}{2\pi}=N+o(N)
+\end{equation}
+by the Riemann--von Mangoldt formula.  The blockwise error in
+\eqref{eq:267-block} is uniform, so its total is $o(N)$.  Consequently
+\begin{equation}\label{eq:defect-global}
+ \cD(M^\circ)
+ \ge\frac{A_0}{m}S-\frac{m-1}{500m}N-o(N)
+ =\frac{261C_*}{267}S-\frac{266}{133500}N-o(N).
+\end{equation}
+
+Substitute~\eqref{eq:defect-global} into~\eqref{eq:global-defect}:
+\[
+ S\ge H_{\MT}N+\frac{261C_*}{267}S
+ -\frac{266}{133500}N-o(N).
+\]
+Hence
+\begin{equation}\label{eq:solve}
+ \left(1-\frac{261C_*}{267}\right)S
+ \ge\left(H_{\MT}-\frac{266}{133500}\right)N-o(N).
+\end{equation}
+Divide by $N$, let $T\to\infty$, and use~\eqref{eq:Cstar}.  This gives
+\eqref{eq:main-formula}.  Multiplying numerator and denominator by
+$267\cdot10^{13}$ gives the exact reduced expression in
+Proposition~\ref{thm:main}; the common integer gcd is one.  This proves the
+relative candidate deduction, subject to the stated imported interfaces and
+open verification obligations.
+
+\section{Position relative to prior work}\label{sec:prior}
+
+Montgomery's pair-correlation argument proved, under RH, that at least two
+thirds of the zeros are simple~\cite{Montgomery73}; the optimized
+Montgomery--Taylor window gives the constant~\eqref{eq:HMT}
+\cite{Montgomery75}.  Chirre, Gon\c{c}alves, and de Laat later obtained
+stronger conditional simple-zero estimates by semidefinite programming and
+positivity outside the bandwidth-one interval~\cite{CGdL20}.  Those results
+operate in a different conditional regime and are not numerically comparable
+to Proposition~\ref{thm:main} as an unconditional critical-line statement.
+
+Recent work of Goldston and collaborators clarified how pair correlation can
+control zeros that are simultaneously simple and on the critical line, under
+the pair-correlation conjecture or narrow-box hypotheses
+\cite{GLSS25,GS25,GS26}.  Claude's paper~\cite{Claude26} then supplied the
+unconditional finite-dimensional inertia framework and the baseline
+$H_{\MT}$ used here.  The present refinement does not extend Fourier support
+or add a new prime-side estimate.  It extracts extra information from the
+short-range Gram matrix by preserving the spectral defect $\cD$ and
+certifying a seven-point local inequality.
+
+The software lineage is also relevant.  A public AI-generated artifact first
+implemented the stability approach at local target $0.0038$
+\cite{Ainta26}; a clean-room release certified $0.00382$
+\cite{Rademacher26}.  The current artifact certifies~\eqref{eq:Cstar} and adds
+the explicit strong-convexity basins and precision replay.  These repositories
+are research artifacts, not substitutes for peer-reviewed priority analysis.
+A search of the cited 2025--2026 primary literature found no identical
+stability-defect/seven-point construction, but that search cannot establish
+priority.
+
+\section{Reproducibility, trust base, and limitations}
+\label{sec:reproducibility}
+
+Proposition~\ref{prop:F6} is the only computer-assisted proposition in the
+deduction.  The accompanying source archive contains the verifier, exact JSON
+reports, unit tests, a hash-locked dependency file, and detailed audit and
+reproduction notes.  The canonical commands are
+\begin{verbatim}
+python3.12 -m venv .venv
+source .venv/bin/activate
+python -m pip install --require-hashes -r requirements.lock
+PYTHONPATH=src python -m unittest discover -s tests -v
+PYTHONPATH=src python scripts/verify_release.py
+PYTHONPATH=src python scripts/verify_cross_precision.py
+\end{verbatim}
+The two verifier scripts agree with their expected reports when they end with
+the respective status strings
+\begin{center}
+\small\ttfamily
+release\_certificate=match\\[2pt]
+cross\_precision\_certificate=match.
+\end{center}
+
+The partial Lean companion uses Lean \texttt{v4.33.0-rc2} and is pinned to
+the following upstream and mathlib commits:
+\begin{center}
+\small\ttfamily
+upstream: 3635e74826a4c1fcece7d1cd2b6fa75e43a00510\\[2pt]
+mathlib: 51e6992efd06126df61a496bebf8f49482a4e129.
+\end{center}
+Its audit commands are
+\begin{verbatim}
+lake build ZetaSeven
+lake env lean ZetaSeven/Audit.lean
+\end{verbatim}
+The proved declarations cover the rank--trace surplus, the simple-zero Gram
+split and its inertia bound, the finite tail seam, the bridge from
+off-diagonal Gram energy to spectral defect, the abstract
+defect-preserving Theorem~D source inequality (including an explicit
+$o(N)$ error package), and the exact rational and epsilon-form assembly.
+The proposition \texttt{SevenPointClaim} is intentionally defined but not
+asserted as a theorem.  Consequently, a successful Lean build is evidence
+for these layers only; it is not an end-to-end formal proof of
+Theorem~\ref{thm:main}.
+
+The finite trust base consists of CPython 3.12, IEEE-754 binary64 semantics,
+\texttt{python-flint} version 0.8.0, Arb/FLINT, the operating system and hardware,
+and the included source.  The verifier rebuilds all transcendental tables; it
+does not trust cached tables, the numerical optimizer, or committed run logs.
+No second implementation or proof-assistant checker is yet available for the
+new local inequality.  Lean reduces the trust base for the surrounding
+algebra but does not reduce the Arb certificate's trust base until a
+proof-carrying certificate checker is completed.
+
+The larger mathematical trust boundary is equally important.  This work
+does not independently rebuild the analytic estimates of~\cite{Claude26} or
+its Lean artifact.  The new Lean theorem checks preservation of
+$\cD(M^\circ)$ through an abstract package of the pinned trace and tail
+hypotheses and packages the remaining source-side terms as $o(N)$.
+Reviewers should still audit the correspondence of those hypotheses with the
+upstream concrete parameter family, as well as endpoint deletion and uniform
+Gram-to-kernel replacement in the open local-to-global bridge.
+
+For peer review, the highest-value checks are:
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+ \item verify Lemma~\ref{lem:stable-rank-trace} and the deduction of
+ Corollary~\ref{cor:global-defect} against the exact notation of
+ \cite{Claude26};
+ \item independently inspect the cell-covering, outward-rounding, Hessian,
+ and basin-containment logic in the verifier;
+ \item reproduce both certificates on a clean machine and, preferably, a
+ second architecture;
+ \item implement an independent interval or proof-assistant checker for
+ Proposition~\ref{prop:F6};
+ \item check the seven-window multiplicities and shifted gap charges in
+ Sections~\ref{sec:block}--\ref{sec:pinching};
+ \item repeat the prior-art search before any public priority claim.
+\end{enumerate}
+
+Finally, neither a positive proportion result nor the local statistics used
+here imply that all zeros lie on the critical line.  The method remains far
+from a proof of the Riemann hypothesis, and the bandwidth-one framework has
+known structural ceilings discussed in~\cite{Claude26}.
+
+\section*{Acknowledgment and authorship placeholder}
+
+This anonymous line is intended for review circulation only.  A submission
+must name the people who take responsibility for the mathematics, disclose
+the AI-assisted origin in accordance with the venue's policy, and obtain
+their approval of the final text.  The upstream software credits and license
+are recorded in the accompanying \texttt{PROVENANCE.md}.
+
+\begin{thebibliography}{99}
+
+\bibitem{Claude26}
+Claude,
+\emph{More than two thirds of the zeros of the Riemann zeta function lie on
+the critical line}, preprint, August 10, 2026,
+\url{https://www-cdn.anthropic.com/564f962e60643842f5fcb4a17c9dbc8f608f1c37.pdf}.
+
+\bibitem{ClaudeLean26}
+Anthropic,
+\emph{Zeta23: Lean 4 formalization of ``More than two thirds of the zeros of
+the Riemann zeta function lie on the critical line''}, 2026,
+\url{https://github.com/anthropics/zeta-23-lean}.
+
+\bibitem{Johansson17}
+F.~Johansson,
+\emph{Arb: efficient arbitrary-precision midpoint-radius interval
+arithmetic}, IEEE Trans. Comput. \textbf{66} (2017), no.~8, 1281--1292.
+
+\bibitem{Montgomery73}
+H.~L.~Montgomery,
+\emph{The pair correlation of zeros of the zeta function}, in: Analytic
+Number Theory (St. Louis, 1972), Proc. Sympos. Pure Math. \textbf{24},
+Amer. Math. Soc., 1973, 181--193.
+
+\bibitem{Montgomery75}
+H.~L.~Montgomery,
+\emph{Distribution of the zeros of the Riemann zeta function}, in:
+Proceedings of the International Congress of Mathematicians (Vancouver,
+1974), Vol.~1, Canad. Math. Congress, 1975, 379--381.
+
+\bibitem{CGdL20}
+A.~Chirre, F.~Gon\c{c}alves, and D.~de Laat,
+\emph{Pair correlation estimates for the zeros of the zeta function via
+semidefinite programming}, Adv. Math. \textbf{361} (2020), 106926;
+\url{https://arxiv.org/abs/1810.08843}.
+
+\bibitem{GLSS25}
+D.~A.~Goldston, J.~Lee, J.~Schettler, and A.~I.~Suriajaya,
+\emph{Pair correlation conjecture for the zeros of the Riemann zeta-function
+I: simple and critical zeros}, arXiv:2503.15449 (2025),
+\url{https://arxiv.org/abs/2503.15449}.
+
+\bibitem{GS25}
+D.~A.~Goldston and A.~I.~Suriajaya,
+\emph{Zeta zeros on the critical line}, arXiv:2511.20059 (2025),
+\url{https://arxiv.org/abs/2511.20059}.
+
+\bibitem{GS26}
+D.~A.~Goldston and A.~I.~Suriajaya,
+\emph{Zeta zeros in a narrow vertical box}, arXiv:2603.28104 (2026),
+\url{https://arxiv.org/abs/2603.28104}.
+
+\bibitem{Ainta26}
+ainta,
+\emph{zeta-simple-zeros: reproducible verification for a simple zeta-zero
+bound}, software artifact, commit
+\texttt{040c5e899e658aed7b56a2a87f501798fe10761d}, 2026,
+\url{https://github.com/ainta/zeta-simple-zeros}.
+
+\bibitem{Rademacher26}
+L.~Rademacher,
+\emph{AI refines AI: a reproducible candidate improvement to the simple
+zeta-zero bound}, software artifact, commit
+\texttt{bd4a7d36988b23220034527881f4457f2f689e86}, 2026,
+\url{https://github.com/learademacher/ai-refines-ai-zeta-bound}.
+
+\end{thebibliography}
+
+\end{document}

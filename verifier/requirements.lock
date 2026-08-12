@@ -1,0 +1,7 @@
+# CPython 3.12 wheels for Linux x86_64/aarch64, macOS x86_64/arm64, and Windows x86_64.
+python-flint==0.8.0 \
+    --hash=sha256:af60dbed2b0e3bedef2875ff3a2b32afec12f7152595d65fcd674713ac09a208 \
+    --hash=sha256:e211b11e0434d9d91e0b93326e7f677751248ef5540bff68785d9690724fc546 \
+    --hash=sha256:3e637105ea2be78c22c6d7b3766fc481c1fd83b6387d40c77667e9f3d7232fdc \
+    --hash=sha256:884a75da741e4ebbfdf5c638629d9e8a34f5bbbbb315b815b08a7d664f7720b2 \
+    --hash=sha256:4fd8958674a9b09c35d2470c9e88ccdd4a63cb351b8595f6aa46639458f57623

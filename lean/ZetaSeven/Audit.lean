@@ -1,0 +1,29 @@
+import ZetaSeven
+
+#print axioms ZetaSeven.Stability.rank_trace_spectral_gc
+#print axioms ZetaSeven.Stability.psi_eq_gc_add_one
+#print axioms ZetaSeven.Stability.min_one_sum_sq_sub_one_le_sum_psi
+#print axioms ZetaSeven.Stability.sum_sq_sub_one_eigenvalues_eq_frob_sub_card
+#print axioms ZetaSeven.Stability.min_one_frob_sub_card_le_spectralDefect
+#print axioms ZetaSeven.Stability.gram_defect_rank_trace
+#print axioms ZetaSeven.BlockDefect.min_one_orderedOffDiagEnergy_le_spectralDefect
+#print axioms ZetaSeven.BlockDefect.min_one_two_mul_upperOffDiagEnergy_le_spectralDefect
+#print axioms Zeta23.ZeroSide.ZeroBlockData.posIndex_simpleQ_le
+#print axioms Zeta23.ZeroSide.ZeroBlockData.simple_gram_defect_rank_trace
+#print axioms Zeta23.ZeroSide.ZeroBlockData.finite_simple_zero_counting
+#print axioms ZetaSeven.SimpleBlock.hatAz_simple_defect
+#print axioms ZetaSeven.SeamDefect.seamA_simple_defect
+#print axioms ZetaSeven.Assembly.Cstar_pos
+#print axioms ZetaSeven.Assembly.Cstar_mul_261_lt_one
+#print axioms ZetaSeven.Assembly.one_lt_Cstar_mul_262
+#print axioms ZetaSeven.Assembly.Cstar_denominator_pos
+#print axioms ZetaSeven.Assembly.Cstar_block_267_exact
+#print axioms ZetaSeven.Assembly.Cstar_block_268_exact
+#print axioms ZetaSeven.Assembly.finite_zero_counting
+#print axioms ZetaSeven.Assembly.assemble_stability
+#print axioms ZetaSeven.Assembly.assemble_stability_div
+#print axioms ZetaSeven.Assembly.sigma_exact_form
+#print axioms ZetaSeven.AsymptoticAssembly.assemble_stability_eps
+#print axioms ZetaSeven.AsymptoticAssembly.assemble_Cstar_eps
+#print axioms ZetaSeven.ThmDDefect.simple_lower_c_defect
+#print axioms ZetaSeven.ThmDDefect.thmD_simple_defect_abstract
