@@ -71,11 +71,11 @@ theorem retainedCorrelation_eq_fin (v : ℝ → ℝ) (L T γ γ' : ℝ) (d : ℕ
     change k ∈ Finset.Ico 0 (d : ℤ) at hk
     rw [Finset.mem_Ico] at hk
     refine ⟨k.toNat, ?_, ?_⟩
-    · rw [Finset.mem_range]
-      have hlt : (k.toNat : ℤ) < (d : ℤ) := by
+    · have hlt : (k.toNat : ℤ) < (d : ℤ) := by
         rw [Int.toNat_of_nonneg hk.1]
         exact hk.2
-      exact_mod_cast hlt
+      have hnat : k.toNat < d := by exact_mod_cast hlt
+      simpa only [Finset.mem_coe, Finset.mem_range] using hnat
     · exact Int.toNat_of_nonneg hk.1
   · intro k _
     rfl

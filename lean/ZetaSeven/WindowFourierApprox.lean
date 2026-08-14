@@ -62,6 +62,7 @@ theorem norm_paperFT_sub_le_integral_abs {f g : ℝ → ℝ}
     _ = ∫ u : ℝ, |f u - g u| := by
       congr 1 with u
       simp [norm_mul, Zeta23.norm_cexp_I_mul, Complex.norm_real]
+      rw [← Complex.ofReal_sub, Complex.norm_real]
 
 /-- The square of the smooth window is integrable. -/
 private theorem integrable_phiD_sq {rho : ℝ → ℝ} {lam L w : ℝ}
