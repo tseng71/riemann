@@ -6,7 +6,9 @@ The current finite certificate trusts CPython 3.12, `python-flint==0.8.0`,
 Arb/FLINT, the operating system, hardware, and the included verifier source.
 It regenerates transcendental interval tables and fails on any unresolved
 terminal cell. The higher-precision run is a precision replay of the same
-implementation, not an independent implementation.
+implementation, not an independent implementation.  The separate basin
+checker changes the derivative, subdivision, and linear-algebra paths but
+still uses Arb/FLINT for transcendental interval evaluation.
 
 ## Lean extension
 
@@ -26,16 +28,17 @@ partitions and endpoint fibers, their insertion into the finite simple-zero
 count, and the epsilon-form algebra. They do not prove `SevenPointClaim` or
 the required summably uniform analytic Gram-to-kernel comparison.
 
-## Open proof obligations
+## Open Lean and trust-reduction obligations
 
 1. Rational enclosures for `sqrt 2`, `pi`, `sin`, `cos`, and normalized sinc.
 2. Proof-carrying bounds for all kernel and second-derivative cells.
 3. Kernel replay of the 822,433-node subdivision forest.
-4. Central endpoint deletion and summably uniform finite Gram-to-kernel error
-   accounting.
-5. Concrete asymptotic specialization of the abstract defect-preserving Theorem-D
-   interface after the local-to-global defect bound is available.
+4. Lean formalization of the manuscript's central endpoint deletion and
+   summably uniform finite Gram-to-kernel error accounting.
+5. A concrete Lean specialization of the abstract defect-preserving Theorem-D
+   interface.
 
-Until these obligations close, the candidate global proportion is a research
-claim under active verification, not an established theorem.
-
+These obligations separate the current unreviewed computer-assisted theorem
+from an end-to-end Lean theorem and from a certificate checked by a different
+interval library. Independent specialist review is separately required
+before claiming community acceptance.

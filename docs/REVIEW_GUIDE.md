@@ -15,7 +15,10 @@ Reproduce `verifier/scripts/verify_release.py`, then the higher-precision
 replay.  Check the exact report, zero unresolved leaves, the binary-forest
 identities, the interval-table hashes, outward conversions to binary64, and
 the two strong-convexity basins.  The second precision is not an independent
-implementation.
+implementation.  Also run `verifier/scripts/verify_basin_independent.py`,
+which reimplements the delicate basin calculation with fresh subdivisions
+and exact rational LDL arithmetic, while retaining Arb/FLINT for
+transcendental intervals.
 
 ## 2. Finite-dimensional Lean layer
 
@@ -44,22 +47,18 @@ These theorems do not prove `SevenPointClaim`.
 
 ## 3. Analytic integration
 
-Compare the manuscript's interface line by line with the pinned upstream
-Theorem D proof. `ThmDDefect.lean` now retains the simple-zero Gram defect
-through an abstract package of the upstream trace and tail estimates and
-proves that the remaining source error is `o(N)`. The decisive open task is
-the concrete local-to-global lower bound for that defect: certificate replay,
-endpoint deletion, summably uniform overlap replacement, and a concrete
-asymptotic top-level specialization. The ordered Gram coordinates, all 267
-principal-block/residue-fiber partitions, endpoint-remainder fibers, and the
-finite simple-count insertion are now compiled. Until
-this path is formalized or independently checked, the candidate proportion
-is not an established theorem.
+Compare Sections 2--7 of the manuscript line by line with the pinned upstream
+Theorem D proof.  In particular, check the exact normalization in Corollary
+3.2, uniformity of Lemma 4.1, the seven-window multiplicities, all 267 shifted
+partitions, and the `O(N/L)=o(N)` accumulated block error. `ThmDDefect.lean`
+retains the simple-zero Gram defect through an abstract package of the
+upstream trace and tail estimates, but the concrete analytic specialization
+is presently a written proof rather than a Lean theorem.
 
 ## 4. Claim language
 
 The repository is public for adversarial review.  It is not a claim of a
-Riemann-hypothesis proof, and the numerical proportion must remain labelled
-“candidate” or “open end-to-end” until every release gate in `CLAIMS.md`
-passes.
-
+Riemann-hypothesis proof.  The accurate label is **unreviewed
+computer-assisted theorem**; do not call it independently verified,
+peer-reviewed, formally verified end to end, or accepted until those gates in
+`CLAIMS.md` have actually passed.

@@ -14,5 +14,4 @@ Date: 2026-08-12
 This audit applies to the declarations enumerated in
 [`../docs/FORMALIZATION_STATUS.md`](../docs/FORMALIZATION_STATUS.md). It does
 not turn the externally generated Arb certificate into a Lean proof term and
-does not assert the top-level candidate proportion.
-
+does not assert the top-level manuscript proportion.

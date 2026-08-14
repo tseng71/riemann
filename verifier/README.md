@@ -1,7 +1,7 @@
-# Computer-assisted seven-point candidate refinement
+# Computer-assisted seven-point refinement
 
 This artifact accompanies the peer-review draft
-*A Computer-Assisted Seven-Point Candidate Refinement for Simple Zeros of the
+*A Computer-Assisted Seven-Point Refinement for Simple Zeros of the
 Riemann Zeta Function*.  It rigorously verifies the finite inequality
 
 \[
@@ -12,7 +12,7 @@ Riemann Zeta Function*.  It rigorously verifies the finite inequality
 \]
 
 Combined with the analytic framework stated in Theorem D of Claude's 2026
-paper, the inequality gives the candidate bound
+paper, the inequality gives the bound
 
 \[
 \liminf_{T\to\infty}
@@ -26,11 +26,10 @@ paper, the inequality gives the candidate bound
 > proves the new finite-dimensional stability, spectral-energy,
 > consecutive-window, principal-block pinching, abstract 267-offset, exact
 > assembly, and defect-preserving Theorem D source lemmas without `sorry`.
-> It does not yet replay the Arb certificate or prove the concrete
-> local-to-global seven-point specialization (including central-window
-> replacement, concrete partition/remainder wiring, endpoint deletion, and
-> uniform error control).  No part of the proposed improvement has yet
-> received independent expert review.
+> It does not replay the Arb certificate or the manuscript's concrete
+> analytic specialization in Lean. Those facts delimit the formalization;
+> they do not replace or leave holes in the written computer-assisted proof.
+> No part of the improvement has yet received independent expert review.
 
 ## Reproduce the certificate
 
@@ -51,6 +50,7 @@ discarded is a hard failure.  The higher-precision rerun is:
 
 ```bash
 PYTHONPATH=src python scripts/verify_cross_precision.py
+python scripts/verify_basin_independent.py
 ```
 
 The exhaustive searches take several minutes each on a typical x86_64
@@ -80,6 +80,8 @@ not an independent codebase.
 - `docs/proof.md`: exact mathematical deduction;
 - `docs/verifier.md`: verifier design and trust base;
 - `AUDIT.md`: claim-by-claim audit and open review items;
+- `../docs/INTERVAL_CERTIFICATE_AUDIT_2026-08-14.md`: pruning-by-pruning
+  soundness audit and local replay record;
 - `REPRODUCIBILITY.md`: frozen commands and expected output;
 - `PROVENANCE.md`: upstream sources, licenses, and modification history.
 - `../lean/`: partial Lean formalization; its exact open-boundary ledger is

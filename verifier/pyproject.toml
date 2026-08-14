@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "zeta-simple-zeros"
 version = "0.3.0"
-description = "Certified seven-point candidate refinement of the simple critical-line zeta-zero bound to 67.30254768%"
+description = "Certified seven-point refinement of the simple critical-line zeta-zero bound to 67.30254768%"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
 license = { text = "MIT" }

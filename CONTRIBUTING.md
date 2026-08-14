@@ -17,5 +17,7 @@ Please classify reports as one of:
 
 Do not describe the repository as a proof of the Riemann hypothesis.  A
 positive lower proportion of simple critical-line zeros would not imply RH.
-The candidate numerical bound also remains open end-to-end under the release
-gate in `CLAIMS.md`.
+The numerical bound is an unreviewed computer-assisted theorem, not an
+independently accepted result. Reports that find a mathematical or
+certificate flaw should identify the exact failed step so the claim can be
+corrected or withdrawn under the status gate in `CLAIMS.md`.

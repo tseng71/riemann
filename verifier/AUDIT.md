@@ -14,15 +14,16 @@ settings.  Lean checks now cover the stability inequality, seven-window
 combinatorics, arbitrary principal-block pinching, abstract 267-offset
 counting, concrete shifted partitions and endpoint fibers, the resulting
 finite simple-zero assembly, and exact final arithmetic. The remaining
-analytic wiring is explicitly open. The corresponding candidate global
+analytic wiring is explicit in the manuscript but remains open in Lean. The
+corresponding global
 proportion is
 
 \[
 0.6730254768378743181159739993\ldots .
 \]
 
-The correct review label is nevertheless **candidate computer-assisted
-refinement**.  The new argument has not been independently peer reviewed; the
+The correct review label is **unreviewed computer-assisted refinement**.  The
+new argument has not been independently peer reviewed; the
 second run changes precision but not the implementation or interval library;
 and the analytic foundation is imported from Theorem D of Claude's 2026
 paper rather than rebuilt here.
@@ -35,10 +36,10 @@ paper rather than rebuilt here.
 | Off-diagonal Gram energy to spectral defect | Manuscript plus `ZetaSeven.BlockDefect` | Compiled Lean proof; independent review pending |
 | Simple-zero Gram block and remainder inertia | `ZetaSeven.SimpleBlock` | Compiled Lean proof, including concrete zeta-zero instantiation |
 | Defect-preserving finite tail seam | `ZetaSeven.SeamDefect` | Compiled Lean proof; independent review pending |
-| Abstract defect-preserving Theorem D source inequality | `ZetaSeven.ThmDDefect` | Compiled Lean proof under the pinned trace/tail hypotheses; concrete specialization remains open |
+| Defect-preserving Theorem D source inequality | Manuscript Corollary 3.2; `ZetaSeven.ThmDDefect` | Concrete mathematical specialization written; abstract Lean proof compiled; end-to-end Lean specialization open |
 | Epsilon-removal and rational final assembly | `ZetaSeven.AsymptoticAssembly`, `ZetaSeven.Assembly` | Compiled Lean proof; independent review pending |
-| Montgomery--Taylor overlap kernel | Derivation from the full-grid identity; normalization tests | Hand checked; depends on cited tail estimates |
-| Local seven-point inequality | Arb interval search, exact expected report, hard terminal-cell failure | Reproduced at 128/256 and 160/320 bits |
+| Montgomery--Taylor overlap kernel | Manuscript Lemma 4.1; normalization tests | Uniform `O(1/L)` full-grid comparison and `O(1/L^4)` normalized omitted tail proved |
+| Local seven-point inequality | Arb interval search, exact expected report, hard terminal-cell failure | Reproduced at 128/256 and 160/320 bits; delicate basins rechecked by a separate exact-rational LDL implementation |
 | Seven-window block inequality | `ZetaSeven.WindowEnergy` | Compiled Lean proof conditional only on the displayed `SevenPointClaim` |
 | Principal-block spectral pinching | `ZetaSeven.Pinching` | Compiled Lean proof for arbitrary finite sigma-type partitions |
 | Concrete ordered simple-zero Gram coordinates | `ZetaSeven.OrderedSimpleZeros` | Compiled Lean proof of increasing-ordinate enumeration, positive normalized gaps, exact Gram reindexing, and defect invariance |
@@ -169,11 +170,11 @@ The exact final expression is
 {2660013536538507}.
 \]
 
-## Open review items
+## Open review and formalization items
 
-1. An expert should verify the concrete specialization of the abstract
-   defect-preserving Theorem D interface, including the local-to-global
-   seven-point passage and every uniform error term.
+1. An expert should independently review the manuscript's concrete
+   specialization of Theorem D, the local-to-global seven-point passage, and
+   every uniform error term.
 2. A second implementation, preferably in a proof assistant or a different
    interval package, should independently certify the local inequality.
 3. The manuscript's priority and comparison claims should be checked against
@@ -181,10 +182,12 @@ The exact final expression is
 4. Authorship, acknowledgments, and a permanent repository/DOI must be supplied
    before journal submission.
 5. The Arb subdivision forest must be replayed by a small independent or Lean
-   checker before the local inequality can be called formally verified.
-6. Central endpoint deletion, a summably uniform Gram-to-kernel limit, and
-   the asymptotic top-level specialization remain to be closed in Lean. The
+   checker before the local inequality can be called formally verified; the
+   current certificate is already a mathematical computer-assisted proof
+   relative to its documented trust base.
+6. Central endpoint deletion, the summably uniform Gram-to-kernel estimate,
+   and the asymptotic top-level specialization are proved in the manuscript
+   but remain to be translated into Lean. The
    concrete full-list ordering, all 267 shifted partitions and endpoint
    fibers, finite simple-count insertion, and source-side defect retention
    are already compiled.
-

@@ -164,11 +164,12 @@ The exact reduced linear-fractional expression is
 
 Equation (3.1) is the only computer-assisted mathematical input added by this
 artifact.  The stability lemma, block deduction, and arithmetic are proved in
-the manuscript.  The analytic trace estimates, error bounds, endpoint
-truncation, and optimized test family remain dependencies of the cited
-Claude/Anthropic paper and its Lean companion.  Thus this package is not a
-proof of the Riemann hypothesis and is not yet an independently reviewed
-unconditional theorem.
+the manuscript.  The prime-side trace estimates and optimized test family
+remain dependencies of the cited Claude/Anthropic paper.  The accompanying
+manuscript proves the new endpoint truncation, finite-grid tail, uniform
+kernel comparison, and shifted-block error summation.  Thus this package is
+not a proof of the Riemann hypothesis; the resulting unconditional
+computer-assisted theorem is also not yet independently reviewed.
 
 ## 7. Formal-proof boundary
 
@@ -181,11 +182,10 @@ trace/tail hypotheses, with no `sorry`, `admit`, or new axiom.  It deliberately
 leaves `SevenPointClaim` as a proposition rather than a theorem.  It now also
 proves the finite consecutive-window count, arbitrary principal-block
 pinching, abstract 267 residue-fiber aggregation, and conditional 267-point
-block bridge. It does not yet prove the concrete local-to-global
-specialization: central-window replacement, concrete partition/remainder
-wiring, endpoint deletion, and the uniform Gram-to-kernel error passage
-remain open.
+block bridge. It does not prove in Lean the concrete local-to-global
+specialization, endpoint deletion, or the uniform Gram-to-kernel error
+passage; those steps are proved in Sections 2--7 of the manuscript.
 
 Thus the current evidence has two complementary but non-identical parts:
 Arb certifies (3.1) externally, while Lean certifies the surrounding algebra.
-The top-level candidate proportion is not yet a closed Lean theorem.
+The top-level proportion is not yet a closed Lean theorem.

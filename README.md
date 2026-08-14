@@ -3,58 +3,63 @@
 [中文说明](README.zh-CN.md)
 
 This public repository is the review and reproducibility workspace for an
-AI-assisted attempt to strengthen the known lower bound for the proportion of
-simple zeros of the Riemann zeta function on the critical line.
+AI-assisted, computer-assisted refinement of the lower bound for the
+proportion of simple zeros of the Riemann zeta function on the critical line.
 
-## Status — research in progress
+## Status — unreviewed computer-assisted theorem
 
 This repository **does not contain a proof of the Riemann hypothesis**.
-It also does **not yet contain an end-to-end proof** of the candidate bound
+The manuscript proves, relative to the explicitly stated Arb/FLINT trust base
+and Claude's cited Theorem D,
 
 \[
 \liminf_{T\to\infty}\frac{N_0^s(T,2T)}{N(T,2T)}
 \ge 0.6730254768378743181\ldots .
 \]
 
-The candidate improvement is based on a certified seven-point numerical
+Claude's cited Montgomery--Taylor value is
+`67.2500703679412%`; the absolute increase is approximately
+`0.0524773158463` percentage points.
+
+The improvement is based on a certified seven-point inequality
 inequality with exact target
 
 \[
 C_* = \frac{38262312113}{10^{13}} = 0.0038262312113.
 \]
 
-The external Arb verifier has completed with no unresolved cells at two
-precision settings. The finite-dimensional matrix layer, exact consecutive
-window count, arbitrary principal-block spectral pinching, abstract
-267-offset aggregation, conditional 267-point block bridge, exact assembly,
-and an abstract defect-preserving Theorem D source inequality have been
-proved in Lean without `sorry`, `admit`, or new axioms. The actual simple-zero
-subtype is now enumerated by increasing ordinate as `Fin (s₁(T))`; its
-normalized adjacent gaps are proved positive, and reindexing its concrete
-Gram matrix is proved to preserve the full spectral defect. Every full
-consecutive 267-point principal block and its 266 actual normalized gaps are
-now concrete Lean objects; positivity, telescoping spans, PSD, and the
-conditional local defect bridge are compiled. The concrete 267 shifted
-partitions are also compiled: every full block is an actual principal fiber,
-both endpoint remainders are represented explicitly, and their fiberwise
-pinching bounds are aggregated. A further theorem inserts the resulting
-concrete defect lower bound into the exact finite simple-zero count. The
-remaining proof boundary is explicit and material: the seven-point interval
-certificate must be replayed by a small verified checker, and endpoint
-deletion plus a summably uniform finite Gram-to-kernel comparison error must
-be proved before the asymptotic top-level specialization closes.
+The Arb verifier exhausts the noncompact six-gap domain after rigorous
+pressure reduction: both precision settings visit 822,433 nodes with zero
+unresolved terminal cells. A separate implementation rechecks the two
+delicate strong-convexity basins using fresh subdivisions and exact rational
+LDL arithmetic, while retaining Arb/FLINT for transcendental intervals.
+
+The paper now supplies the previously missing mathematical bridge: central
+endpoint deletion costs `o(N)`, every retained finite Gram entry differs
+uniformly from the limiting Montgomery--Taylor kernel by `O(1/log T)`, and
+the error over every full block in all 267 shifted partitions is `o(N)`.
+Together with the stability inequality, block pinching, certified local
+inequality, and Claude's trace asymptotics, this yields the displayed bound.
+
+The Lean companion checks much of the finite-dimensional algebra and exact
+arithmetic without `sorry`, `admit`, or new axioms. It is deliberately
+partial: the Arb forest and the analytic endpoint/kernel estimates have not
+been translated into one end-to-end Lean theorem. That is a formalization
+boundary, not an omitted premise in the written mathematical proof.
 
 ## Publication policy
 
-- Claims are labelled **proved**, **externally certified**, or **open**.
-- No release or paper may say “theorem” for the candidate proportion until
-  the top-level proof and its dependency audit close.
+- Claims distinguish **proved in the manuscript**, **computer certified**,
+  **Lean proved**, and **open formalization/review**.
+- The proportion is described as an **unreviewed computer-assisted theorem**,
+  not as an independently accepted result.
 - Numerical optimization is discovery only; it is not accepted as proof.
 - A public draft PR contains the current paper, verifier, certificates, Lean
   extension, reproducibility instructions, provenance, and trust-base notes.
 
-See `CLAIMS.md`, `docs/FORMALIZATION_STATUS.md`, and `docs/ROADMAP.md` for
-the exact boundary and proof-closure order.
+See `paper/riemann.pdf`, `CLAIMS.md`,
+`docs/INTERVAL_CERTIFICATE_AUDIT_2026-08-14.md`, and
+`docs/FORMALIZATION_STATUS.md` for the proof and its trust boundary.
 
 ## Review focus
 
@@ -66,9 +71,9 @@ the exact boundary and proof-closure order.
    increasing-ordinate Gram reindexing, full-block specialization, concrete
    267 shifted partitions and endpoint fibers, and the finite simple-count
    assembly in `ConcreteSimpleAssembly.lean`.
-5. Verify the hypotheses and concrete specialization of the new
-   defect-preserving Theorem D interface, especially endpoint deletion and
-   the uniform Gram-to-kernel replacement used by the local-to-global bridge.
+5. Verify the normalization against Claude's Theorem D, the endpoint
+   deletion, the uniform Gram-to-kernel estimate, and summation of all 267
+   shifted-block errors in Sections 2--7 of the manuscript.
 
 ## Attribution
 
@@ -76,4 +81,3 @@ The Lean extension is built against Anthropic's `zeta-23-lean` at commit
 `3635e74826a4c1fcece7d1cd2b6fa75e43a00510`. Verifier provenance and inherited
 licenses are recorded in the review branch. Human authorship and submission
 responsibility must be settled before journal submission.
-

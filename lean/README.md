@@ -29,8 +29,9 @@ declaration-level ledger.
 theorem. The Arb interval forest is not replayed in Lean.  The compiled
 concrete assembly still assumes the displayed per-block Gram-to-kernel error
 and `SevenPointClaim`; endpoint deletion, a summably uniform comparison bound,
-and the asymptotic top-level specialization remain open. Therefore this
-package does not prove the candidate proportion and does not prove the
+and the asymptotic top-level specialization remain open in Lean. Therefore
+this package does not by itself prove the manuscript's proportion and does
+not prove the
 Riemann hypothesis.
 
 ## Rebuild
@@ -48,4 +49,3 @@ rg -n '(^|[^[:alnum:]_])(sorry|admit|axiom)([^[:alnum:]_]|$)' \
 
 The last command must return no matches. The current axiom audit reports only
 `propext`, `Classical.choice`, and `Quot.sound`.
-

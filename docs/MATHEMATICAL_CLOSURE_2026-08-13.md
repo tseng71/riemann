@@ -274,11 +274,12 @@ With `C*=38262312113/10^13`, the right side is
  0.6730254768378743181159739993\ldots .
 \]
 
-## 6. Remaining proof boundary
+## 6. Review and trust boundary
 
-The written analytic bridge is now explicit.  Before the headline can be
-promoted without qualification, the following still deserve independent
-checking:
+The written analytic bridge is explicit and closes the mathematical
+deduction at the manuscript's disclosed computer-assisted trust level.  The
+following still deserve independent checking before any claim of external
+acceptance or full formal verification:
 
 1. replay or independently reimplement the Arb certificate for the exact
    six-variable inequality;
@@ -290,5 +291,9 @@ checking:
 4. independently assess the still-new Claude Theorem D on which the
    prime-side asymptotic is based.
 
-These are review/trust tasks, not missing asymptotic terms in the
-local-to-global passage proved above.
+The delicate strong-convexity basins have since also been rechecked by
+`verifier/scripts/verify_basin_independent.py`, which uses fresh rational
+subdivision and exact rational LDL arithmetic but retains Arb/FLINT for
+transcendental intervals.  The listed items are review or trust-reduction
+tasks, not missing asymptotic terms in the local-to-global passage proved
+above.

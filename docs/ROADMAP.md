@@ -14,7 +14,7 @@ headline claim while an earlier one is open.
 Status: implemented on the research branch; clean rebuild and review are the
 merge gate.
 
-## M2 — proof-carrying seven-point certificate
+## M2 — seven-point certificate
 
 - specify exact dyadic/rational tables and a versioned certificate format;
 - prove the transcendental enclosures used for normalized sinc and its first
@@ -22,7 +22,11 @@ merge gate.
 - replay every subdivision/pruning node with a small trusted checker;
 - compare the replayed root coverage and target with the canonical Arb run.
 
-Status: Arb evidence complete; Lean/independent replay open.
+Status: complete at the disclosed computer-assisted-proof trust level.  The
+canonical and higher-precision Arb runs agree, and a separate implementation
+rechecks the two strong-convexity basins with exact rational LDL arithmetic.
+A full replay in Lean or a different interval package remains a desirable
+trust-base reduction, not a missing premise of the manuscript theorem.
 
 ## M3 — window and pinching layer
 
@@ -49,13 +53,12 @@ and concrete global pinching and finite aggregation are compiled.
 - account for endpoint deletion and every asymptotic error;
 - close the top-level epsilon-form proportion theorem.
 
-Status: concrete finite zero-side entry point and tail seam implemented in
-Lean. The abstract defect-preserving Theorem-D source inequality and its
-`o(N)` error package are also implemented. The finite local-to-global
-combinatorial and spectral core is now connected to the exact finite
-simple-zero count. Central endpoint deletion, summably uniform
-Gram-to-kernel error control, certificate replay, and the asymptotic
-top-level specialization remain open.
+Status: complete in the mathematical manuscript.  Corollary 3.2 and Lemma
+4.1 prove the concrete source specialization, central endpoint deletion,
+uniform finite-Gram comparison, and `o(N)` accumulation over all 267 shifts.
+The abstract finite-dimensional and asymptotic assembly layers compile in
+Lean; translating the new analytic estimates and Arb certificate into one
+end-to-end Lean theorem remains open.
 
 ## M5 — release and review
 
@@ -64,6 +67,7 @@ top-level specialization remain open.
 - resolve authorship and submission responsibility;
 - archive a tagged release with hashes and, ideally, a DOI.
 
-Only after M1–M5 pass may the candidate proportion be labelled proved.  None
-of these milestones would constitute a proof of the Riemann hypothesis.
-
+M1--M4 support the present label: **unreviewed computer-assisted theorem**.
+M5 is the gate for claims of independent verification, peer-reviewed
+acceptance, priority, or a permanent archival release.  None of these
+milestones would constitute a proof of the Riemann hypothesis.

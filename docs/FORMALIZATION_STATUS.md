@@ -1,11 +1,13 @@
 # ZetaSeven Lean formalization status
 
-Date: 2026-08-12
+Date: 2026-08-14
 
-This branch is a **partial formalization of the seven-point stability
-refinement**, not a proof of the Riemann hypothesis and not yet a closed Lean
-proof of the proposed `67.3025476...%` simple-zero proportion.  The purpose of
-this file is to make the exact verification boundary reviewable.
+This branch is a **partial Lean formalization of a mathematically complete,
+computer-assisted manuscript**, not a proof of the Riemann hypothesis and
+not an end-to-end Lean proof of the `67.3025476...%` simple-zero proportion.
+The distinction matters: the analytic endpoint/kernel estimates and the Arb
+certificate are proved and documented outside Lean, while the declarations
+below check the surrounding finite-dimensional algebra and exact arithmetic.
 
 ## Pinned base
 
@@ -66,7 +68,7 @@ overlays these files before rebuilding against exactly the audited base.
 
 All declarations above compile without `sorry`, `admit`, or a new `axiom`.
 
-## Exact open boundary
+## Exact Lean boundary
 
 `ZetaSeven.SevenPointSpec` defines the normalized sinc kernel, the complete
 six-gap functional `F6`, and the proposition
@@ -77,10 +79,10 @@ SevenPointClaim : for all nonnegative g1,...,g6,
 ```
 
 The module deliberately does **not** declare that proposition as a theorem.
-The present Python/Arb run is strong external evidence, but an Arb log is not a
-Lean proof term.
+The present Python/Arb run is the disclosed computer-assisted proof object for
+this proposition, but an Arb computation is not a Lean proof term.
 
-The remaining end-to-end work is:
+The remaining work for an end-to-end Lean theorem is:
 
 1. Prove rational enclosures for `sqrt 2`, `pi`, `sin`, `cos`, and `sinc`
    using Taylor remainders in Lean.
@@ -89,17 +91,16 @@ The remaining end-to-end work is:
 3. Replay the 822,433-node subdivision forest with a small verified checker.
    The preferred route is chunked kernel reduction; if `native_decide` is used
    instead, its larger trust base must be disclosed explicitly.
-4. Starting from the now-compiled concrete residue partitions and endpoint
-   fibers of the increasing-ordinate simple-zero Gram matrix, prove central
-   endpoint deletion and the summably uniform finite Gram-to-kernel
-   comparison required by
+4. Formalize the manuscript's central endpoint deletion and summably uniform
+   finite Gram-to-kernel comparison required by
    `BlockEnergyDefect.defect_lower_of_kernel_energy_approx`.  The finite
    zero-side split, tail seam, abstract Theorem-D source inequality, and
-   epsilon-form algebra are already checked.  A concrete top-level
+   epsilon-form algebra are already checked.  A concrete top-level Lean
    specialization must still discharge these analytic interfaces.
 
-Only after items 1--4 close should the numerical proportion be advertised as
-an end-to-end Lean theorem.
+Items 1--4 are required before advertising the result as an end-to-end Lean
+theorem.  They are not prerequisites for the narrower and current claim of
+an unreviewed computer-assisted mathematical proof.
 
 ## Reproduction
 
@@ -128,4 +129,3 @@ rg -n '(^|[^[:alnum:]_])(sorry|admit|axiom)([^[:alnum:]_]|$)' ZetaSeven ZetaSeve
 ```
 
 returns no matches.
-

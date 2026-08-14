@@ -31,14 +31,14 @@
 \newcommand{\Nsimple}{N_0^s}
 
 \hypersetup{
-  pdftitle={A Computer-Assisted Seven-Point Candidate Refinement for Simple Zeros of the Riemann Zeta Function},
+  pdftitle={A Computer-Assisted Seven-Point Refinement for Simple Zeros of the Riemann Zeta Function},
   pdfauthor={Anonymous submission; AI-assisted research draft}
 }
 
-\title{A Computer-Assisted Seven-Point Candidate Refinement\\
+\title{A Computer-Assisted Seven-Point Refinement\\
 for Simple Zeros of the Riemann Zeta Function}
 \author{Anonymous submission\\\small AI-assisted research draft}
-\date{Peer-review draft, August 12, 2026}
+\date{Peer-review draft, August 14, 2026}
 
 \begin{document}
 
@@ -46,28 +46,18 @@ for Simple Zeros of the Riemann Zeta Function}
 
 \begin{center}
 \fcolorbox{black}{gray!8}{\parbox{0.91\linewidth}{
-\textbf{Release status.} This manuscript is an unreviewed,
-computer-assisted candidate refinement.  It does not prove the Riemann
-hypothesis.  The finite seven-point inequality has been verified at two Arb
-precision settings.  A pinned Lean~4 companion checks the new
-finite-dimensional stability, spectral-energy, and exact assembly lemmas
-without \texttt{sorry}.  It also checks an abstract defect-preserving
-Theorem~D source inequality, with the remaining source error proved to be
-$o(N)$, as well as the finite consecutive-window count, arbitrary
-principal-block spectral pinching, abstract 267-offset aggregation, and a
-conditional 267-point block bridge.  It also enumerates the actual simple
-critical-line Gram columns by increasing ordinate and proves that this
-reindexing preserves the full spectral defect.  Each full consecutive
-267-point principal block and its normalized adjacent gaps are now concrete
-Lean objects, with positivity and telescoping spans checked.  The 267
-concrete shifted partitions, their endpoint-remainder fibers, global
-pinching, and insertion into the exact finite simple-zero count are also
-checked.  It does not yet replay the Arb certificate or close endpoint
-deletion, the summably uniform Gram-to-kernel comparison, and the asymptotic
-top-level specialization interfaces.
-The analytic trace and tail estimates are imported from Claude's
-Theorem~D~\cite{Claude26}.  No part of the proposed improvement has yet
-received independent expert review.}}
+\textbf{Status.} This manuscript presents an unreviewed,
+computer-assisted proof of a refinement of Claude's Theorem~D.  It does not
+prove the Riemann hypothesis.  The finite seven-point inequality has been
+replayed locally at two Arb precision settings, and its delicate
+strong-convexity basin has also been checked by a separate exact-rational LDL
+implementation using the same Arb/FLINT transcendental trust base.  The
+endpoint deletion, finite-grid tail, uniform Gram-to-kernel comparison, and
+summation of all block errors are proved explicitly below.  The prime-side
+trace asymptotics are cited from Claude's Theorem~D~\cite{Claude26}.  A
+partial Lean~4 companion checks the finite-dimensional algebra but is not
+used as a substitute for the analytic proof.  The result has not yet
+received independent specialist peer review.}}
 \end{center}
 
 \begin{abstract}
@@ -88,17 +78,11 @@ Montgomery--Taylor overlap kernel.  An exhaustive interval verifier uses Arb
 enclosures, certified convex tangent bounds, and two rational
 strong-convexity basins; a higher-precision replay has identical logical
 counts.  A Lean companion formalizes the new matrix and exact-arithmetic
-layers, the finite window/pinching/267-offset core, and an abstract
-defect-preserving Theorem~D source inequality.  It also formalizes the
-increasing-ordinate reindexing of the concrete simple-zero Gram matrix and
-its exact defect invariance, and specializes the local block bridge to every
-concrete consecutive 267-point principal block.  It also realizes all 267
-shifted partitions and endpoint fibers on the actual ordered index, proves
-their global pinching bound, and inserts the resulting finite defect bound
-into the exact simple-zero count.  It leaves the local certificate replay,
-endpoint deletion, summably uniform Gram-to-kernel error, and asymptotic
-top-level specialization as explicit open obligations.  Subject to those stated
-verification obligations, the candidate bound is
+layers and exact final arithmetic.  We prove directly that endpoint deletion
+costs $o(N)$, that the finite simple-zero Gram entries differ uniformly from
+the limiting kernel by $O(1/\log T)$ on every relevant block, and that the
+error summed over all 267 shifts is $o(N)$.  The Lean companion is supporting
+evidence rather than a premise of the proof.  The resulting bound is
 \[
  \liminf_{T\to\infty}\frac{\Nsimple(T,2T)}{N(T,2T)}
  \ge 0.6730254768378743181159739993\ldots .
@@ -118,14 +102,11 @@ and let
 \end{equation}
 The quantity $H_{\MT}$ is the optimized constant in Theorem~D of
 Claude~\cite{Claude26}.  That theorem is accompanied by a Lean~4 artifact for
-its stated results~\cite{ClaudeLean26}.  We use its analytic framework as a
-cited input.  The accompanying \texttt{ZetaSeven} package is a pinned
-extension of that Lean development: it verifies the new finite-dimensional
-lemmas, the finite window/pinching/267-offset core, the defect-preserving
-abstract Theorem~D source inequality, concrete shifted partitions with
-endpoint fibers, their finite simple-count assembly, and exact algebra, but
-does not yet prove the local seven-point claim or the strengthened
-end-to-end top-level statement.
+its stated results~\cite{ClaudeLean26}.  We use its analytic trace and tail
+estimates in the ordinary manner of a cited theorem.  The accompanying
+\texttt{ZetaSeven} package is a pinned partial formalization of the new
+finite-dimensional layers; the mathematical proof in this manuscript does
+not depend on an end-to-end Lean theorem.
 
 The exact local constant certified in this work is
 \begin{equation}\label{eq:Cstar}
@@ -133,9 +114,8 @@ The exact local constant certified in this work is
  =0.0038262312113.
 \end{equation}
 
-\begin{proposition}[Relative candidate deduction]\label{thm:main}
-Assume the analytic trace, endpoint-tail, inertia, and uniform overlap
-conclusions used in the proof of Theorem~D of~\cite{Claude26}.  Then
+\begin{theorem}[Computer-assisted refinement]\label{thm:main}
+One has
 \begin{align}
  \liminf_{T\to\infty}\frac{\Nsimple(T,2T)}{N(T,2T)}
  &\ge \frac{267H_{\MT}-266/500}{267-261C_*}\label{eq:main-formula}\\
@@ -144,21 +124,23 @@ conclusions used in the proof of Theorem~D of~\cite{Claude26}.  Then
  &=0.67302547683787431811597399932145\ldots .\notag
 \end{align}
 Equivalently, the lower proportion is
-$67.3025476837874318115\ldots\%$.
-\end{proposition}
+$67.3025476837874318115\ldots\%$.  Relative to the cited
+Montgomery--Taylor value $H_{\MT}=67.2500703679411645\ldots\%$, the increase
+is $0.0524773158462672\ldots$ percentage points.
+\end{theorem}
 
-The adjective ``relative'' is a disclosure about verification scope, not an
-additional number-theoretic hypothesis such as RH.  If the cited analytic
-inputs are accepted, the deduction below is unconditional.  This manuscript
-itself, however, is not yet a peer-reviewed validation of those inputs or of
-their interface with the new defect term.
+The theorem is unconditional: no Riemann hypothesis or zero-density
+hypothesis is assumed.  As with any result built on a recent preprint, its
+status remains subject to checking of the cited source and independent
+review of the new argument.  The adjective ``computer-assisted'' refers only
+to Proposition~\ref{prop:F6} and its explicit software trust base.
 
 The proof has three new layers.  Section~\ref{sec:stability} preserves a
 nonnegative spectral defect in the matrix inequality.  Sections
 \ref{sec:kernel}--\ref{sec:certificate} lower-bound that defect using the
 Montgomery--Taylor kernel and a rigorous seven-point computation.  Sections
 \ref{sec:block}--\ref{sec:pinching} convert the local inequality to the exact
-constant in Proposition~\ref{thm:main}.
+constant in Theorem~\ref{thm:main}.
 
 \section{The imported analytic interface}\label{sec:interface}
 
@@ -168,8 +150,17 @@ Put
  \ell:=\log\frac{T}{2\pi},\qquad L:=\ell,\qquad
  I:=(T,2T],\qquad I':=(T-T^{1/2},2T+T^{1/2}].
 \]
-For the optimized test family of~\cite[Section~7.1]{Claude26}, let
-$\widehat A$ be the normalized finite compression of Weil's Hermitian form.
+Fix the ramp profile $\varrho$ of~\cite[Section~2.2]{Claude26} and use ramp
+width one.  The optimized window of~\cite[Section~7.1]{Claude26} is
+\begin{equation}\label{eq:optimized-window}
+ \phi_L(u):=\cos\!\left(\frac{\sqrt2u}{L}\right)^{1/2}
+ \varrho(L/2-|u|),
+ \qquad
+ a_L:=\frac1L\int_{\R}\phi_L(u)^2\,du.
+\end{equation}
+Put $h=2\pi/L$, $d=\lfloor T/h\rfloor$, and $\tau_k=T+kh$.  Let
+$\widehat A=A/(a_LL^2)$ be the normalized finite zero-side compression of
+Weil's Hermitian form from~\cite[Section~4]{Claude26}.
 Partition the zeros in $I'$ into simple critical-line zeros $\mathcal S_1$,
 distinct multiple critical-line zeros $\mathcal S_2$, and unordered off-line
 pairs $\mathcal P$.  Write
@@ -182,34 +173,40 @@ Counting multiplicity gives
  N(I')\ge s_1+2s_2+2p.
 \end{equation}
 
-For $\rho\in\mathcal S_1$, let $v_\rho$ be the normalized Gabor atom of
-\cite[Sections~2 and~4]{Claude26}, and let $V$ have these atoms as columns.
-Then
+For $\rho\in\mathcal S_1$, with ordinate $\gamma_\rho$, put
+\[
+ u_\rho:=\bigl(\widehat\phi_L(\gamma_\rho-\tau_k)\bigr)_{0\le k<d},
+ \qquad v_\rho:=\frac{u_\rho}{\sqrt{a_L}\,L},
+\]
+and let $V$ have these atoms as columns.  The full-grid identity
+\cite[Lemma~2.2]{Claude26} gives
+\[
+ \sum_{k\in\mathbb Z}
+ |\widehat\phi_L(\gamma_\rho-\tau_k)|^2=a_LL^2,
+\]
+so every finite column $v_\rho$ has norm at most one.  Moreover
 \[
  P_1=VV^*,\qquad M=V^*V,
 \]
-the column norms are at most one, and for $Q':=\widehat A-P_1$ the inertia
-decomposition gives
+and for $Q':=\widehat A-P_1$ the inertia decomposition in the proof of
+\cite[Proposition~4.4]{Claude26} gives
 \begin{equation}\label{eq:positive-index}
  n_+(Q')\le s_2+p.
 \end{equation}
 The trace and tail analysis in~\cite[Sections~4--7]{Claude26} yields the
-baseline constant~\eqref{eq:HMT}.  In the form needed below, once the matrix
-inequality of Section~\ref{sec:stability} is applied, the same estimates give
+baseline constant~\eqref{eq:HMT}.  Corollary~\ref{cor:global-defect} below
+shows that the same estimates, after applying the strengthened matrix
+inequality, give
 \begin{equation}\label{eq:analytic-interface}
  S\ge H_{\MT}N+\cD(M^\circ)-o(N),
 \end{equation}
 where $M^\circ$ is the Gram matrix of the retained central simple zeros and
-$\cD$ is defined in~\eqref{eq:Psi} below.  We derive the added term
-$\cD(M^\circ)$ in Corollary~\ref{cor:global-defect}; all analytic error
-estimates used to pass to~\eqref{eq:analytic-interface} remain those of the
-cited paper.
+$\cD$ is defined in~\eqref{eq:Psi} below.
 
-The second imported interface is the full-grid identity of
-\cite[Lemma~2.2]{Claude26} and its endpoint truncation.  It gives the uniform
-kernel limit stated in Lemma~\ref{lem:kernel-limit}.  The normalization and
-closed form of that kernel are rederived in Section~\ref{sec:kernel}, since
-they are also the input to the interval verifier.
+The full-grid identity just quoted is exact.  Its finite-grid truncation and
+the limiting kernel comparison are proved with explicit uniform error in
+Lemma~\ref{lem:kernel-limit}; they are not assumed as an additional
+interface.
 
 \section{A stability refinement of the rank--trace inequality}
 \label{sec:stability}
@@ -301,13 +298,38 @@ $P_1+Q'=\widehat A$.  Equations~\eqref{eq:Nlower} and
 \end{align*}
 which is~\eqref{eq:s1-finite}.
 
-Now use the same comparison of $\widehat A$ with the prime-side matrix,
-the same Frobenius and trace asymptotics, and the same tail estimates as in
-the proof of Theorem~D of~\cite{Claude26}.  Pinching $M$ into the retained
-central block and its complement gives
-$\cD(M)\ge\cD(M^\circ)$: pinching is an average of unitary conjugations,
-$X\mapsto\tr\Psi(X)$ is convex and unitarily invariant, and $\Psi\ge0$.
-The remaining main term is $H_{\MT}N$, yielding~\eqref{eq:global-defect}.
+Let $M^\circ$ be the principal block belonging to the simple zeros in
+$(T,2T]$ that are at normalized distance at least $L^2$ from both endpoints.
+The number of zeros in $I'\setminus I$ is $O(T^{1/2}L)=o(N)$, and
+Lemma~\ref{lem:kernel-limit} below shows that the additional endpoint
+deletion costs $O(L^2)=o(N)$.  Pinching $M$ into $M^\circ$ and its complement
+gives $\cD(M)\ge\cD(M^\circ)$: pinching is an average of unitary
+conjugations, $X\mapsto\tr\Psi(X)$ is convex and unitarily invariant, and
+$\Psi\ge0$.
+
+In the notation of~\cite[Equation~(4.4)]{Claude26},
+$\widehat A=\widehat G-\widehat E$.  Proposition~4.2 there gives, at
+$\lambda=1$,
+\[
+ \|\widehat E\|_1\ll T^{-1/2},
+ \qquad \|\widehat G\|_{\Frob}\ll N^{1/2}.
+\]
+Consequently
+\[
+ 4\tr\widehat A-\|\widehat A\|_{\Frob}^2
+ \ge4\tr\widehat G-\|\widehat G\|_{\Frob}^2-o(N).
+\]
+The optimized-window form of Theorem~5.8 and the proof of Theorem~D
+in~\cite{Claude26} give
+\[
+ \tr\widehat G=N+o(N),\qquad
+ \|\widehat G\|_{\Frob}^2=\frac1{c_1^*}N+o(N),
+\]
+where $2-1/c_1^*=H_{\MT}$.  Also $N(I')=N+o(N)$.  Substitution in
+\eqref{eq:s1-finite}, followed by deletion of the $o(N)$ noncentral points,
+yields~\eqref{eq:global-defect}.  Remark~6.1 of~\cite{Claude26} confirms
+that the endpoint $\lambda=1$ used here is admissible; its relative source
+error is $O(\log\log T/\log T)=o(1)$.
 \end{proof}
 
 \section{The Montgomery--Taylor overlap kernel}\label{sec:kernel}
@@ -318,13 +340,13 @@ Let $h:=2\pi/L$ and normalize ordinates by
  =\frac{L(\gamma_\rho-T)}{2\pi}.
 \]
 
-\begin{lemma}[Uniform local overlap]\label{lem:kernel-limit}
-Fix $R_0>0$.  After deleting simple zeros in normalized endpoint strips of
-width $L^2$, the number deleted is $o(N)$, and uniformly for retained simple
-zeros with $|x_\rho-x_{\rho'}|\le R_0$,
+\begin{lemma}[Uniform finite-Gram comparison]\label{lem:kernel-limit}
+After deleting simple zeros in normalized endpoint strips of width $L^2$,
+the number deleted is $O(L^2)=o(N)$, and uniformly for all retained simple
+zeros,
 \begin{equation}\label{eq:kernel-limit}
  \langle v_\rho,v_{\rho'}\rangle
- =k(x_\rho-x_{\rho'})+o(1),
+ =k(x_\rho-x_{\rho'})+O(L^{-1}),
 \end{equation}
 where
 \begin{align}
@@ -339,22 +361,52 @@ The apparent singularities in~\eqref{eq:K-closed} are removable.
 \end{lemma}
 
 \begin{proof}
-The full-grid Gabor identity in~\cite[Lemma~2.2]{Claude26} expresses the
-normalized inner product through the Fourier transform of the squared
-window.  For the optimized window, substitution $u=Lt$ gives
+Put
 \[
- \frac{\displaystyle\int_{-1/2}^{1/2}
- \phi(Lt)^2e^{-2\pi ixt}\,dt}
- {\displaystyle\int_{-1/2}^{1/2}\phi(Lt)^2\,dt}
- \longrightarrow\frac{K(x)}{K(0)}.
+ q_L(t):=\phi_L(Lt)^2,
+ \qquad q(t):=\cos(\sqrt2t)\mathbf1_{[-1/2,1/2]}(t).
 \]
-Indeed, the fixed-width endpoint ramp has rescaled length $O(L^{-1})$, while
-$\phi(Lt)^2$ tends in $L^1$ to
-$\cos(\sqrt2t)\mathbf1_{[-1/2,1/2]}(t)$.  The convergence is uniform for
-$x$ in compact sets.  The endpoint-tail estimate used in
-\cite[Section~5.3]{Claude26} is uniform for bounded separations.  A normalized
-strip of width $L^2$ has physical width $O(L)$ and contains $O(L^2)=o(N)$
-zeros by the standard local zero count.  This proves~\eqref{eq:kernel-limit}.
+The two functions differ only on two intervals of total length $2/L$ and
+are bounded by one.  Hence
+\begin{equation}\label{eq:q-L1}
+ \|q_L-q\|_1\le\frac2L,
+ \qquad |a_L-K(0)|\le\frac2L.
+\end{equation}
+For large $L$, $a_L\ge K(0)/2$.  Substitution $u=Lt$ in the full-grid
+identity of~\cite[Lemma~2.2]{Claude26}, together with~\eqref{eq:q-L1}, gives
+uniformly for every real $x$,
+\begin{equation}\label{eq:full-kernel-error}
+ \left|
+ \frac{\displaystyle\int_{-1/2}^{1/2}
+ q_L(t)e^{-2\pi ixt}\,dt}{a_L}-\frac{K(x)}{K(0)}
+ \right|\ll L^{-1}.
+\end{equation}
+
+It remains to truncate the full grid.  The derivative bounds stated in the
+proof of~\cite[Theorem~D]{Claude26} imply, with a constant depending only on
+the fixed ramp,
+\begin{equation}\label{eq:phi-decay}
+ |\widehat\phi_L(r)|\le C_\varrho |r|^{-2}\qquad(r\ne0),
+\end{equation}
+uniformly in $L$.  For a retained ordinate, the distance to every omitted
+grid point is at least
+\[
+ D_L:=h(L^2-2)\ge\pi L
+\]
+for all large $L$.  On either side of the grid,
+\begin{equation}\label{eq:grid-square-tail}
+ \sum_{j\ge0}(D_L+jh)^{-4}
+ \le D_L^{-4}+\frac1{3hD_L^3}=O(L^{-2}).
+\end{equation}
+By Cauchy--Schwarz,~\eqref{eq:phi-decay}, and
+\eqref{eq:grid-square-tail}, the omitted product tail is $O(L^{-2})$.
+After the Gram normalization by $a_LL^2$ it is $O(L^{-4})$.  Combining this
+with~\eqref{eq:full-kernel-error} proves~\eqref{eq:kernel-limit}, uniformly
+in the two retained ordinates.
+
+Finally, each deleted normalized strip has physical width
+$hL^2=2\pi L$.  The local zero count
+$N(t+1)-N(t)\ll\log(t+3)$ gives $O(L\log T)=O(L^2)=o(N)$ deleted zeros.
 The elementary integral gives~\eqref{eq:K-closed} and its value at zero.
 \end{proof}
 
@@ -496,7 +548,30 @@ fd634c87441380105aad52f069f735108d0dabcd7d5d0a993b6abc52ee12b055.
 This is a cross-precision stress test, not an independent implementation: it
 uses the same source and Arb/FLINT library.  The exact expected reports are
 included in the artifact and are compared field by field on every release
-run.  These facts complete the finite verification of
+run.  At commit
+\begin{center}
+\small\ttfamily b8dcb42c88f920fca2c609b1c88a5cc133d88b2a,
+\end{center}
+clean local replays with the hash-locked CPython~3.12 wheel ended respectively
+with
+\begin{center}
+\small\ttfamily
+release\_certificate=match,\qquad
+cross\_precision\_certificate=match.
+\end{center}
+
+The additional script
+\texttt{verifier/scripts/verify\_basin\_independent.py} does not import the
+release verifier.  It reimplements the sinc quotient derivatives,
+subdivides each scalar basin interval into 2,048 exact rational pieces, and
+performs the shifted $6\times6$ LDL test over exact rational arithmetic.  It
+proves~\eqref{eq:strong-convexity} for both basins and obtains the lower
+endpoint
+\[
+ 0.003826231211304474248273717130062706993838230354884912386.
+\]
+This is a separate control path but retains Arb/FLINT as the transcendental
+interval trust base.  These facts complete the finite verification of
 Proposition~\ref{prop:F6}.
 \end{proof}
 
@@ -559,20 +634,31 @@ For comparison,
  C_*(268-6)=1.0024725773606>1.
 \end{equation}
 Thus $m=267$ is the last block size before the unit cap in
-Lemma~\ref{lem:block-defect} activates; direct substitution also shows that
-it maximizes the resulting bound among integer block sizes $m\ge7$.
+Lemma~\ref{lem:block-defect} activates.  More explicitly, for general $m$
+the block constant is $A_m=\min\{1,C_*(m-6)\}$ and the same argument gives
+\[
+ R_m=\frac{H_{\MT}-(m-1)/(500m)}{1-A_m/m}.
+\]
+On $7\le m\le267$ this is increasing because
+$6C_*(H_{\MT}-1/500)>(1-C_*)/500$, while for $m\ge268$ it is decreasing
+with derivative $-H_{\MT}/(m-1)^2$ after writing
+$R_m=((H_{\MT}-1/500)m+1/500)/(m-1)$.  Hence $m=267$ maximizes the
+resulting bound among integer block sizes $m\ge7$.
 
 Let $B$ be a block of 267 consecutive retained central simple zeros, and let
-$G_B$ be its Gram matrix.  If $\Span(B)/500\ge A_0$, the next inequality is
-immediate.  Otherwise $\Span(B)<500$, so Lemma~\ref{lem:kernel-limit} applies
-uniformly to every pair in the fixed-size block and
-\[
- 2\sum_{i<j}|(G_B)_{ij}|^2=E_m+o(1).
-\]
-Lemmas~\ref{lem:block-energy} and~\ref{lem:block-defect} give, uniformly in
-$B$,
+$G_B$ be its Gram matrix.  Lemma~\ref{lem:kernel-limit} and the bounds
+$|(G_B)_{ij}|,|k(x_i-x_j)|\le1$ give, uniformly in $B$,
+\begin{equation}\label{eq:block-energy-comparison}
+ \left|2\sum_{i<j}|(G_B)_{ij}|^2-E_m\right|
+ \le\frac{C_m}{L},
+\end{equation}
+where $C_m$ is absolute because $m=267$ is fixed.  Put
+$Q_B=2\sum_{i<j}|(G_B)_{ij}|^2$.  If $Q_B\le1$, then
+Lemmas~\ref{lem:block-energy}--\ref{lem:block-defect} and
+\eqref{eq:block-energy-comparison} give the next inequality.  If $Q_B>1$,
+then $\cD(G_B)\ge1>A_0$, so it holds again.  Thus, uniformly in $B$,
 \begin{equation}\label{eq:267-block}
- \cD(G_B)+\frac1{500}\Span(B)\ge A_0-o(1).
+ \cD(G_B)+\frac1{500}\Span(B)\ge A_0-O(L^{-1}).
 \end{equation}
 
 \section{Shifted block pinching and final arithmetic}\label{sec:pinching}
@@ -584,7 +670,7 @@ Let
 be the normalized ordinates of the retained central simple zeros.  Endpoint
 deletion gives
 \begin{equation}\label{eq:S-central}
- S^\circ=S-o(N).
+ S^\circ=S-O(L^2)=S-o(N).
 \end{equation}
 For each of the $m=267$ offsets, partition the ordered points into full
 consecutive blocks of size $m$, leaving only bounded endpoint remainders.
@@ -601,8 +687,9 @@ block span for at most $m-1$ offsets.  Moreover
  x_{S^\circ}-x_1
  \le\frac{LT}{2\pi}=N+o(N)
 \end{equation}
-by the Riemann--von Mangoldt formula.  The blockwise error in
-\eqref{eq:267-block} is uniform, so its total is $o(N)$.  Consequently
+by the Riemann--von Mangoldt formula.  Across all offsets there are at most
+$S^\circ\le N$ full blocks, each occurring once, so the total error from
+\eqref{eq:267-block} is $O(N/L)=o(N)$.  Consequently
 \begin{equation}\label{eq:defect-global}
  \cD(M^\circ)
  \ge\frac{A_0}{m}S-\frac{m-1}{500m}N-o(N)
@@ -622,9 +709,8 @@ Hence
 Divide by $N$, let $T\to\infty$, and use~\eqref{eq:Cstar}.  This gives
 \eqref{eq:main-formula}.  Multiplying numerator and denominator by
 $267\cdot10^{13}$ gives the exact reduced expression in
-Proposition~\ref{thm:main}; the common integer gcd is one.  This proves the
-relative candidate deduction, subject to the stated imported interfaces and
-open verification obligations.
+Theorem~\ref{thm:main}; the common integer gcd is one.  This proves
+Theorem~\ref{thm:main}.
 
 \section{Position relative to prior work}\label{sec:prior}
 
@@ -635,7 +721,7 @@ Montgomery--Taylor window gives the constant~\eqref{eq:HMT}
 stronger conditional simple-zero estimates by semidefinite programming and
 positivity outside the bandwidth-one interval~\cite{CGdL20}.  Those results
 operate in a different conditional regime and are not numerically comparable
-to Proposition~\ref{thm:main} as an unconditional critical-line statement.
+to Theorem~\ref{thm:main} as an unconditional critical-line statement.
 
 Recent work of Goldston and collaborators clarified how pair correlation can
 control zeros that are simultaneously simple and on the critical line, under
@@ -671,6 +757,7 @@ python -m pip install --require-hashes -r requirements.lock
 PYTHONPATH=src python -m unittest discover -s tests -v
 PYTHONPATH=src python scripts/verify_release.py
 PYTHONPATH=src python scripts/verify_cross_precision.py
+python scripts/verify_basin_independent.py
 \end{verbatim}
 The two verifier scripts agree with their expected reports when they end with
 the respective status strings
@@ -710,20 +797,22 @@ The finite trust base consists of CPython 3.12, IEEE-754 binary64 semantics,
 \texttt{python-flint} version 0.8.0, Arb/FLINT, the operating system and hardware,
 and the included source.  The verifier rebuilds all transcendental tables; it
 does not trust cached tables, the numerical optimizer, or committed run logs.
-No second implementation or proof-assistant checker is yet available for the
-new local inequality.  Lean reduces the trust base for the surrounding
-algebra but does not reduce the Arb certificate's trust base until a
-proof-carrying certificate checker is completed.
+The separate basin checker changes the derivative implementation,
+subdivision, and exact linear-algebra path, but uses the same Arb/FLINT
+library.  No fully independent interval library or proof-assistant checker is
+yet available for the complete six-variable subdivision.  Lean reduces the
+trust base for the surrounding algebra but does not reduce the Arb
+certificate's trust base until a proof-carrying certificate checker is
+completed.
 
 The larger mathematical trust boundary is equally important.  This work
-does not independently rebuild the analytic estimates of~\cite{Claude26} or
-its Lean artifact.  The new Lean theorem checks preservation of
-$\cD(M^\circ)$ through an abstract package of the pinned trace and tail
-hypotheses and packages the remaining source-side terms as $o(N)$.
-Reviewers should still audit the correspondence of those hypotheses with the
-upstream concrete parameter family, as well as endpoint deletion and the
-summably uniform Gram-to-kernel replacement in the remaining analytic
-bridge.
+does not independently reprove the prime-side Theorem~5.8 of~\cite{Claude26}
+or its explicit-formula inputs.  Corollary~\ref{cor:global-defect} and
+Lemma~\ref{lem:kernel-limit} spell out the new interface, endpoint deletion,
+finite-grid tail, and uniform Gram comparison rather than leaving them as
+formal hypotheses.  Reviewers should nevertheless audit their normalization
+against the upstream concrete parameter family and independently assess the
+still-new cited theorem.
 
 For peer review, the highest-value checks are:
 \begin{enumerate}[leftmargin=*,itemsep=2pt]
@@ -824,4 +913,3 @@ zeta-zero bound}, software artifact, commit
 \end{thebibliography}
 
 \end{document}
-
