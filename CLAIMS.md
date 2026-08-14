@@ -17,9 +17,10 @@ Date: 2026-08-12
 | Principal-block spectral pinching | **Lean proved** | `ZetaSeven.Pinching`; constructs and verifies the block-diagonal unitary and proves the arbitrary finite-partition defect inequality. |
 | Concrete increasing-ordinate simple-zero Gram coordinates | **Lean proved** | `ZetaSeven.OrderedSimpleZeros`; enumerates the actual `S₁` subtype by `Fin (s₁(T))`, proves positive normalized consecutive gaps, reindexes the concrete Gram matrix, and preserves its spectral defect exactly. |
 | Concrete consecutive 267-point Gram blocks | **Lean proved at an explicit comparison interface** | `ZetaSeven.ConcreteBlocks`; constructs every full principal block of the actual ordered Gram matrix, proves PSD, gap positivity and telescoping, and specializes the local defect theorem. Its displayed finite Gram-to-kernel error hypothesis remains analytic. |
-| 267-offset finite aggregation | **Lean proved at the abstract fiber interface** | `ZetaSeven.ShiftedPartitions`; proves exact residue-fiber counting and the 266-fold gap charge. Concrete residue partitions, retained central sublists, and endpoint remainder wiring remain open. |
+| 267-offset finite aggregation | **Lean proved concretely** | `ZetaSeven.ConcreteShiftedPinching`; realizes all 267 partitions on `Fin S`, identifies every full block with a principal fiber, keeps both endpoint remainders in the `none` fiber, and proves the filtered-start pinching bound. |
+| Concrete finite simple-zero assembly | **Lean proved at explicit analytic interfaces** | `ZetaSeven.ConcreteSimpleAssembly`; identifies local and global ordered gaps, aggregates the actual ordered simple-zero Gram blocks, and inserts the result into the exact finite simple-zero count. `SevenPointClaim` and the displayed per-block Gram-to-kernel errors remain inputs. |
 | 267-point block defect from the local claim | **Lean proved conditional on explicit inputs** | `ZetaSeven.BlockEnergyDefect`; assumes `SevenPointClaim` and a displayed finite Gram-to-kernel comparison error. |
-| Candidate `67.3025476837...%` bound | **Open end-to-end** | Requires proof-carrying interval replay, retained-central-sublist partition/remainder and endpoint integration, uniform Gram-to-kernel error control, and top-level specialization of the defect-preserving interface. |
+| Candidate `67.3025476837...%` bound | **Open end-to-end** | Requires proof-carrying interval replay, endpoint deletion, summably uniform Gram-to-kernel error control, and asymptotic top-level specialization of the defect-preserving interface. |
 
 ## Release gate
 
@@ -34,3 +35,4 @@ of the following are present in one immutable revision:
 - clean rebuild logs and axiom output;
 - a paper whose theorem statement matches the formal statement exactly;
 - independent mathematical review of the analytic interface.
+

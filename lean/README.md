@@ -16,8 +16,10 @@ spectral pinching, abstract 267-offset aggregation, the conditional
 267-point block bridge, concrete increasing-ordinate coordinates and
 defect-preserving reindexing for the actual simple-zero Gram matrix, the
 concrete consecutive 267-point principal blocks with telescoping normalized
-gaps, the finite tail seam, an abstract defect-preserving Theorem D source
-inequality, epsilon removal, and exact rational assembly. See
+gaps, all concrete shifted partitions and endpoint fibers, their global
+pinching bound and insertion into the exact finite simple-zero count, the
+finite tail seam, an abstract defect-preserving Theorem D source inequality,
+epsilon removal, and exact rational assembly. See
 [`../docs/FORMALIZATION_STATUS.md`](../docs/FORMALIZATION_STATUS.md) for the
 declaration-level ledger.
 
@@ -25,9 +27,9 @@ declaration-level ledger.
 
 `SevenPointClaim` is intentionally a definition of a proposition, not a
 theorem. The Arb interval forest is not replayed in Lean.  The compiled
-increasing-ordinate index has not yet been restricted to the retained central
-sublist or connected to concrete 267 partitions, endpoint remainders,
-endpoint deletion, and a uniform Gram-to-kernel error in a top-level theorem. Therefore this
+concrete assembly still assumes the displayed per-block Gram-to-kernel error
+and `SevenPointClaim`; endpoint deletion, a summably uniform comparison bound,
+and the asymptotic top-level specialization remain open. Therefore this
 package does not prove the candidate proportion and does not prove the
 Riemann hypothesis.
 
@@ -46,3 +48,4 @@ rg -n '(^|[^[:alnum:]_])(sorry|admit|axiom)([^[:alnum:]_]|$)' \
 
 The last command must return no matches. The current axiom audit reports only
 `propext`, `Classical.choice`, and `Quot.sound`.
+

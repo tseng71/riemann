@@ -22,7 +22,7 @@ Linux 6.18.35 x86_64
 | Canonical nodes / unresolved | 822,433 / 0 |
 | Cross-precision nodes / unresolved | 822,433 / 0 |
 | Splits / pruned / maximum depth | 410,999 / 411,434 / 39 |
-| Lean `lake build ZetaSeven` | 8,852 jobs completed after adding the finite window, pinching, shifted-partition, block-bridge, concrete ordered-simple-zero, and concrete 267-block modules |
+| Lean `lake build ZetaSeven` | 8,854 jobs completed after adding the concrete shifted-pinching and finite simple-zero assembly modules |
 | Lean source placeholder scan | clean |
 | Lean axiom audit | `propext`, `Classical.choice`, `Quot.sound` only |
 
@@ -50,3 +50,4 @@ second-derivative table hash is
 ```text
 fd634c87441380105aad52f069f735108d0dabcd7d5d0a993b6abc52ee12b055
 ```
+

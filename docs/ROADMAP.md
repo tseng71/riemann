@@ -37,9 +37,9 @@ the conditional 267-point block-defect bridge, and the concrete
 increasing-ordinate reindexing of the actual simple-zero Gram matrix are
 compiled.  Every full consecutive 267-point block has also been concretely
 constructed with its actual normalized gaps, PSD proof, telescoping span, and
-specialized local bridge.  Selecting the retained central sublist and wiring
-all blocks into its 267 residue partitions and endpoint remainders remains
-open.
+specialized local bridge. All full blocks are now wired into 267 concrete
+partitions of `Fin (s₁(T))`; both endpoint remainders are explicit fibers,
+and concrete global pinching and finite aggregation are compiled.
 
 ## M4 — analytic Theorem D integration
 
@@ -52,9 +52,10 @@ open.
 Status: concrete finite zero-side entry point and tail seam implemented in
 Lean. The abstract defect-preserving Theorem-D source inequality and its
 `o(N)` error package are also implemented. The finite local-to-global
-combinatorial and spectral core is now available; central-window replacement,
-uniform Gram-to-kernel error control, concrete partition/remainder wiring,
-and the top-level specialization remain open.
+combinatorial and spectral core is now connected to the exact finite
+simple-zero count. Central endpoint deletion, summably uniform
+Gram-to-kernel error control, certificate replay, and the asymptotic
+top-level specialization remain open.
 
 ## M5 — release and review
 
@@ -65,3 +66,4 @@ and the top-level specialization remain open.
 
 Only after M1–M5 pass may the candidate proportion be labelled proved.  None
 of these milestones would constitute a proof of the Riemann hypothesis.
+

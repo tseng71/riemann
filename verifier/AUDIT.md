@@ -12,9 +12,10 @@ The finite claim
 has been verified by exhaustive interval computation at two precision
 settings.  Lean checks now cover the stability inequality, seven-window
 combinatorics, arbitrary principal-block pinching, abstract 267-offset
-counting, and exact final arithmetic; hand checks found no error in the
-remaining kernel normalization and analytic wiring.  The corresponding
-global proportion is
+counting, concrete shifted partitions and endpoint fibers, the resulting
+finite simple-zero assembly, and exact final arithmetic. The remaining
+analytic wiring is explicitly open. The corresponding candidate global
+proportion is
 
 \[
 0.6730254768378743181159739993\ldots .
@@ -42,7 +43,8 @@ paper rather than rebuilt here.
 | Principal-block spectral pinching | `ZetaSeven.Pinching` | Compiled Lean proof for arbitrary finite sigma-type partitions |
 | Concrete ordered simple-zero Gram coordinates | `ZetaSeven.OrderedSimpleZeros` | Compiled Lean proof of increasing-ordinate enumeration, positive normalized gaps, exact Gram reindexing, and defect invariance |
 | Concrete consecutive 267-point Gram blocks | `ZetaSeven.ConcreteBlocks` | Compiled Lean construction, PSD and gap-telescoping proofs, and local theorem at the explicit Gram-to-kernel comparison interface |
-| Shifted 267-block arithmetic | `ZetaSeven.ShiftedPartitions` | Compiled Lean proof at the residue-fiber interface; retained-sublist partition and remainder wiring remain open |
+| Concrete shifted 267-block pinching | `ZetaSeven.ConcreteShiftedPinching` | Compiled Lean proof of all residue partitions, full-block principal fibers, and the endpoint-remainder fiber |
+| Concrete finite simple-zero assembly | `ZetaSeven.ConcreteSimpleAssembly` | Compiled Lean insertion into the exact finite count, conditional on `SevenPointClaim` and displayed per-block Gram-to-kernel errors |
 | 267-point block defect | `ZetaSeven.BlockEnergyDefect` | Compiled Lean proof conditional on `SevenPointClaim` and an explicit finite Gram-to-kernel error bound |
 | Final constant | Exact rational reduction, Arb evaluation, and `ZetaSeven.Assembly` | Compiled Lean arithmetic proof; independent review pending |
 | Underlying analytic trace/tail estimates | Claude, Theorem D and cited propositions | Imported; not independently rebuilt here |
@@ -180,9 +182,9 @@ The exact final expression is
    before journal submission.
 5. The Arb subdivision forest must be replayed by a small independent or Lean
    checker before the local inequality can be called formally verified.
-6. Selecting the retained central sublist from the compiled increasing-
-   ordinate Gram coordinates, wiring its 267 residue partitions and endpoint
-   remainders, central-window replacement, and the uniform Gram-to-kernel
-   limit remain to be closed in Lean.  The concrete full-list ordering and
-   defect-preserving reindexing, finite window, spectral pinching, abstract
-   shifted arithmetic, and source-side defect retention are already compiled.
+6. Central endpoint deletion, a summably uniform Gram-to-kernel limit, and
+   the asymptotic top-level specialization remain to be closed in Lean. The
+   concrete full-list ordering, all 267 shifted partitions and endpoint
+   fibers, finite simple-count insertion, and source-side defect retention
+   are already compiled.
+

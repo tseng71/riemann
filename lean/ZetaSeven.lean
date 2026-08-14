@@ -12,3 +12,7 @@ import ZetaSeven.OrderedSimpleZeros
 import ZetaSeven.ShiftedPartitions
 import ZetaSeven.BlockEnergyDefect
 import ZetaSeven.ConcreteBlocks
+
+import ZetaSeven.ConcreteShiftedPinching
+import ZetaSeven.ConcreteSimpleAssembly
+

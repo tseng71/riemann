@@ -59,9 +59,12 @@ conditional 267-point block bridge.  It also enumerates the actual simple
 critical-line Gram columns by increasing ordinate and proves that this
 reindexing preserves the full spectral defect.  Each full consecutive
 267-point principal block and its normalized adjacent gaps are now concrete
-Lean objects, with positivity and telescoping spans checked.  It does not yet replay the
-Arb certificate or close the retained-central-sublist partition, endpoint,
-Gram-to-kernel, and top-level specialization interfaces.
+Lean objects, with positivity and telescoping spans checked.  The 267
+concrete shifted partitions, their endpoint-remainder fibers, global
+pinching, and insertion into the exact finite simple-zero count are also
+checked.  It does not yet replay the Arb certificate or close endpoint
+deletion, the summably uniform Gram-to-kernel comparison, and the asymptotic
+top-level specialization interfaces.
 The analytic trace and tail estimates are imported from Claude's
 Theorem~D~\cite{Claude26}.  No part of the proposed improvement has yet
 received independent expert review.}}
@@ -89,10 +92,12 @@ layers, the finite window/pinching/267-offset core, and an abstract
 defect-preserving Theorem~D source inequality.  It also formalizes the
 increasing-ordinate reindexing of the concrete simple-zero Gram matrix and
 its exact defect invariance, and specializes the local block bridge to every
-concrete consecutive 267-point principal block.  It leaves the local certificate replay,
-retained central-sublist partition and endpoint wiring,
-uniform Gram-to-kernel error, and top-level specialization as explicit open
-obligations.  Subject to those stated
+concrete consecutive 267-point principal block.  It also realizes all 267
+shifted partitions and endpoint fibers on the actual ordered index, proves
+their global pinching bound, and inserts the resulting finite defect bound
+into the exact simple-zero count.  It leaves the local certificate replay,
+endpoint deletion, summably uniform Gram-to-kernel error, and asymptotic
+top-level specialization as explicit open obligations.  Subject to those stated
 verification obligations, the candidate bound is
 \[
  \liminf_{T\to\infty}\frac{\Nsimple(T,2T)}{N(T,2T)}
@@ -117,9 +122,10 @@ its stated results~\cite{ClaudeLean26}.  We use its analytic framework as a
 cited input.  The accompanying \texttt{ZetaSeven} package is a pinned
 extension of that Lean development: it verifies the new finite-dimensional
 lemmas, the finite window/pinching/267-offset core, the defect-preserving
-abstract Theorem~D source inequality, and exact assembly, but does not yet
-prove the local seven-point claim or the strengthened end-to-end top-level
-statement.
+abstract Theorem~D source inequality, concrete shifted partitions with
+endpoint fibers, their finite simple-count assembly, and exact algebra, but
+does not yet prove the local seven-point claim or the strengthened
+end-to-end top-level statement.
 
 The exact local constant certified in this work is
 \begin{equation}\label{eq:Cstar}
@@ -692,7 +698,9 @@ off-diagonal Gram energy to spectral defect, the exact consecutive-window
 count, arbitrary principal-block spectral pinching, abstract 267-offset
 aggregation, the conditional 267-point block bridge, the abstract
 defect-preserving Theorem~D source inequality (including an explicit
-$o(N)$ error package), and the exact rational and epsilon-form assembly.
+$o(N)$ error package), the concrete shifted partitions and endpoint fibers,
+their insertion into the exact finite simple-zero count, and the exact
+rational and epsilon-form assembly.
 The proposition \texttt{SevenPointClaim} is intentionally defined but not
 asserted as a theorem.  Consequently, a successful Lean build is evidence
 for these layers only; it is not an end-to-end formal proof of
@@ -713,8 +721,9 @@ its Lean artifact.  The new Lean theorem checks preservation of
 $\cD(M^\circ)$ through an abstract package of the pinned trace and tail
 hypotheses and packages the remaining source-side terms as $o(N)$.
 Reviewers should still audit the correspondence of those hypotheses with the
-upstream concrete parameter family, as well as endpoint deletion and uniform
-Gram-to-kernel replacement in the open local-to-global bridge.
+upstream concrete parameter family, as well as endpoint deletion and the
+summably uniform Gram-to-kernel replacement in the remaining analytic
+bridge.
 
 For peer review, the highest-value checks are:
 \begin{enumerate}[leftmargin=*,itemsep=2pt]
@@ -815,3 +824,4 @@ zeta-zero bound}, software artifact, commit
 \end{thebibliography}
 
 \end{document}
+

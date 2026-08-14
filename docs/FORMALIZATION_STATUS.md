@@ -54,6 +54,12 @@ overlays these files before rebuilding against exactly the audited base.
 | `ZetaSeven.ConcreteBlocks.orderedBlockGap_nonneg` | Defines the 266 actual normalized adjacent gaps of each concrete block (zero-extended outside the used range) and proves nonnegativity. |
 | `ZetaSeven.ConcreteBlocks.sum_orderedBlockGap_eq_sub` | Proves that every consecutive sum of these concrete gaps telescopes to the corresponding normalized zero separation. |
 | `ZetaSeven.ConcreteBlocks.orderedBlock_defect_lower_of_kernel_energy_approx` | Specializes the local seven-point defect bridge to the actual ordered Gram block, leaving only the displayed finite Gram-to-kernel comparison error. |
+| `ZetaSeven.ConcreteShiftedPinching.sum_consecutiveBlock_spectralDefect_le` | Realizes one shifted partition on `Fin S`, identifies every full consecutive 267-point block with a principal fiber, keeps both endpoint remainders in the `none` fiber, and bounds the sum of full-block defects by the global defect. |
+| `ZetaSeven.ConcreteShiftedPinching.offset267_fiber_blockDefectAt_le` | Converts the concrete partition theorem to the exact filtered residue-fiber form used by the 267-offset aggregation. |
+| `ZetaSeven.ConcreteShiftedPinching.aggregate_267_consecutiveBlock_defects` | Discharges the abstract pinching interface in the finite 267-shift aggregation for an arbitrary concrete PSD matrix. |
+| `ZetaSeven.ConcreteSimpleAssembly.orderedSimpleGapNat_add_eq_orderedBlockGap` | Identifies each local block gap with the corresponding member of the global increasing-ordinate simple-zero gap sequence. |
+| `ZetaSeven.ConcreteSimpleAssembly.orderedSimpleGram_finite_267_assembly` | Aggregates all actual ordered simple-zero Gram blocks with explicit endpoint and Gram-to-kernel error terms. |
+| `ZetaSeven.ConcreteSimpleAssembly.finite_simple_count_with_267_assembly` | Inserts the concrete 267-block defect lower bound into the exact finite simple-zero count, conditional only on `SevenPointClaim` and the displayed per-block comparison errors. |
 | `ZetaSeven.ShiftedPartitions.sum_full_267_block_spans_le` | Proves that the `S-266` consecutive 267-point blocks charge every adjacent gap at most 266 times. |
 | `ZetaSeven.ShiftedPartitions.aggregate_267_shifted_blocks` | Proves the exact finite 267-offset aggregation from residue-fiber pinching hypotheses, including all endpoint and block-error sums. |
 | `ZetaSeven.BlockEnergyDefect.defect_lower_of_kernel_energy_approx` | Joins the seven-point block energy to the PSD spectral defect, leaving only an explicit nonnegative finite Gram-to-kernel comparison error. |
@@ -83,10 +89,9 @@ The remaining end-to-end work is:
 3. Replay the 822,433-node subdivision forest with a small verified checker.
    The preferred route is chunked kernel reduction; if `native_decide` is used
    instead, its larger trust base must be disclosed explicitly.
-4. Starting from the now-compiled increasing-ordinate coordinates for the
-   actual simple-zero Gram matrix, construct the retained central sublist,
-   concrete residue partitions, and endpoint remainders; prove central
-   endpoint deletion and the uniform finite Gram-to-kernel
+4. Starting from the now-compiled concrete residue partitions and endpoint
+   fibers of the increasing-ordinate simple-zero Gram matrix, prove central
+   endpoint deletion and the summably uniform finite Gram-to-kernel
    comparison required by
    `BlockEnergyDefect.defect_lower_of_kernel_energy_approx`.  The finite
    zero-side split, tail seam, abstract Theorem-D source inequality, and
@@ -107,7 +112,7 @@ lake build ZetaSeven
 lake env lean ZetaSeven/Audit.lean
 ```
 
-The full `lake build ZetaSeven` target in this workspace completed 8,852 jobs
+The full `lake build ZetaSeven` target in this workspace completed 8,854 jobs
 for the pinned dependency closure plus the `ZetaSeven` extension.  The audit reports
 only the standard foundational axioms already present in the upstream
 development:
@@ -123,3 +128,4 @@ rg -n '(^|[^[:alnum:]_])(sorry|admit|axiom)([^[:alnum:]_]|$)' ZetaSeven ZetaSeve
 ```
 
 returns no matches.
+

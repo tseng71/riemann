@@ -49,10 +49,10 @@ Theorem D proof. `ThmDDefect.lean` now retains the simple-zero Gram defect
 through an abstract package of the upstream trace and tail estimates and
 proves that the remaining source error is `o(N)`. The decisive open task is
 the concrete local-to-global lower bound for that defect: certificate replay,
-selecting the retained central sublist from the now-formalized ordered Gram
-coordinates, wiring it into the principal-block/residue-fiber interfaces,
-endpoint remainders and deletion, uniform overlap replacement, and a concrete
-top-level specialization. Until
+endpoint deletion, summably uniform overlap replacement, and a concrete
+asymptotic top-level specialization. The ordered Gram coordinates, all 267
+principal-block/residue-fiber partitions, endpoint-remainder fibers, and the
+finite simple-count insertion are now compiled. Until
 this path is formalized or independently checked, the candidate proportion
 is not an established theorem.
 
@@ -62,3 +62,4 @@ The repository is public for adversarial review.  It is not a claim of a
 Riemann-hypothesis proof, and the numerical proportion must remain labelled
 “candidate” or “open end-to-end” until every release gate in `CLAIMS.md`
 passes.
+
