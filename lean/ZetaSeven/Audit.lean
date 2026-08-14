@@ -55,6 +55,7 @@ import ZetaSeven
 #print axioms ZetaSeven.ConcreteShiftedPinching.aggregate_267_consecutiveBlock_defects
 #print axioms ZetaSeven.ConcreteSimpleAssembly.orderedSimpleGapNat_nonneg
 #print axioms ZetaSeven.ConcreteSimpleAssembly.orderedSimpleGapNat_add_eq_orderedBlockGap
+#print axioms ZetaSeven.ConcreteSimpleAssembly.sum_orderedSimpleGapNat_eq_sub
+#print axioms ZetaSeven.ConcreteSimpleAssembly.sum_orderedSimpleGapNat_eq_endpointSpan
 #print axioms ZetaSeven.ConcreteSimpleAssembly.orderedSimpleGram_finite_267_assembly
 #print axioms ZetaSeven.ConcreteSimpleAssembly.finite_simple_count_with_267_assembly
-

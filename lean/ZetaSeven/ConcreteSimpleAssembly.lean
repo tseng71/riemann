@@ -72,6 +72,34 @@ lemma sum_orderedSimpleGapNat_eq_orderedBlockGap
   exact orderedSimpleGapNat_add_eq_orderedBlockGap Z T P hconj k hk
     (Finset.mem_range.mp ha)
 
+/-- Every initial segment of the global ordered gap sequence telescopes to
+the separation of its two endpoint coordinates. -/
+lemma sum_orderedSimpleGapNat_eq_sub
+    (hconj : PhiHatConj T P) {n : ℕ} (hn : n < Z.s1 T) :
+    (∑ j ∈ range n, orderedSimpleGapNat Z T P hconj j) =
+      normalizedSimpleOrdinateAt Z T P hconj ⟨n, hn⟩ -
+        normalizedSimpleOrdinateAt Z T P hconj ⟨0, by omega⟩ := by
+  induction n with
+  | zero => simp
+  | succ n ih =>
+      rw [sum_range_succ]
+      rw [ih (by omega)]
+      rw [orderedSimpleGapNat, dif_pos (by omega)]
+      unfold simpleGap
+      ring_nf
+
+/-- The complete global gap sum is exactly the normalized span from the
+first ordered simple zero to the last. -/
+theorem sum_orderedSimpleGapNat_eq_endpointSpan
+    (hconj : PhiHatConj T P) (hS : 2 ≤ Z.s1 T) :
+    (∑ j ∈ range (Z.s1 T - 1), orderedSimpleGapNat Z T P hconj j) =
+      normalizedSimpleOrdinateAt Z T P hconj
+          ⟨Z.s1 T - 1, by omega⟩ -
+        normalizedSimpleOrdinateAt Z T P hconj ⟨0, by omega⟩ := by
+  simpa using
+    (sum_orderedSimpleGapNat_eq_sub Z T P hconj
+      (n := Z.s1 T - 1) (by omega))
+
 /-- **Concrete finite simple-zero assembly.**  For the actual ordered
 simple-zero Gram matrix, the 267 shifted partitions and all endpoint
 remainders have been discharged.  The remaining local inputs are precisely
