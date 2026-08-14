@@ -30,7 +30,9 @@ theorem three_four_le_aStar {lam : ℝ} (hlam0 : 0 < lam) (hlam1 : lam ≤ 1) :
   have hpoint : ∀ s ∈ Set.Icc (-(1 : ℝ) / 2) ((1 : ℝ) / 2),
       3 / 4 ≤ vStar lam s := by
     intro s hs
-    have habs : |s| ≤ (1 : ℝ) / 2 := abs_le.mpr hs
+    have habs : |s| ≤ (1 : ℝ) / 2 := by
+      apply abs_le.mpr
+      constructor <;> linarith [hs.1, hs.2]
     simpa using
       (cos_factor_ge (lam := lam) (L := 1) (u := s)
         hlam0 hlam1 one_pos habs)
@@ -40,6 +42,7 @@ theorem three_four_le_aStar {lam : ℝ} (hlam0 : 0 < lam) (hlam1 : lam ≤ 1) :
     (Continuous.intervalIntegrable (by fun_prop) _ _)
     (Continuous.intervalIntegrable (by unfold vStar; fun_prop) _ _)
     hpoint
+  norm_num at hmono
   simpa [aStar] using hmono
 
 theorem aStar_pos {lam : ℝ} (hlam0 : 0 < lam) (hlam1 : lam ≤ 1) :
@@ -55,7 +58,9 @@ theorem abs_integral_vStar_mul_cos_le_aStar {lam : ℝ}
   have hv_nonneg : ∀ s ∈ Set.Icc (-(1 : ℝ) / 2) ((1 : ℝ) / 2),
       0 ≤ vStar lam s := by
     intro s hs
-    have habs : |s| ≤ (1 : ℝ) / 2 := abs_le.mpr hs
+    have habs : |s| ≤ (1 : ℝ) / 2 := by
+      apply abs_le.mpr
+      constructor <;> linarith [hs.1, hs.2]
     have hcos := cos_factor_ge (lam := lam) (L := 1) (u := s)
       hlam0 hlam1 one_pos habs
     simpa using hcos.trans' (by norm_num : (0 : ℝ) ≤ 3 / 4)
@@ -100,7 +105,9 @@ theorem integral_abs_vStar_sub_le (lam mu : ℝ) :
   have hpoint : ∀ s ∈ Set.Icc (-(1 : ℝ) / 2) ((1 : ℝ) / 2),
       |vStar lam s - vStar mu s| ≤ (3 / 4) * |lam - mu| := by
     intro s hs
-    have habs : |s| ≤ (1 : ℝ) / 2 := abs_le.mpr hs
+    have habs : |s| ≤ (1 : ℝ) / 2 := by
+      apply abs_le.mpr
+      constructor <;> linarith [hs.1, hs.2]
     unfold vStar
     calc
       |Real.cos (Real.sqrt 2 * lam * s) -
@@ -120,6 +127,7 @@ theorem integral_abs_vStar_sub_le (lam mu : ℝ) :
     (Continuous.intervalIntegrable (by unfold vStar; fun_prop) _ _)
     (Continuous.intervalIntegrable (by fun_prop) _ _)
     hpoint
+  norm_num at hmono
   simpa using hmono
 
 /-- Consequently the sharp masses are Lipschitz with the same constant. -/

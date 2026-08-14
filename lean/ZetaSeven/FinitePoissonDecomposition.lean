@@ -66,14 +66,17 @@ theorem retainedCorrelation_eq_fin (v : ℝ → ℝ) (L T γ γ' : ℝ) (d : ℕ
     rw [Finset.mem_Ico]
     omega
   · intro a ha b hb hab
-    omega
+    simpa using hab
   · intro k hk
     change k ∈ Finset.Ico 0 (d : ℤ) at hk
     rw [Finset.mem_Ico] at hk
     refine ⟨k.toNat, ?_, ?_⟩
-    · rw [Finset.mem_range]
-      omega
-    · omega
+    · change k.toNat < d
+      have hlt : (k.toNat : ℤ) < (d : ℤ) := by
+        rw [Int.toNat_of_nonneg hk.1]
+        exact hk.2
+      exact_mod_cast hlt
+    · exact Int.toNat_of_nonneg hk.1
   · intro k _
     rfl
 
@@ -103,7 +106,6 @@ theorem retained_eq_full_sub_omitted {v : ℝ → ℝ} {L w c : ℝ}
 
 /-- The omitted correlation is bounded by the sum of the absolute omitted
 summands.  Summability is inherited directly from the Poisson series. -/
-set_option maxHeartbeats 1000000 in
 theorem abs_omittedCorrelation_le_tsum_abs {v : ℝ → ℝ} {L w c : ℝ}
     (hW : AdmWindow v L w c) (T γ γ' : ℝ) (d : ℕ) :
     |omittedCorrelation v L T γ γ' d| ≤
@@ -111,9 +113,14 @@ theorem abs_omittedCorrelation_le_tsum_abs {v : ℝ → ℝ} {L w c : ℝ}
         |gridCorrelation v L T γ γ' k.1| := by
   have hs : Summable (fun k : ℤ => gridCorrelation v L T γ γ' k) :=
     (hW.hasSum_vHatR_mul T γ γ').summable
-  simpa [omittedCorrelation, Real.norm_eq_abs] using
-    (norm_tsum_le_tsum_norm (hs.subtype
-      ((↑(retainedGrid d) : Set ℤ)ᶜ)))
+  unfold omittedCorrelation
+  change
+    ‖∑' k : ↥((↑(retainedGrid d) : Set ℤ)ᶜ),
+        gridCorrelation v L T γ γ' k.1‖ ≤
+      ∑' k : ↥((↑(retainedGrid d) : Set ℤ)ᶜ),
+        ‖gridCorrelation v L T γ γ' k.1‖
+  exact norm_tsum_le_tsum_norm
+    (hs.subtype ((↑(retainedGrid d) : Set ℤ)ᶜ))
 
 /-- Pointwise fourth-order product decay for a correlation summand.  This is
 the analytic input for summing the two omitted endpoint tails. -/
