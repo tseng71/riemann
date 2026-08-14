@@ -1,0 +1,45 @@
+name: Verifier checks
+
+on:
+  pull_request:
+  push:
+    branches:
+      - "agent/**"
+  workflow_dispatch:
+    inputs:
+      canonical:
+        description: Run the full canonical interval certificate
+        required: true
+        default: false
+        type: boolean
+      cross_precision:
+        description: Also run the 160/320-bit precision replay
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    defaults:
+      run:
+        working-directory: verifier
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: verifier/requirements.lock
+      - run: python -m pip install --require-hashes -r requirements.lock
+      - run: PYTHONPATH=src python -m unittest discover -s tests -v
+      - name: Canonical interval replay
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.canonical }}
+        run: PYTHONPATH=src python scripts/verify_release.py
+      - name: Cross-precision replay
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.cross_precision }}
+        run: PYTHONPATH=src python scripts/verify_cross_precision.py

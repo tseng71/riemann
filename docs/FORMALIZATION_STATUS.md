@@ -1,11 +1,13 @@
 # ZetaSeven Lean formalization status
 
-Date: 2026-08-12
+Date: 2026-08-14
 
-This branch is a **partial formalization of the seven-point stability
-refinement**, not a proof of the Riemann hypothesis and not yet a closed Lean
-proof of the proposed `67.3025476...%` simple-zero proportion.  The purpose of
-this file is to make the exact verification boundary reviewable.
+This branch is a **partial Lean formalization of a mathematically complete,
+computer-assisted manuscript**, not a proof of the Riemann hypothesis and
+not an end-to-end Lean proof of the `67.3025476...%` simple-zero proportion.
+The distinction matters: the analytic endpoint/kernel estimates and the Arb
+certificate are proved and documented outside Lean, while the declarations
+below check the surrounding finite-dimensional algebra and exact arithmetic.
 
 ## Pinned base
 
@@ -14,8 +16,9 @@ this file is to make the exact verification boundary reviewable.
 - Lean: `leanprover/lean4:v4.33.0-rc2`
 - mathlib: `51e6992efd06126df61a496bebf8f49482a4e129`
 
-The new library root is `ZetaSeven`.  The upstream `Zeta23` source is retained
-so the extension can be rebuilt against exactly the audited base.
+The new library root is `ZetaSeven`.  This repository stores only that
+extension; the CI workflow fetches the pinned upstream `Zeta23` source and
+overlays these files before rebuilding against exactly the audited base.
 
 ## Closed, compiled theorems
 
@@ -27,15 +30,45 @@ so the extension can be rebuilt against exactly the audited base.
 | `ZetaSeven.Stability.sum_sq_sub_one_eigenvalues_eq_frob_sub_card` | Converts squared spectral deviation into Frobenius excess for a PSD matrix of normalized trace. |
 | `ZetaSeven.Stability.min_one_frob_sub_card_le_spectralDefect` | Matrix form of the local energy bridge. |
 | `ZetaSeven.Stability.gram_defect_rank_trace` | Proves the strengthened Gram-matrix inequality `||P+Q||_F^2 >= 4 tr(P+Q)-3r-4b+D(M)`. |
+| `ZetaSeven.BlockDefect.min_one_two_mul_upperOffDiagEnergy_le_spectralDefect` | Proves the manuscript's exact `min(1, 2 sum_{i<j} ||M_ij||^2) <= D(M)` inequality, without a unit-diagonal assumption. |
+| `Zeta23.ZeroSide.ZeroBlockData.posIndex_simpleQ_le` | Splits off exactly the simple on-line Gram block and proves that the remainder has positive index at most `s₂+p`. |
+| `Zeta23.ZeroSide.ZeroBlockData.finite_simple_zero_counting` | Retains the simple-zero Gram defect in the exact finite zero-side count. |
+| `ZetaSeven.SimpleBlock.hatAz_simple_defect` | Instantiates the finite defect inequality against the concrete zeta-zero `ZeroConfig/Params` data. |
+| `ZetaSeven.SeamDefect.seamA_simple_defect` | Carries the defect through the finite tail perturbation and the passage from `I'` to `(T,2T]`. |
 | `ZetaSeven.Assembly.finite_zero_counting` | Checks the finite zero-count bookkeeping after the strengthened matrix inequality. |
 | `ZetaSeven.Assembly.Cstar_*` | Checks `C_*`, the `261/262` threshold, both exact block values, and denominator positivity by rational normalization. |
 | `ZetaSeven.Assembly.assemble_stability` | Checks the global linear rearrangement, with both error terms explicit. |
 | `ZetaSeven.Assembly.assemble_stability_div` | Checks the positive-denominator quotient form. |
 | `ZetaSeven.Assembly.sigma_exact_form` | Checks the exact linear-fractional expression with denominator `2660013536538507`. |
+| `ZetaSeven.AsymptoticAssembly.assemble_stability_eps` | Converts the defect-preserving source and local inequalities, with two explicit `o(N)` errors, into the epsilon-form proportion statement. |
+| `ZetaSeven.AsymptoticAssembly.assemble_Cstar_eps` | Specializes that asymptotic assembly to the exact rational constant `Cstar`. |
+| `ZetaSeven.ThmDDefect.simple_lower_c_defect` | Substitutes the Theorem-D trace and Frobenius estimates while retaining an arbitrary favorable defect term. |
+| `ZetaSeven.ThmDDefect.thmD_simple_defect_abstract` | Carries the concrete simple-zero Gram spectral defect through the pinned Theorem-D trace/tail hypotheses and packages every remaining source-side error as `o(N)`. |
+| `ZetaSeven.WindowEnergy.block_energy_of_sevenPointClaim` | Proves the exact finite consecutive-window inequality: `n` seven-point windows charge every short pair at most twice and every gap at most `1/500`, conditional only on `SevenPointClaim`. |
+| `ZetaSeven.Pinching.sum_psi_re_diag_unitary_le_spectralDefect` | Proves the Schur--Horn inequality for the chosen `Psi` penalty in an arbitrary unitary basis. |
+| `ZetaSeven.Pinching.sum_spectralDefect_principalBlock_le` | Constructs the block-diagonal unitary from all principal-block eigenbases and proves that the sum of all principal-block defects is at most the full defect for an arbitrary finite sigma-type partition. |
+| `ZetaSeven.Pinching.spectralDefect_reindex` | Proves that simultaneous row/column reindexing by any finite equivalence preserves the complete spectral defect. |
+| `ZetaSeven.OrderedSimpleZeros.simpleOrdinateAt_strictMono` | Enumerates the actual concrete simple critical-line zero subtype by `Fin (s₁(T))` and proves that the physical ordinates are strictly increasing. |
+| `ZetaSeven.OrderedSimpleZeros.normalizedSimpleOrdinateAt_strictMono` | Transfers strict ordering to the paper's normalized coordinate `L(γ-T)/(2π)`. |
+| `ZetaSeven.OrderedSimpleZeros.simpleGap_pos` | Proves every adjacent normalized gap in the concrete ordered simple-zero list is positive. |
+| `ZetaSeven.OrderedSimpleZeros.orderedSimpleGram_spectralDefect` | Reindexes the actual simple-zero Gram matrix on the increasing `Fin (s₁(T))` index and proves exact preservation of its spectral defect. |
+| `ZetaSeven.ConcreteBlocks.orderedBlockGram_posSemidef` | Constructs every full consecutive 267-point principal block of the actual ordered simple-zero Gram matrix and proves it PSD. |
+| `ZetaSeven.ConcreteBlocks.orderedBlockGap_nonneg` | Defines the 266 actual normalized adjacent gaps of each concrete block (zero-extended outside the used range) and proves nonnegativity. |
+| `ZetaSeven.ConcreteBlocks.sum_orderedBlockGap_eq_sub` | Proves that every consecutive sum of these concrete gaps telescopes to the corresponding normalized zero separation. |
+| `ZetaSeven.ConcreteBlocks.orderedBlock_defect_lower_of_kernel_energy_approx` | Specializes the local seven-point defect bridge to the actual ordered Gram block, leaving only the displayed finite Gram-to-kernel comparison error. |
+| `ZetaSeven.ConcreteShiftedPinching.sum_consecutiveBlock_spectralDefect_le` | Realizes one shifted partition on `Fin S`, identifies every full consecutive 267-point block with a principal fiber, keeps both endpoint remainders in the `none` fiber, and bounds the sum of full-block defects by the global defect. |
+| `ZetaSeven.ConcreteShiftedPinching.offset267_fiber_blockDefectAt_le` | Converts the concrete partition theorem to the exact filtered residue-fiber form used by the 267-offset aggregation. |
+| `ZetaSeven.ConcreteShiftedPinching.aggregate_267_consecutiveBlock_defects` | Discharges the abstract pinching interface in the finite 267-shift aggregation for an arbitrary concrete PSD matrix. |
+| `ZetaSeven.ConcreteSimpleAssembly.orderedSimpleGapNat_add_eq_orderedBlockGap` | Identifies each local block gap with the corresponding member of the global increasing-ordinate simple-zero gap sequence. |
+| `ZetaSeven.ConcreteSimpleAssembly.orderedSimpleGram_finite_267_assembly` | Aggregates all actual ordered simple-zero Gram blocks with explicit endpoint and Gram-to-kernel error terms. |
+| `ZetaSeven.ConcreteSimpleAssembly.finite_simple_count_with_267_assembly` | Inserts the concrete 267-block defect lower bound into the exact finite simple-zero count, conditional only on `SevenPointClaim` and the displayed per-block comparison errors. |
+| `ZetaSeven.ShiftedPartitions.sum_full_267_block_spans_le` | Proves that the `S-266` consecutive 267-point blocks charge every adjacent gap at most 266 times. |
+| `ZetaSeven.ShiftedPartitions.aggregate_267_shifted_blocks` | Proves the exact finite 267-offset aggregation from residue-fiber pinching hypotheses, including all endpoint and block-error sums. |
+| `ZetaSeven.BlockEnergyDefect.defect_lower_of_kernel_energy_approx` | Joins the seven-point block energy to the PSD spectral defect, leaving only an explicit nonnegative finite Gram-to-kernel comparison error. |
 
 All declarations above compile without `sorry`, `admit`, or a new `axiom`.
 
-## Exact open boundary
+## Exact Lean boundary
 
 `ZetaSeven.SevenPointSpec` defines the normalized sinc kernel, the complete
 six-gap functional `F6`, and the proposition
@@ -46,10 +79,10 @@ SevenPointClaim : for all nonnegative g1,...,g6,
 ```
 
 The module deliberately does **not** declare that proposition as a theorem.
-The present Python/Arb run is strong external evidence, but an Arb log is not a
-Lean proof term.
+The present Python/Arb run is the disclosed computer-assisted proof object for
+this proposition, but an Arb computation is not a Lean proof term.
 
-The remaining end-to-end work is:
+The remaining work for an end-to-end Lean theorem is:
 
 1. Prove rational enclosures for `sqrt 2`, `pi`, `sin`, `cos`, and `sinc`
    using Taylor remainders in Lean.
@@ -58,23 +91,30 @@ The remaining end-to-end work is:
 3. Replay the 822,433-node subdivision forest with a small verified checker.
    The preferred route is chunked kernel reduction; if `native_decide` is used
    instead, its larger trust base must be disclosed explicitly.
-4. Formalize the consecutive-window sum, pinching, 267 shifted partitions,
-   endpoint errors, and the modified Theorem D endgame that retains the defect
-   rather than discarding it.
+4. Formalize the manuscript's central endpoint deletion and summably uniform
+   finite Gram-to-kernel comparison required by
+   `BlockEnergyDefect.defect_lower_of_kernel_energy_approx`.  The finite
+   zero-side split, tail seam, abstract Theorem-D source inequality, and
+   epsilon-form algebra are already checked.  A concrete top-level Lean
+   specialization must still discharge these analytic interfaces.
 
-Only after items 1--4 close should the numerical proportion be advertised as
-an end-to-end Lean theorem.
+Items 1--4 are required before advertising the result as an end-to-end Lean
+theorem.  They are not prerequisites for the narrower and current claim of
+an unreviewed computer-assisted mathematical proof.
 
 ## Reproduction
 
-From this directory:
+After overlaying `lean/ZetaSeven`, `lean/ZetaSeven.lean`, and the pinned Lake
+files on the upstream commit (the exact procedure is in
+`.github/workflows/lean.yml`):
 
 ```bash
 lake build ZetaSeven
 lake env lean ZetaSeven/Audit.lean
 ```
 
-The completed build in this workspace comprised 2,830 jobs.  The audit reports
+The full `lake build ZetaSeven` target in this workspace completed 8,854 jobs
+for the pinned dependency closure plus the `ZetaSeven` extension.  The audit reports
 only the standard foundational axioms already present in the upstream
 development:
 

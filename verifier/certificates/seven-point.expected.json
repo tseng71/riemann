@@ -1,0 +1,31 @@
+{
+  "certificate": "seven-point",
+  "details": {
+    "basin_cell_bounds": "[4122,4245];[7895,8018];[7884,8007];[4104,4227];[7846,7969];[4118,4241]|[4118,4241];[7846,7969];[4104,4227];[7884,8007];[7895,8018];[4122,4245]",
+    "basin_center": "104608035577/100000000000,99456601031/50000000000,198641493611/100000000000,26040082343/25000000000,98851176117/50000000000,52250104731/50000000000",
+    "basin_precision_bits": 256,
+    "basin_radius": "1/64",
+    "basin_strong_convexity": "3/16",
+    "basin_value_lower": "0.00382623121130447424827371713006270699383823035;0.00382623121130447424827371713006270699383823035",
+    "binary_forest_identity_verified": true,
+    "interval_pruned": 285258,
+    "pressure_cutoff_cells": 45915,
+    "pressure_pruned": 2872,
+    "second_derivative_table_sha256": "318ee79f619cc75c6f7a30424a181764865910693f33a3d95469ebcae0ce42ba",
+    "strong_convexity_pruned": 975,
+    "surviving_gap_components_cells": "[3807,4780];[7218,9373];[10560,44945]",
+    "surviving_gap_components_count": 3,
+    "tangent_pruned": 122329,
+    "unresolved_terminal_cells": 0
+  },
+  "grid": 4000,
+  "initial_boxes": 435,
+  "kernel_table_sha256": "5a1f95f754a83ba05f37692d4bda69bf3fa5d3752af902826bfc4cffd31428b9",
+  "maximum_depth": 39,
+  "nodes": 822433,
+  "precision_bits": 128,
+  "pruned": 411434,
+  "splits": 410999,
+  "target": "F6 >= 38262312113/10000000000000",
+  "verified": true
+}

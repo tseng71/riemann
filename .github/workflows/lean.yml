@@ -1,0 +1,51 @@
+name: Lean formalization
+
+on:
+  pull_request:
+  push:
+    branches:
+      - "agent/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch pinned upstream development
+        run: |
+          git clone https://github.com/anthropics/zeta-23-lean.git upstream
+          git -C upstream checkout 3635e74826a4c1fcece7d1cd2b6fa75e43a00510
+          cp -R lean/ZetaSeven upstream/ZetaSeven
+          cp lean/ZetaSeven.lean upstream/ZetaSeven.lean
+          cp lean/lakefile.toml upstream/lakefile.toml
+          cp lean/lake-manifest.json upstream/lake-manifest.json
+          cp lean/lean-toolchain upstream/lean-toolchain
+      - name: Install elan
+        run: |
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Restore mathlib cache
+        working-directory: upstream
+        run: lake exe cache get
+      - name: Restore upstream build cache
+        uses: actions/cache@v4
+        with:
+          path: upstream/.lake/build
+          key: zeta23-root-build-v1-${{ runner.os }}-3635e74826a4c1fcece7d1cd2b6fa75e43a00510-${{ hashFiles('lean/lean-toolchain', 'lean/lake-manifest.json') }}
+          restore-keys: |
+            zeta23-root-build-v1-${{ runner.os }}-3635e74826a4c1fcece7d1cd2b6fa75e43a00510-
+      - name: Build and audit
+        working-directory: upstream
+        run: |
+          ulimit -n 65536 2>/dev/null || true
+          lake build ZetaSeven
+          lake env lean ZetaSeven/Audit.lean
+          if rg -n '(^|[^[:alnum:]_])(sorry|admit|axiom)([^[:alnum:]_]|$)' ZetaSeven ZetaSeven.lean; then
+            echo 'Forbidden proof placeholder found.' >&2
+            exit 1
+          fi
