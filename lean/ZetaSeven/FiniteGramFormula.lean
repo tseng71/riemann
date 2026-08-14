@@ -59,9 +59,15 @@ theorem orderedSimpleW_apply (hconj : PhiHatConj T P)
           ((simpleOrdinateAt Z T P hconj i : ℂ) - P.tau T k) /
         (Real.sqrt (P.a T * P.L T ^ 2) : ℂ) := by
   change
+    (Real.sqrt (1 : ℝ) : ℂ) *
+          ((blockData Z T P hconj).v
+              (simpleBlockEquiv Z T P hconj i) k /
+            (Real.sqrt (P.a T * P.L T ^ 2) : ℂ)) = _
+  rw [Real.sqrt_one, Complex.ofReal_one, one_mul]
+  change
     P.phiHat T
-          (gammaOf (simpleZeroAt Z T P hconj i) - P.tau T k) /
-        (Real.sqrt (P.a T * P.L T ^ 2) : ℂ) = _
+        (gammaOf (simpleZeroAt Z T P hconj i) - P.tau T k) /
+      (Real.sqrt (P.a T * P.L T ^ 2) : ℂ) = _
   rw [gammaOf_simpleZeroAt Z T P hconj i]
 
 /-- The finite ordered Gram entry is the exact finite grid inner product of

@@ -1,4 +1,4 @@
-db616e14de923431a85dd88f902a834daea2d410a9cac94be281c2a29e900a09  ./.github/workflows/lean.yml
+7bc621d8ece8a8b7355a54ac098d3fcb55b8a112bdccdafd769116c0d5720311  ./.github/workflows/lean.yml
 1004f3e8564f7b86025b61974460ba10912de09994a3c99f0ce1b9faa8636046  ./.github/workflows/verifier.yml
 9f4fea72bf11fc8fd2ea6a8e8cc9692752dd1954fa72f3842de15b33760a81af  ./.gitignore
 11550d985de43ec546250dc883cd900b3aab5113edfea4a2fa1ae717e3aa48e0  ./CLAIMS.md
@@ -25,7 +25,7 @@ ed2ce108e56fea7a6abccdd81329e489116d759096ea7d0d51098edbaf72a3f3  ./lean/NOTICE
 c88fa8f89bbece4b587c6a59e9d67993d0f91ec202d7c6fde7e62d825e841cda  ./lean/ZetaSeven/ConcreteBlocks.lean
 eb259014ca98b3433f3696ebdd60e142680dfbc29119d2022d3b2265c0bccd01  ./lean/ZetaSeven/ConcreteShiftedPinching.lean
 5f140f480c0c91120209c495fc7facb4025c7c9c4ffb7f264a9f75b075459eb5  ./lean/ZetaSeven/ConcreteSimpleAssembly.lean
-5b259b42aa878bd5d371b81f4132a29ad83cc62d9e1cca9ad5188a3a768ea3b5  ./lean/ZetaSeven/FiniteGramFormula.lean
+cf52aa85ea788f4ac2a103a6c252ef2d1331b825ba4ebbc2affb396de8b5714f  ./lean/ZetaSeven/FiniteGramFormula.lean
 3747853c5e9a525017db91a121701f4d30c1ac98bcf4ba29ad1adbb0cca3d268  ./lean/ZetaSeven/OrderedSimpleZeros.lean
 15de8c98a4435cfa699eecafbdf46322b53d831dd18f448f4bf2ded5c8aaa047  ./lean/ZetaSeven/Pinching.lean
 04d3d33d3bade7018079d5d148e6424c44e4feace4280f47f447b41999f24969  ./lean/ZetaSeven/SeamDefect.lean
