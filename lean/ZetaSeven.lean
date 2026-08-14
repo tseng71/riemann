@@ -15,4 +15,4 @@ import ZetaSeven.ConcreteBlocks
 
 import ZetaSeven.ConcreteShiftedPinching
 import ZetaSeven.ConcreteSimpleAssembly
-
+import ZetaSeven.FiniteGramFormula

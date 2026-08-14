@@ -59,3 +59,7 @@ import ZetaSeven
 #print axioms ZetaSeven.ConcreteSimpleAssembly.sum_orderedSimpleGapNat_eq_endpointSpan
 #print axioms ZetaSeven.ConcreteSimpleAssembly.orderedSimpleGram_finite_267_assembly
 #print axioms ZetaSeven.ConcreteSimpleAssembly.finite_simple_count_with_267_assembly
+#print axioms ZetaSeven.FiniteGramFormula.simpleZeroAt_re_eq_half
+#print axioms ZetaSeven.FiniteGramFormula.gammaOf_simpleZeroAt
+#print axioms ZetaSeven.FiniteGramFormula.orderedSimpleW_apply
+#print axioms ZetaSeven.FiniteGramFormula.orderedSimpleGram_apply
