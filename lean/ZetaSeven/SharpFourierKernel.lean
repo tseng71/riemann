@@ -42,12 +42,16 @@ theorem paperFT_sharpW_re_scaled {L : ℝ} (hL : 0 < L) (lam x : ℝ) :
         Complex.exp (I * ((2 * Real.pi * x / L : ℝ) : ℂ) * u)).re =
         sharpW lam L u * Real.cos ((2 * Real.pi * x / L) * u) := by
     intro u
-    rw [show I * ((2 * Real.pi * x / L : ℝ) : ℂ) * (u : ℂ) =
-        (((2 * Real.pi * x / L) * u : ℝ) : ℂ) * I by
-          push_cast
-          ring,
-      Complex.exp_mul_I]
-    simp
+    let y : ℝ := (2 * Real.pi * x / L) * u
+    have hy : I * ((2 * Real.pi * x / L : ℝ) : ℂ) * (u : ℂ) =
+        (y : ℂ) * I := by
+      dsimp [y]
+      push_cast
+      ring
+    rw [hy, Complex.exp_ofReal_mul_I]
+    simp only [mul_re, add_re, ofReal_re, ofReal_im, I_re, I_im,
+      mul_zero, zero_mul, add_zero, sub_zero, mul_one]
+    simp [y]
   push_cast at hreal
   rw [MeasureTheory.integral_congr_ae (MeasureTheory.ae_of_all _ hreal)]
   have hind :
@@ -71,8 +75,8 @@ theorem paperFT_sharpW_re_scaled {L : ℝ} (hL : 0 < L) (lam x : ℝ) :
     intervalIntegral.integral_comp_div
       (f := fun s => vStar lam s * Real.cos (2 * Real.pi * x * s)) hL.ne',
     smul_eq_mul,
-    show -(L / 2) / L = (-(1 : ℝ) / 2) by field_simp; ring,
-    show (L / 2) / L = ((1 : ℝ) / 2) by field_simp; ring,
+    show -(L / 2) / L = (-(1 : ℝ) / 2) by field_simp,
+    show (L / 2) / L = ((1 : ℝ) / 2) by field_simp,
     integral_vStar_mul_cos]
 
 /-- Dividing the scaled sharp transform by its mass gives exactly the
