@@ -43,7 +43,11 @@ theorem three_four_le_aStar {lam : ℝ} (hlam0 : 0 < lam) (hlam1 : lam ≤ 1) :
     (Continuous.intervalIntegrable (by unfold vStar; fun_prop) _ _)
     hpoint
   norm_num at hmono
-  simpa [aStar] using hmono
+  have hneg : (-(1 : ℝ) / 2) = -(2 : ℝ)⁻¹ := by norm_num
+  have hpos : ((1 : ℝ) / 2) = (2 : ℝ)⁻¹ := by norm_num
+  unfold aStar
+  rw [hneg, hpos]
+  exact hmono
 
 theorem aStar_pos {lam : ℝ} (hlam0 : 0 < lam) (hlam1 : lam ≤ 1) :
     0 < aStar lam := by
@@ -128,7 +132,10 @@ theorem integral_abs_vStar_sub_le (lam mu : ℝ) :
     (Continuous.intervalIntegrable (by fun_prop) _ _)
     hpoint
   norm_num at hmono
-  simpa using hmono
+  have hneg : (-(1 : ℝ) / 2) = -(2 : ℝ)⁻¹ := by norm_num
+  have hpos : ((1 : ℝ) / 2) = (2 : ℝ)⁻¹ := by norm_num
+  rw [hneg, hpos]
+  exact hmono
 
 /-- Consequently the sharp masses are Lipschitz with the same constant. -/
 theorem abs_aStar_sub_le (lam mu : ℝ) :

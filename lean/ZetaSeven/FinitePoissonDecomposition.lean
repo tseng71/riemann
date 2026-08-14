@@ -71,7 +71,7 @@ theorem retainedCorrelation_eq_fin (v : ℝ → ℝ) (L T γ γ' : ℝ) (d : ℕ
     change k ∈ Finset.Ico 0 (d : ℤ) at hk
     rw [Finset.mem_Ico] at hk
     refine ⟨k.toNat, ?_, ?_⟩
-    · change k.toNat < d
+    · rw [Finset.mem_range]
       have hlt : (k.toNat : ℤ) < (d : ℤ) := by
         rw [Int.toNat_of_nonneg hk.1]
         exact hk.2
@@ -120,7 +120,7 @@ theorem abs_omittedCorrelation_le_tsum_abs {v : ℝ → ℝ} {L w c : ℝ}
       ∑' k : ↥((↑(retainedGrid d) : Set ℤ)ᶜ),
         ‖gridCorrelation v L T γ γ' k.1‖
   exact norm_tsum_le_tsum_norm
-    (hs.subtype ((↑(retainedGrid d) : Set ℤ)ᶜ))
+    (hs.subtype ((↑(retainedGrid d) : Set ℤ)ᶜ)).norm
 
 /-- Pointwise fourth-order product decay for a correlation summand.  This is
 the analytic input for summing the two omitted endpoint tails. -/
