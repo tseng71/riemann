@@ -15,7 +15,7 @@ used by the parameterized seven-point kernel.
 
 noncomputable section
 
-open Real
+open Real intervalIntegral
 open scoped Interval
 
 namespace ZetaSeven.SharpCosineKernel
@@ -32,7 +32,7 @@ private theorem integral_cos_mul_unit (c : ℝ) :
   · subst c
     norm_num [intervalIntegral.integral_const]
   · rw [intervalIntegral.integral_comp_mul_left Real.cos hc,
-      Real.integral_cos, smul_eq_mul]
+      integral_cos, smul_eq_mul]
     rw [show c * (-(1 : ℝ) / 2) = -(c / 2) by ring,
       show c * ((1 : ℝ) / 2) = c / 2 by ring, Real.sin_neg,
       Real.sinc_of_ne_zero (div_ne_zero hc (by norm_num))]

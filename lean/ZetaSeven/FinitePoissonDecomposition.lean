@@ -66,8 +66,9 @@ theorem retainedCorrelation_eq_fin (v : ℝ → ℝ) (L T γ γ' : ℝ) (d : ℕ
     rw [Finset.mem_Ico]
     omega
   · intro a ha b hb hab
-    exact_mod_cast hab
+    omega
   · intro k hk
+    change k ∈ Finset.Ico 0 (d : ℤ) at hk
     rw [Finset.mem_Ico] at hk
     refine ⟨k.toNat, ?_, ?_⟩
     · rw [Finset.mem_range]
@@ -102,6 +103,7 @@ theorem retained_eq_full_sub_omitted {v : ℝ → ℝ} {L w c : ℝ}
 
 /-- The omitted correlation is bounded by the sum of the absolute omitted
 summands.  Summability is inherited directly from the Poisson series. -/
+set_option maxHeartbeats 1000000 in
 theorem abs_omittedCorrelation_le_tsum_abs {v : ℝ → ℝ} {L w c : ℝ}
     (hW : AdmWindow v L w c) (T γ γ' : ℝ) (d : ℕ) :
     |omittedCorrelation v L T γ γ' d| ≤

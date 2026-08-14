@@ -3,6 +3,7 @@ Copyright (c) 2026.
 SPDX-License-Identifier: Apache-2.0
 -/
 import Zeta23.ThmD.Window
+import Zeta23.ThmD.WindowCore
 
 /-!
 # Fourier error from tapering the sharp Montgomery--Taylor window
@@ -60,8 +61,7 @@ theorem norm_paperFT_sub_le_integral_abs {f g : ℝ → ℝ}
       MeasureTheory.norm_integral_le_integral_norm _
     _ = ∫ u : ℝ, |f u - g u| := by
       congr 1 with u
-      rw [← Complex.ofReal_sub, Complex.norm_real]
-      simp [Zeta23.norm_cexp_I_mul]
+      simp [norm_mul, Zeta23.norm_cexp_I_mul]
 
 /-- The square of the smooth window is integrable. -/
 private theorem integrable_phiD_sq {rho : ℝ → ℝ} {lam L w : ℝ}
