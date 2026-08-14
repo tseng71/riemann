@@ -58,10 +58,10 @@ theorem orderedSimpleW_apply (hconj : PhiHatConj T P)
       P.phiHat T
           ((simpleOrdinateAt Z T P hconj i : ℂ) - P.tau T k) /
         (Real.sqrt (P.a T * P.L T ^ 2) : ℂ) := by
-  simp only [orderedSimpleW, Matrix.reindex_apply,
-    Matrix.submatrix_apply, ZetaSeven.SimpleBlock.zetaSimpleW,
-    ZeroBlockData.simpleW, Wmat, Real.sqrt_one, Complex.ofReal_one,
-    one_mul, ZeroBlockData.simpleVhat, blockData, mkData, evalVec]
+  change
+    P.phiHat T
+          (gammaOf (simpleZeroAt Z T P hconj i) - P.tau T k) /
+        (Real.sqrt (P.a T * P.L T ^ 2) : ℂ) = _
   rw [gammaOf_simpleZeroAt Z T P hconj i]
 
 /-- The finite ordered Gram entry is the exact finite grid inner product of
@@ -71,7 +71,7 @@ theorem orderedSimpleGram_apply (hconj : PhiHatConj T P)
     (i j : Fin (Z.s1 T)) :
     orderedSimpleGram Z T P hconj i j =
       ∑ k : Fin (P.d T),
-        starRingEnd ℂ
+        star
             (P.phiHat T
                 ((simpleOrdinateAt Z T P hconj i : ℂ) - P.tau T k) /
               (Real.sqrt (P.a T * P.L T ^ 2) : ℂ)) *
