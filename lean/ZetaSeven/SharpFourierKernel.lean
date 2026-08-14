@@ -34,7 +34,9 @@ theorem paperFT_sharpW_re_scaled {L : ℝ} (hL : 0 < L) (lam x : ℝ) :
         + Real.sinc ((Real.sqrt 2 * lam + 2 * Real.pi * x) / 2)) / 2) := by
   have hint := integrable_ofReal_mul_character
     (integrable_sharpW lam L) (2 * Real.pi * x / L)
-  rw [Zeta23.paperFT_def, ← Zeta23.integral_re_C hint]
+  rw [Zeta23.paperFT_def]
+  push_cast at hint
+  rw [← Zeta23.integral_re_C hint]
   have hreal : ∀ u : ℝ,
       (((sharpW lam L u : ℝ) : ℂ) *
         Complex.exp (I * ((2 * Real.pi * x / L : ℝ) : ℂ) * u)).re =
@@ -46,6 +48,7 @@ theorem paperFT_sharpW_re_scaled {L : ℝ} (hL : 0 < L) (lam x : ℝ) :
           ring,
       Complex.exp_mul_I]
     simp
+  push_cast at hreal
   rw [MeasureTheory.integral_congr_ae (MeasureTheory.ae_of_all _ hreal)]
   have hind :
       (fun u : ℝ => sharpW lam L u * Real.cos ((2 * Real.pi * x / L) * u)) =

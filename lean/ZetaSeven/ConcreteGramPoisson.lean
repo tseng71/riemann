@@ -89,6 +89,7 @@ theorem orderedSimpleGram_atD_apply_gridCorrelation
   push_cast
   rw [div_mul_div_comm, hs]
   push_cast
+  rfl
 
 /-- Retained-sum form of the concrete entry.  Combining this theorem with
 `retained_eq_full_sub_omitted` isolates the endpoint tails in one rewrite. -/
