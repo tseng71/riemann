@@ -39,7 +39,7 @@ def retainedCorrelation (v : ℝ → ℝ) (L T γ γ' : ℝ) (d : ℕ) : ℝ :=
 /-- The two omitted endpoint tails, represented as one sum on the complement
 of the retained integer interval. -/
 def omittedCorrelation (v : ℝ → ℝ) (L T γ γ' : ℝ) (d : ℕ) : ℝ :=
-  ∑' k : (↑(retainedGrid d) : Set ℤ)ᶜ,
+  ∑' k : ↥((↑(retainedGrid d) : Set ℤ)ᶜ),
     gridCorrelation v L T γ γ' k.1
 
 /-- The complement of the retained grid consists exactly of the two endpoint
@@ -56,7 +56,8 @@ finite Gram matrix. -/
 theorem retainedCorrelation_eq_fin (v : ℝ → ℝ) (L T γ γ' : ℝ) (d : ℕ) :
     retainedCorrelation v L T γ γ' d =
       ∑ k : Fin d, gridCorrelation v L T γ γ' (k : ℤ) := by
-  rw [Fin.sum_univ_eq_sum_range]
+  rw [Fin.sum_univ_eq_sum_range
+    (fun k : ℕ => gridCorrelation v L T γ γ' (k : ℤ))]
   unfold retainedCorrelation retainedGrid
   symm
   refine Finset.sum_nbij (fun k : ℕ => (k : ℤ)) ?_ ?_ ?_ ?_
@@ -104,7 +105,7 @@ summands.  Summability is inherited directly from the Poisson series. -/
 theorem abs_omittedCorrelation_le_tsum_abs {v : ℝ → ℝ} {L w c : ℝ}
     (hW : AdmWindow v L w c) (T γ γ' : ℝ) (d : ℕ) :
     |omittedCorrelation v L T γ γ' d| ≤
-      ∑' k : (↑(retainedGrid d) : Set ℤ)ᶜ,
+      ∑' k : ↥((↑(retainedGrid d) : Set ℤ)ᶜ),
         |gridCorrelation v L T γ γ' k.1| := by
   have hs : Summable (fun k : ℤ => gridCorrelation v L T γ γ' k) :=
     (hW.hasSum_vHatR_mul T γ γ').summable

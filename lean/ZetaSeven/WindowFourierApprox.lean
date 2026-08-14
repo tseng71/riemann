@@ -60,6 +60,7 @@ theorem norm_paperFT_sub_le_integral_abs {f g : ℝ → ℝ}
       MeasureTheory.norm_integral_le_integral_norm _
     _ = ∫ u : ℝ, |f u - g u| := by
       congr 1 with u
+      rw [← Complex.ofReal_sub, Complex.norm_real]
       simp [Zeta23.norm_cexp_I_mul]
 
 /-- The square of the smooth window is integrable. -/
@@ -96,7 +97,7 @@ transform by at most `2 * w` at every real frequency. -/
 theorem norm_VPhi_phiD_sub_sharp_le {rho : ℝ → ℝ} {lam L w : ℝ}
     (hrho : TaperProfile rho) (hlam0 : 0 < lam) (hlam1 : lam ≤ 1)
     (hw : 0 < w) (hwL : 2 * w ≤ L) (x : ℝ) :
-    ‖AdmWindow.VPhi (phiD rho lam L w) x -
+    ‖Zeta23.AdmWindow.VPhi (phiD rho lam L w) x -
         paperFT (fun u => (sharpW lam L u : ℂ)) x‖ ≤ 2 * w := by
   exact (norm_paperFT_sub_le_integral_abs
       (integrable_phiD_sq hrho hlam0 hlam1 hw hwL)
@@ -107,15 +108,15 @@ theorem norm_VPhi_phiD_sub_sharp_le {rho : ℝ → ℝ} {lam L w : ℝ}
 theorem abs_VPhiR_phiD_sub_sharp_re_le {rho : ℝ → ℝ} {lam L w : ℝ}
     (hrho : TaperProfile rho) (hlam0 : 0 < lam) (hlam1 : lam ≤ 1)
     (hw : 0 < w) (hwL : 2 * w ≤ L) (x : ℝ) :
-    |AdmWindow.VPhiR (phiD rho lam L w) x -
+    |Zeta23.AdmWindow.VPhiR (phiD rho lam L w) x -
         (paperFT (fun u => (sharpW lam L u : ℂ)) x).re| ≤ 2 * w := by
   calc
-    |AdmWindow.VPhiR (phiD rho lam L w) x -
+    |Zeta23.AdmWindow.VPhiR (phiD rho lam L w) x -
         (paperFT (fun u => (sharpW lam L u : ℂ)) x).re|
-        = |(AdmWindow.VPhi (phiD rho lam L w) x -
+        = |(Zeta23.AdmWindow.VPhi (phiD rho lam L w) x -
             paperFT (fun u => (sharpW lam L u : ℂ)) x).re| := by
               rfl
-    _ ≤ ‖AdmWindow.VPhi (phiD rho lam L w) x -
+    _ ≤ ‖Zeta23.AdmWindow.VPhi (phiD rho lam L w) x -
           paperFT (fun u => (sharpW lam L u : ℂ)) x‖ :=
       Complex.abs_re_le_norm _
     _ ≤ 2 * w :=
