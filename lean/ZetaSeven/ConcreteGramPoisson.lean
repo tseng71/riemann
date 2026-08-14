@@ -59,6 +59,7 @@ theorem orderedSimpleGram_atD_apply
     Z T (P.atD T) (atDConj P T) (atDReal P T)]
   simp only [Params.atD_d, atD_phiHatR hP T, atD_tau_eq,
     Params.atD_L, atD_a_eq_av hP T]
+  rfl
 
 /-- After the positive normalization is collected, the same entry is the
 finite `gridCorrelation` sum divided by the exact window mass. -/
@@ -83,10 +84,11 @@ theorem orderedSimpleGram_atD_apply_gridCorrelation
           (Real.sqrt
             (AdmWindow.av (P.phiD T) (P.L T) * P.L T ^ 2) : ℂ) =
         (AdmWindow.av (P.phiD T) (P.L T) * P.L T ^ 2 : ℝ) := by
-    push_cast
-    nlinarith [Real.sq_sqrt hq.le]
+    norm_cast
+    simpa [pow_two] using Real.sq_sqrt hq.le
   push_cast
   rw [div_mul_div_comm, hs]
+  push_cast
 
 /-- Retained-sum form of the concrete entry.  Combining this theorem with
 `retained_eq_full_sub_omitted` isolates the endpoint tails in one rewrite. -/

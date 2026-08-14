@@ -19,8 +19,8 @@ namespace ZetaSeven.ParametricPressure
 open ZetaSeven.ParametricKernel
 open ZetaSeven.KernelBounds
 
-/-- Uniform stability of the complete six-gap pressure functional. -/
 set_option maxHeartbeats 1000000 in
+/-- Uniform stability of the complete six-gap pressure functional. -/
 theorem abs_F6At_sub_le_48 {lam mu : ℝ}
     (hlam0 : 0 < lam) (hlam1 : lam ≤ 1)
     (hmu0 : 0 < mu) (hmu1 : mu ≤ 1)
