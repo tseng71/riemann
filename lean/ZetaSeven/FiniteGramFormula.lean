@@ -88,4 +88,35 @@ theorem orderedSimpleGram_apply (hconj : PhiHatConj T P)
   simp only [Matrix.mul_apply, Matrix.conjTranspose_apply,
     orderedSimpleW_apply Z T P hconj]
 
+/-- When the Fourier transform is real on the real axis, every entry of the
+ordered simple-zero Gram matrix is a finite correlation of real Fourier
+samples.  This removes all conjugation bookkeeping before the Poisson
+decomposition is applied. -/
+theorem orderedSimpleGram_apply_real_samples
+    (hconj : PhiHatConj T P) (hreal : PhiHatReal T P)
+    (i j : Fin (Z.s1 T)) :
+    orderedSimpleGram Z T P hconj i j =
+      ∑ k : Fin (P.d T),
+        ((P.phiHatR T
+              (simpleOrdinateAt Z T P hconj i - P.tau T k) : ℂ) /
+            (Real.sqrt (P.a T * P.L T ^ 2) : ℂ)) *
+          ((P.phiHatR T
+              (simpleOrdinateAt Z T P hconj j - P.tau T k) : ℂ) /
+            (Real.sqrt (P.a T * P.L T ^ 2) : ℂ)) := by
+  rw [orderedSimpleGram_apply Z T P hconj]
+  apply Finset.sum_congr rfl
+  intro k _
+  have hi :
+      (simpleOrdinateAt Z T P hconj i : ℂ) - P.tau T k =
+        ((simpleOrdinateAt Z T P hconj i - P.tau T k : ℝ) : ℂ) := by
+    push_cast
+    rfl
+  have hj :
+      (simpleOrdinateAt Z T P hconj j : ℂ) - P.tau T k =
+        ((simpleOrdinateAt Z T P hconj j - P.tau T k : ℝ) : ℂ) := by
+    push_cast
+    rfl
+  rw [hi, hj, hreal, hreal]
+  simp
+
 end ZetaSeven.FiniteGramFormula

@@ -16,3 +16,11 @@ import ZetaSeven.ConcreteBlocks
 import ZetaSeven.ConcreteShiftedPinching
 import ZetaSeven.ConcreteSimpleAssembly
 import ZetaSeven.FiniteGramFormula
+import ZetaSeven.FinitePoissonDecomposition
+import ZetaSeven.ConcreteGramPoisson
+import ZetaSeven.ParametricKernel
+import ZetaSeven.SharpCosineKernel
+import ZetaSeven.WindowFourierApprox
+import ZetaSeven.SharpFourierKernel
+import ZetaSeven.KernelBounds
+import ZetaSeven.ParametricPressure
